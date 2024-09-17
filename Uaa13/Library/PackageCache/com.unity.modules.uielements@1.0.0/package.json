@@ -7,6 +7,11 @@
     "dependencies": {
         "com.unity.modules.ui": "1.0.0",
         "com.unity.modules.imgui": "1.0.0",
+<<<<<<< HEAD
         "com.unity.modules.jsonserialize": "1.0.0"
+=======
+        "com.unity.modules.jsonserialize": "1.0.0",
+        "com.unity.modules.uielementsnative": "1.0.0"
+>>>>>>> 66e9aca54d0ad2848b2793b7651fb88046963822
     }
 }

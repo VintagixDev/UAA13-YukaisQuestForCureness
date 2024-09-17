@@ -1,3 +1,0 @@
-./Assets/Textures
-./Library
-./Logs

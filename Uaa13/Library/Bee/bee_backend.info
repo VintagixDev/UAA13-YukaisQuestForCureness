@@ -1,4 +1,9 @@
 {
+<<<<<<< HEAD
     "UnityVersion": "2022.3.9f1",
     "BeeBackendHash": "a9cef0b48a2ccef90cd036d6bf1f1b8e93d73411e82147be6521e7822cace825"
+=======
+    "UnityVersion": "2021.3.31f1",
+    "BeeBackendHash": "54aec4c3046635dbb76a5e39ee0132a87184e92dfa8e44d3b40144fc12aa5a12"
+>>>>>>> 66e9aca54d0ad2848b2793b7651fb88046963822
 }

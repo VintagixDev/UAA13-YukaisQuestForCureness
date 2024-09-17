@@ -1,10 +1,20 @@
 
+<<<<<<< HEAD
 === Tue Sep  3 10:52:02 2024
 
 Packages were changed.
 Update Mode: resetToDefaultDependencies
 
 The following packages were added:
+=======
+=== Tue Sep  3 10:32:46 2024
+
+Packages were changed.
+Update Mode: mergeDefaultDependencies
+
+The following packages were added:
+  com.unity.ide.vscode@1.2.5
+>>>>>>> 66e9aca54d0ad2848b2793b7651fb88046963822
   com.unity.modules.ai@1.0.0
   com.unity.modules.androidjni@1.0.0
   com.unity.modules.animation@1.0.0
@@ -36,3 +46,14 @@ The following packages were added:
   com.unity.modules.vr@1.0.0
   com.unity.modules.wind@1.0.0
   com.unity.modules.xr@1.0.0
+<<<<<<< HEAD
+=======
+The following packages were updated:
+  com.unity.collab-proxy from version 1.17.6 to 2.1.0
+  com.unity.feature.2d from version 1.0.0 to 2.0.0
+  com.unity.ide.rider from version 3.0.16 to 3.0.25
+  com.unity.ide.visualstudio from version 2.0.16 to 2.0.21
+  com.unity.test-framework from version 1.1.31 to 1.1.33
+  com.unity.timeline from version 1.6.4 to 1.6.5
+  com.unity.visualscripting from version 1.7.8 to 1.9.1
+>>>>>>> 66e9aca54d0ad2848b2793b7651fb88046963822
