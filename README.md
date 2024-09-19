@@ -1,4 +1,4 @@
-# Roguelike Dungeon Crawler - Unity Game Project
+# Yukai's Quest For Cureness - Unity Game Project
 
 ## Project Overview
 
