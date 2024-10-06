@@ -1,8 +1,8 @@
 # Ignorer le dossier Library
-Library/
+Uaa13/Library/
 
 # Ignorer le dossier Logs
-Logs/
+Uaa13/Logs/
 
 # Fichiers spécifiques à Unity
 [Tt]emp/
