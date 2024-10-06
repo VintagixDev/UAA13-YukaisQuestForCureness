@@ -1,7 +1,8 @@
+# Comment ?
+Il faut tout mettre à la racine le gitignore enft
+
 # Ignorer le dossier Library
 Library/
 
 # Ignorer le dossier Logs
 Logs/
-
-
