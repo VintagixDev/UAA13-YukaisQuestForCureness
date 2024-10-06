@@ -4,27 +4,4 @@ Library/
 # Ignorer le dossier Logs
 Logs/
 
-# Fichiers spécifiques à Unity
-[Tt]emp/
-[Oo]bj/
-[Bb]uild/
-[Bb]uilds/
-[Mm]emoryCaptures/
-[Uu]serSettings/
 
-# Fichiers spécifiques à Visual Studio
-.vscode/
-*.csproj
-*.sln
-*.user
-*.suo
-*.pidb
-*.unityproj
-*.booproj
-
-# Autres fichiers temporaires et système
-.DS_Store
-.idea/
-*.log
-*.tmp
-*.swp
