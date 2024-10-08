@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class PlayerMovements : MonoBehaviour
 {
-    [SerializeField]
-    public float speed;
+    [Header("Vitesse")]
+    public float speed = 4.5f;
+    public PlayerStats stats;
     public float horizontalVelocity;
     public float verticalVelocity;
 
@@ -121,6 +122,6 @@ public class PlayerMovements : MonoBehaviour
 
         Vector2 direction = new Vector2(horizontalVelocity, verticalVelocity);
 
-        transform.Translate(direction * speed * Time.deltaTime);
+        transform.Translate(direction * speed * stats.playerMoveSpeed * Time.deltaTime);
     }
 }
