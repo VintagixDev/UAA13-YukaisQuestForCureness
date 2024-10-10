@@ -3,6 +3,8 @@
 
 Un jeu fait sur Unity en c#
 
+LA VERSION EST DU UNITY 2022.3.9F1
+
 
 ![Logo](https://upload.wikimedia.org/wikipedia/commons/c/c4/Unity_2021.svg)
 
