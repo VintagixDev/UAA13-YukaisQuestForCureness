@@ -3,11 +3,7 @@
 --- !u!30 &1
 GraphicsSettings:
   m_ObjectHideFlags: 0
-<<<<<<< HEAD
-  serializedVersion: 15
-=======
   serializedVersion: 13
->>>>>>> 66e9aca54d0ad2848b2793b7651fb88046963822
   m_Deferred:
     m_Mode: 1
     m_Shader: {fileID: 69, guid: 0000000000000000f000000000000000, type: 0}
@@ -17,12 +13,9 @@ GraphicsSettings:
   m_ScreenSpaceShadows:
     m_Mode: 1
     m_Shader: {fileID: 64, guid: 0000000000000000f000000000000000, type: 0}
-<<<<<<< HEAD
-=======
   m_LegacyDeferred:
     m_Mode: 1
     m_Shader: {fileID: 63, guid: 0000000000000000f000000000000000, type: 0}
->>>>>>> 66e9aca54d0ad2848b2793b7651fb88046963822
   m_DepthNormals:
     m_Mode: 1
     m_Shader: {fileID: 62, guid: 0000000000000000f000000000000000, type: 0}
@@ -45,10 +38,6 @@ GraphicsSettings:
   - {fileID: 10770, guid: 0000000000000000f000000000000000, type: 0}
   - {fileID: 10783, guid: 0000000000000000f000000000000000, type: 0}
   m_PreloadedShaders: []
-<<<<<<< HEAD
-  m_PreloadShadersBatchTimeLimit: -1
-=======
->>>>>>> 66e9aca54d0ad2848b2793b7651fb88046963822
   m_SpritesDefaultMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_CustomRenderPipeline: {fileID: 0}
   m_TransparencySortMode: 0
@@ -59,10 +48,6 @@ GraphicsSettings:
   m_LightmapStripping: 0
   m_FogStripping: 0
   m_InstancingStripping: 0
-<<<<<<< HEAD
-  m_BrgStripping: 0
-=======
->>>>>>> 66e9aca54d0ad2848b2793b7651fb88046963822
   m_LightmapKeepPlain: 1
   m_LightmapKeepDirCombined: 1
   m_LightmapKeepDynamicPlain: 1
@@ -77,10 +62,3 @@ GraphicsSettings:
   m_LightsUseColorTemperature: 0
   m_DefaultRenderingLayerMask: 1
   m_LogWhenShaderIsCompiled: 0
-<<<<<<< HEAD
-  m_SRPDefaultSettings: {}
-  m_LightProbeOutsideHullStrategy: 1
-  m_CameraRelativeLightCulling: 0
-  m_CameraRelativeShadowCulling: 0
-=======
->>>>>>> 66e9aca54d0ad2848b2793b7651fb88046963822

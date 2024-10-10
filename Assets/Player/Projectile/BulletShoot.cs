@@ -23,7 +23,7 @@ public class BulletShoot : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.name != "Player" && other.gameObject.name != "Bullet(Clone)")
+        if (!other.CompareTag("Player") && !other.CompareTag("FriendlyProjectile"))
         {
             Destroy(gameObject);
         }

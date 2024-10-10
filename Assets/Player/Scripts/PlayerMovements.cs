@@ -23,11 +23,10 @@ public class PlayerMovements : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         Movements();
     }
 
-    // Mouvements avec système de glissements
+    // Mouvements avec systï¿½me de glissements
     private void Movements()
     {
 
@@ -50,20 +49,20 @@ public class PlayerMovements : MonoBehaviour
             }
         }
 
-        // Si aucune touche de mouvement n'est pressée
+        // Si aucune touche de mouvement n'est pressï¿½e
         else
         {
 
-            // Si il existe un mouvement horizontal vers la gauche, réduit la vitesse du personnage jusqu'à s'arrêter
+            // Si il existe un mouvement horizontal vers la gauche, rï¿½duit la vitesse du personnage jusqu'ï¿½ s'arrï¿½ter
 
             // Si le mouvement existe (vers la gauche) 
             if (horizontalVelocity < 0f)
             {
 
-                // Réduit la vitesse du joueur
+                // Rï¿½duit la vitesse du joueur
                 horizontalVelocity = horizontalVelocity / speedDecrease;
 
-                // Si la vitesse est inférieure à -0.1
+                // Si la vitesse est infï¿½rieure ï¿½ -0.1
                 if (horizontalVelocity > -0.1)
                 {
                     // Stop le joueur

@@ -349,8 +349,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1708247611}
   - component: {fileID: 1708247610}
-  - component: {fileID: 1708247609}
+  - component: {fileID: 1708247614}
   - component: {fileID: 1708247612}
+  - component: {fileID: 1708247613}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -358,22 +359,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1708247609
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1708247607}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 720347bce02927141b816b6ca87fd359, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 4
-  horizontalVelocity: 0
-  verticalVelocity: 0
-  speedDecrease: 1.015
 --- !u!212 &1708247610
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -465,6 +450,43 @@ MonoBehaviour:
   bulletSpeed: 5
   bulletRate: 2
   bulletRange: 1.5
+--- !u!114 &1708247613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1708247607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd3858c0e7815c44ca1c99db1a30a899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHP: 6
+  playerDamage: 5
+  playerMoveSpeed: 1
+  playerProjectileSize: 1
+  playerProjectileReach: 1
+  playerProjectileSpeed: 1
+  playerGolds: 0
+  playerKeys: 0
+--- !u!114 &1708247614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1708247607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea88dd4cb91415a499487ae0afd79e70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 4.5
+  stats: {fileID: 1708247613}
+  horizontalVelocity: 0
+  verticalVelocity: 0
+  speedDecrease: 1.025
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
