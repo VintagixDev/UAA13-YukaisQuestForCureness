@@ -4,14 +4,32 @@ using UnityEngine;
 
 public class PlayerMovements : MonoBehaviour
 {
-    [Header("Vitesse")]
+    /// <summary>
+    /// speed : Vitesse du joueur
+    /// speedDecrease : Sert a diminuer la vitesse du joueur (facteur de glissance)
+    /// canMove : Détermine si le joueur peut bouger ou non
+    /// </summary>
+    
+    [Header("Speed")]
     public float speed = 4.5f;
-    public PlayerStats stats;
+    public float speedDecrease = 1.025f;
+    public bool canMove = true;
+
+    /// <summary>
+    /// horizontalVelocity : Vitesse horizontale
+    /// verticalVelocity : Vitesse verticale
+    /// </summary>
+    
+    [Header("velocity axis")]
     public float horizontalVelocity;
     public float verticalVelocity;
 
-
-    public float speedDecrease = 1.025f;
+    /// <summary>
+    /// stats : Sert à la récupération des statistiques du joueur
+    /// </summary>
+    
+    [Header("Stats")]
+    public PlayerStats stats;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +44,12 @@ public class PlayerMovements : MonoBehaviour
         Movements();
     }
 
-    // Mouvements avec syst�me de glissements
+    /// <summary>
+    /// Gère les mouvements du joueur en 2D avec un effet de glissement.
+    /// Le joueur peut se déplacer horizontalement avec les touches A (gauche) et D (droite),
+    /// ainsi que verticalement avec les touches W (haut) et S (bas).
+    /// Si aucune touche n'est enfoncée, la vitesse du joueur diminue progressivement jusqu'à s'arrêter.
+    /// </summary>
     private void Movements()
     {
 
@@ -115,10 +138,6 @@ public class PlayerMovements : MonoBehaviour
             }
 
         }
-
-
-
-
         Vector2 direction = new Vector2(horizontalVelocity, verticalVelocity);
 
         transform.Translate(direction * speed * stats.playerMoveSpeed * Time.deltaTime);
