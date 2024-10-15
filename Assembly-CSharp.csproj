@@ -63,11 +63,11 @@
     <Compile Include="Assets\Enemies\Scripts\EnemyData.cs" />
     <Compile Include="Assets\Player\Projectile\BulletShoot.cs" />
     <Compile Include="Assets\Enemies\Scripts\EnemyControl.cs" />
-    <Compile Include="Assets\Dungeon\Scripts\ProceduralGenerationAlgorithms.cs" />
     <Compile Include="Assets\Player\Scripts\PlayerMovements.cs" />
-    <Compile Include="Assets\Dungeon\Scripts\SimpleRandomWalkDungeonGenerator.cs" />
     <Compile Include="Assets\Player\Scripts\PlayerStats.cs" />
     <Compile Include="Assets\Player\Scripts\PlayerMethods.cs" />
+    <Compile Include="Assets\Dungeon\Scripts\Room.cs" />
+    <Compile Include="Assets\Dungeon\Scripts\LevelGeneration.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Lib\TextMesh Pro\Shaders\TMPro.cginc" />
