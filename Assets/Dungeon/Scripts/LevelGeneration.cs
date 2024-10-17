@@ -276,7 +276,7 @@ public class LevelGeneration : MonoBehaviour
     void SetRoomDoors()
     {
         // Parcourir toutes les pièces dans la grille.
-        for (int x = 0; x < 10; x++
+        for (int x = 0; x < 10; x++)
         {
             for (int y = 0; y < (gridSizeY * 2); y++)
             {

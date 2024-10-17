@@ -241,7 +241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 1909056789}
-  heart: {fileID: 4785236957969636293, guid: ebc23bbc9e0592041ba3e5ab9d573c78, type: 3}
+  heart: {fileID: 2938386512282357458, guid: b568a797fa4866947b1af2b08f343247, type: 3}
   HPDisplay: {fileID: 1696670817}
   heartText: {fileID: 993873996}
   GoldsText: {fileID: 157507201}
@@ -1760,10 +1760,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4.5
-  stats: {fileID: 1909056789}
+  speedDecrease: 1.025
+  canMove: 1
   horizontalVelocity: 0
   verticalVelocity: 0
-  speedDecrease: 1.025
+  stats: {fileID: 1909056789}
 --- !u!1 &1960671160
 GameObject:
   m_ObjectHideFlags: 0
