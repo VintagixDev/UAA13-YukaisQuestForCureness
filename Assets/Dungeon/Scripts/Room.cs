@@ -2,32 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Room
+public class Room : MonoBehaviour
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    [Header("Grid")]
-    public Vector2 gridPos;
+    [SerializeField] GameObject topDoor;
+    [SerializeField] GameObject botDoor;
+    [SerializeField] GameObject leftDoor;
+    [SerializeField] GameObject rightDoor;
 
-    /// <summary>
-    /// 
-    /// </summary>
-    [Header("Type of room")]
-    public int type;
+    public Vector2Int RoomIndex { get; set; }
 
-    /// <summary>
-    /// doorTop,doorBot,doorLeft,doorRight : Indique si une porte existe à chaque endroit de la piece
-    /// </summary>
-    [Header("Door position")]
-    public bool doorTop;
-    public bool doorBot;
-    public bool doorLeft;
-    public bool doorRight;
-
-    public Room(Vector2 _gridPos, int _type)
+    // Sert à ouvrir les portes
+    public void OpenDoor(Vector2Int direction)
     {
-        gridPos = _gridPos;
-        type = _type;
+        // Haut
+        if (direction == Vector2Int.up)
+        {
+            topDoor.SetActive(true);
+        }
+        // Bas
+        if (direction == Vector2Int.down)
+        {
+            botDoor.SetActive(true);
+        }
+        // Gauche
+        if (direction == Vector2Int.left)
+        {
+            leftDoor.SetActive(true);
+        }
+        // Droite
+        if (direction == Vector2Int.right)
+        {
+            rightDoor.SetActive(true);
+        }
     }
 }
