@@ -11,28 +11,43 @@ public class Room : MonoBehaviour
 
     public Vector2Int RoomIndex { get; set; }
 
-    // Sert à ouvrir les portes
     public void OpenDoor(Vector2Int direction)
     {
-        // Haut
-        if (direction == Vector2Int.up)
+        if (direction == Vector2Int.up)      // Open top door
         {
             topDoor.SetActive(true);
         }
-        // Bas
-        if (direction == Vector2Int.down)
+        else if (direction == Vector2Int.down) // Open bottom door
         {
             botDoor.SetActive(true);
         }
-        // Gauche
-        if (direction == Vector2Int.left)
+        else if (direction == Vector2Int.left) // Open left door
         {
             leftDoor.SetActive(true);
         }
-        // Droite
-        if (direction == Vector2Int.right)
+        else if (direction == Vector2Int.right) // Open right door
         {
             rightDoor.SetActive(true);
+        }
+    }
+
+    public void CloseDoor(Vector2Int direction)
+    {
+        if (direction == Vector2Int.up)   
+        {
+            topDoor.SetActive(false);
+        }
+        else if (direction == Vector2Int.down) 
+        {
+            botDoor.SetActive(false);
+        }
+        else if (direction == Vector2Int.left) 
+        {
+            leftDoor.SetActive(false);
+        }
+        else if (direction == Vector2Int.right) 
+        {
+            rightDoor.SetActive(false);
         }
     }
 }
