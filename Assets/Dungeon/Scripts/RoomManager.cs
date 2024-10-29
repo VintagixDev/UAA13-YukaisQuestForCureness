@@ -4,139 +4,158 @@ using UnityEngine;
 
 public class RoomManager : MonoBehaviour
 {
+    // Prefabs pour la génération de pièces
+    [SerializeField] GameObject RoomPrefab; // Le prefab de la pièce standard
+    [SerializeField] GameObject roomBossPrefabTest; // Un prefab pour une pièce de boss (pour l'instant utilisé comme test)
+    [SerializeField] List<GameObject> roomPrefabs; // Liste des prefabs de pièces pour la variété
+    [SerializeField] private int maxRoom = 15; // Nombre maximum de pièces à générer
+    [SerializeField] private int minRoom = 10; // Nombre minimum de pièces à générer
 
-    [SerializeField] GameObject RoomPrefab;
-    [SerializeField] private int maxRoom = 15;
-    [SerializeField] private int minRoom = 10;
+    // Dimensions pour l'espacement des pièces
+    int roomWidth = 20; // Largeur d'une pièce
+    int roomHeight = 12; // Hauteur d'une pièce
 
-    int roomWidth = 20;
-    int roomHeight = 12;
+    // Dimensions de la grille
+    [SerializeField] int gridSizex = 10; // Taille de la grille sur l'axe X
+    [SerializeField] int gridSizey = 10; // Taille de la grille sur l'axe Y
 
-    [SerializeField] int gridSizex = 10;
-    [SerializeField] int gridSizey = 10;
-
+    // Listes pour stocker les objets des pièces générées
     private List<GameObject> roomObjects = new List<GameObject>();
+    private Queue<Vector2Int> roomQueue = new Queue<Vector2Int>(); // Queue pour gérer les indices des pièces à générer
 
-    private Queue<Vector2Int> roomQueue = new Queue<Vector2Int>();
-
-    private int[,] roomGrid;
-    private int roomCount;
-    private bool generationComplete = false;
+    private int[,] roomGrid; // Grille 2D pour suivre les emplacements des pièces
+    private int roomCount; // Compteur de pièces générées
+    private bool generationComplete = false; // Indicateur si la génération est terminée
 
     private void Start()
     {
+        // Initialisation de la grille et démarrage de la génération à partir du centre
         roomGrid = new int[gridSizex, gridSizey];
         roomQueue = new Queue<Vector2Int>();
-
-        Vector2Int initialRoomIndex = new Vector2Int(gridSizex / 2,gridSizey / 2);
-        StartRoomGenerationFromRoom(initialRoomIndex);
+        Vector2Int initialRoomIndex = new Vector2Int(gridSizex / 2, gridSizey / 2);
+        StartRoomGenerationFromRoom(initialRoomIndex); 
     }
 
     private void Update()
     {
+        // Génération des pièces tant qu'il y a des indices dans la queue et que la limite de pièces n'est pas atteinte
         if (roomQueue.Count > 0 && roomCount < maxRoom && !generationComplete)
         {
-            Vector2Int roomIndex = roomQueue.Dequeue();
+            Vector2Int roomIndex = roomQueue.Dequeue(); 
             int gridX = roomIndex.x;
             int gridY = roomIndex.y;
 
-            TryGenerateRoom(new Vector2Int(gridX - 1,gridY));
-            TryGenerateRoom(new Vector2Int(gridX + 1, gridY));
-            TryGenerateRoom(new Vector2Int(gridX, gridY - 1));
-            TryGenerateRoom(new Vector2Int(gridX, gridY + 1));
-        } else if (roomCount < minRoom)
+            // Essaye de générer des pièces adjacentes
+            TryGenerateRoom(new Vector2Int(gridX - 1, gridY)); // Gauche
+            TryGenerateRoom(new Vector2Int(gridX + 1, gridY)); // Droite
+            TryGenerateRoom(new Vector2Int(gridX, gridY - 1)); // Bas
+            TryGenerateRoom(new Vector2Int(gridX, gridY + 1)); // Haut
+        }
+        else if (roomCount < minRoom)
         {
-            Debug.Log($"RoomCount était plus petit que le nombre minimal de piece, recommencer");
-            RegenerateRooms();
+            Debug.Log($"RoomCount était plus petit que le nombre minimal de pièce, recommencer");
+            RegenerateRooms(); // Regénère les pièces si le minimum n'est pas atteint
         }
         else if (!generationComplete)
         {
-            Debug.Log($"Generation complete, {roomCount} rooms create");
-            generationComplete = true;
+            Debug.Log($"Generation complète, {roomCount} pièces créées");
+            generationComplete = true; 
         }
     }
 
     private void StartRoomGenerationFromRoom(Vector2Int roomIndex)
     {
+        // Démarre la génération de pièces à partir d'un indice donné
         roomQueue.Enqueue(roomIndex);
         int x = roomIndex.x;
         int y = roomIndex.y;
-        roomGrid[x, y] = 1;
-        roomCount++;
+        roomGrid[x, y] = 1; 
+        roomCount++; 
+
+        // Instancie la pièce initiale
         var initialRoom = Instantiate(RoomPrefab, GetPositionFromGridIndex(roomIndex), Quaternion.identity);
-        initialRoom.name = $"ROOM- {roomCount}";
+        initialRoom.name = $"ROOM- {roomCount}"; 
         initialRoom.GetComponent<Room>().RoomIndex = roomIndex;
-        roomObjects.Add(initialRoom);
-    } 
+        roomObjects.Add(initialRoom); 
+    }
 
     private bool TryGenerateRoom(Vector2Int roomIndex)
     {
         int x = roomIndex.x;
         int y = roomIndex.y;
 
+        // Vérifie si le nombre maximum de pièces est atteint
         if (roomCount >= maxRoom)
         {
             return false;
         }
+        // Vérifie si la génération de la pièce doit échouer aléatoirement
         if (Random.value < 0.5f && roomIndex != Vector2Int.zero)
         {
             return false;
         }
-        if (CountAdjacentRooms(roomIndex) > 1) 
-           return false;
-       
+        // Vérifie le nombre de pièces adjacentes pour éviter de trop densifier
+        if (CountAdjacentRooms(roomIndex) > 1)
+        {
+            return false;
+        }
+
+        // Ajoute la pièce à la queue et à la grille
         roomQueue.Enqueue(roomIndex);
         roomGrid[x, y] = 1;
-        roomCount++;
+        roomCount++; 
 
+        // Instancie la nouvelle pièce
         var newRoom = Instantiate(RoomPrefab, GetPositionFromGridIndex(roomIndex), Quaternion.identity);
-        newRoom.GetComponent<Room>().RoomIndex = roomIndex;
-        newRoom.name = $"ROOM-{roomCount}";
-        OpenDoors(newRoom, x, y);
+        newRoom.GetComponent<Room>().RoomIndex = roomIndex; 
+        newRoom.name = $"ROOM-{roomCount}"; 
+        OpenDoors(newRoom, x, y); 
 
-        return true;
+        return true; 
     }
 
     private void RegenerateRooms()
     {
+        // Détruit les pièces existantes et réinitialise les variables pour recommencer la génération
         roomObjects.ForEach(Destroy);
         roomObjects.Clear();
-        roomGrid = new int[gridSizex, gridSizex];
+        roomGrid = new int[gridSizex, gridSizey];
         roomQueue.Clear();
         roomCount = 0;
         generationComplete = false;
 
         Vector2Int initialRoomIndex = new Vector2Int(gridSizex / 2, gridSizey / 2);
-        StartRoomGenerationFromRoom(initialRoomIndex);
-
+        StartRoomGenerationFromRoom(initialRoomIndex); 
     }
 
     void OpenDoors(GameObject room, int x, int y)
     {
+        // Gère l'ouverture des portes entre la pièce actuelle et les pièces adjacentes
         Room newRoomScript = room.GetComponent<Room>();
 
-        // Get 
-        Room leftRoomScript = GetRoomScriptAt(new Vector2Int(x - 1, y));
-        Room rightRoomScript = GetRoomScriptAt(new Vector2Int(x + 1, y));
-        Room topRoomScript = GetRoomScriptAt(new Vector2Int(x, y + 1));
-        Room botRoomScript = GetRoomScriptAt(new Vector2Int(x, y - 1));
+        // Récupère les scripts des pièces adjacentes
+        Room leftRoomScript = GetRoomScriptAt(new Vector2Int(x - 1, y)); // Gauche
+        Room rightRoomScript = GetRoomScriptAt(new Vector2Int(x + 1, y)); // Droite
+        Room topRoomScript = GetRoomScriptAt(new Vector2Int(x, y + 1)); // Haut
+        Room botRoomScript = GetRoomScriptAt(new Vector2Int(x, y - 1)); // Bas
 
-        if (x > 0 && roomGrid[x - 1, y] != 0 && leftRoomScript != null) // Left
+        // Ouvre les portes selon les pièces adjacentes existantes
+        if (x > 0 && roomGrid[x - 1, y] != 0 && leftRoomScript != null) // Gauche
         {
             newRoomScript.OpenDoor(Vector2Int.left);
             leftRoomScript.OpenDoor(Vector2Int.right);
         }
-        if (x < gridSizex - 1 && roomGrid[x + 1, y] != 0 && rightRoomScript != null) // Right
+        if (x < gridSizex - 1 && roomGrid[x + 1, y] != 0 && rightRoomScript != null) // Droite
         {
             newRoomScript.OpenDoor(Vector2Int.right);
             rightRoomScript.OpenDoor(Vector2Int.left);
         }
-        if (y > 0 && roomGrid[x, y - 1] != 0 && botRoomScript != null) // Down
+        if (y > 0 && roomGrid[x, y - 1] != 0 && botRoomScript != null) // Bas
         {
             newRoomScript.OpenDoor(Vector2Int.down);
             botRoomScript.OpenDoor(Vector2Int.up);
         }
-        if (y < gridSizey - 1 && roomGrid[x, y + 1] != 0 && topRoomScript != null) // Up
+        if (y < gridSizey - 1 && roomGrid[x, y + 1] != 0 && topRoomScript != null) // Haut
         {
             newRoomScript.OpenDoor(Vector2Int.up);
             topRoomScript.OpenDoor(Vector2Int.down);
@@ -145,6 +164,7 @@ public class RoomManager : MonoBehaviour
 
     Room GetRoomScriptAt(Vector2Int index)
     {
+        // Récupère le script Room d'une pièce à l'indice donné
         GameObject roomObject = roomObjects.Find(r => r.GetComponent<Room>().RoomIndex == index);
         if (roomObject != null)
         {
@@ -152,12 +172,13 @@ public class RoomManager : MonoBehaviour
         }
         else
         {
-            return null;
+            return null; 
         }
     }
 
     private int CountAdjacentRooms(Vector2Int roomIndex)
     {
+        // Compte le nombre de pièces adjacentes à l'indice donné
         int x = roomIndex.x;
         int y = roomIndex.y;
         int count = 0;
@@ -179,11 +200,12 @@ public class RoomManager : MonoBehaviour
             count++;
         }
 
-        return count;
+        return count; 
     }
 
     private Vector3 GetPositionFromGridIndex(Vector2Int gridIndex)
     {
+        // Convertit un indice de grille en position mondiale pour placer les pièces
         int gridX = gridIndex.x;
         int gridY = gridIndex.y;
         return new Vector3(roomWidth * (gridX - gridSizex / 2), roomHeight * (gridY - gridSizey / 2));
@@ -191,6 +213,7 @@ public class RoomManager : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        // Dessine les contours de la grille dans l'éditeur pour le débogage
         Color gizmoColor = new Color(0, 1, 1, 0.05f);
         Gizmos.color = gizmoColor;
 
