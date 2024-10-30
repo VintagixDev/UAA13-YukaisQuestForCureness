@@ -418,7 +418,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   topDoor: {fileID: 7211794820387693999}
-  botDoor: {fileID: 7078384141184533603}
+  bottomDoor: {fileID: 7078384141184533603}
   leftDoor: {fileID: 7981281949923858468}
   rightDoor: {fileID: 4696963305604938666}
 --- !u!1 &5952853126275904162
@@ -436,7 +436,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &231413133472595098
 Transform:
   m_ObjectHideFlags: 0

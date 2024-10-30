@@ -15,18 +15,22 @@ public class Room : MonoBehaviour
     {
         if (direction == Vector2Int.up)      // Open top door
         {
+            Debug.Log("Top door is opening");
             topDoor.SetActive(true);
         }
         else if (direction == Vector2Int.down) // Open bottom door
         {
+            Debug.Log("Bottom door is opening");
             botDoor.SetActive(true);
         }
         else if (direction == Vector2Int.left) // Open left door
         {
+            Debug.Log("Left door is opening");
             leftDoor.SetActive(true);
         }
         else if (direction == Vector2Int.right) // Open right door
         {
+            Debug.Log("Right door is opening");
             rightDoor.SetActive(true);
         }
     }
