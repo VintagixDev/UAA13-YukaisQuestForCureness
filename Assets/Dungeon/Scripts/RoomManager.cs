@@ -4,28 +4,30 @@ using UnityEngine;
 
 public class RoomManager : MonoBehaviour
 {
+    [Header("Prefabs")]
     // Prefabs pour la génération de pièces
-    [SerializeField] GameObject RoomPrefab; // Le prefab de la pièce standard
-    [SerializeField] GameObject roomBossPrefabTest; // Un prefab pour une pièce de boss (pour l'instant utilisé comme test)
-    [SerializeField] List<GameObject> roomPrefabs; // Liste des prefabs de pièces pour la variété
-    [SerializeField] private int maxRoom = 15; // Nombre maximum de pièces à générer
-    [SerializeField] private int minRoom = 10; // Nombre minimum de pièces à générer
+    [SerializeField] GameObject RoomPrefab; 
+    [SerializeField] GameObject roomBossPrefabTest; 
+    [SerializeField] List<GameObject> roomPrefabs; 
+    [SerializeField] private int maxRoom = 15; 
+    [SerializeField] private int minRoom = 10; 
 
     // Dimensions pour l'espacement des pièces
-    int roomWidth = 20; // Largeur d'une pièce
-    int roomHeight = 12; // Hauteur d'une pièce
+    int roomWidth = 20; 
+    int roomHeight = 12; 
 
+    [Header("Grid Size")]
     // Dimensions de la grille
-    [SerializeField] int gridSizex = 10; // Taille de la grille sur l'axe X
-    [SerializeField] int gridSizey = 10; // Taille de la grille sur l'axe Y
+    [SerializeField] int gridSizex = 10; 
+    [SerializeField] int gridSizey = 10; 
 
     // Listes pour stocker les objets des pièces générées
     private List<GameObject> roomObjects = new List<GameObject>();
-    private Queue<Vector2Int> roomQueue = new Queue<Vector2Int>(); // Queue pour gérer les indices des pièces à générer
+    private Queue<Vector2Int> roomQueue = new Queue<Vector2Int>(); 
 
-    private int[,] roomGrid; // Grille 2D pour suivre les emplacements des pièces
-    private int roomCount; // Compteur de pièces générées
-    private bool generationComplete = false; // Indicateur si la génération est terminée
+    private int[,] roomGrid; 
+    private int roomCount; 
+    private bool generationComplete = false; 
 
     private void Start()
     {
@@ -139,23 +141,23 @@ public class RoomManager : MonoBehaviour
 
         if (x > 0 && roomGrid[x - 1, y] != 0)
         {
-            newRoomScript.OpenDoor(Vector2Int.left);
-            leftRoomScript.OpenDoor(Vector2Int.right);
+            newRoomScript.OpenDoor(Vector2Int.left,roomCount);
+            leftRoomScript.OpenDoor(Vector2Int.right, roomCount);
         }
         if (x < gridSizex - 1 && roomGrid[x + 1, y] != 0)
         {
-            newRoomScript.OpenDoor(Vector2Int.right);
-            rightRoomScript.OpenDoor(Vector2Int.left);
+            newRoomScript.OpenDoor(Vector2Int.right, roomCount);
+            rightRoomScript.OpenDoor(Vector2Int.left, roomCount);
         }
         if (y > 0 && roomGrid[x, y - 1] != 0)
         {
-            newRoomScript.OpenDoor(Vector2Int.down);
-            bottomRoomScript.OpenDoor(Vector2Int.up);
+            newRoomScript.OpenDoor(Vector2Int.down, roomCount);
+            bottomRoomScript.OpenDoor(Vector2Int.up, roomCount);
         }
         if (y < gridSizey - 1 && roomGrid[x, y + 1] != 0)
         {
-            newRoomScript.OpenDoor(Vector2Int.up);
-            topRoomScript.OpenDoor(Vector2Int.down);
+            newRoomScript.OpenDoor(Vector2Int.up, roomCount);
+            topRoomScript.OpenDoor(Vector2Int.down, roomCount);
         }
     }
 
@@ -196,27 +198,9 @@ public class RoomManager : MonoBehaviour
 
     private Vector3 GetPositionFromGridIndex(Vector2Int gridIndex)
     {
-        // Convertit un indice de grille en position mondiale pour placer les pièces
+        // Convertit un indice de grille en position pour placer les pièces
         int gridX = gridIndex.x;
         int gridY = gridIndex.y;
         return new Vector3(roomWidth * (gridX - gridSizex / 2), roomHeight * (gridY - gridSizey / 2));
     }
-
-    /// private void OnDrawGizmos()
-    ///{
-    ///Dessine les contours de la grille dans l'éditeur pour le débogage
-    ///Color gizmoColor = new Color(0, 1, 1, 0.05f);
-    ///Gizmos.color = gizmoColor;
-    ///
-    ///   for (int x = 0; x < gridSizex; x++)
-    ///  {
-    ///      for (int y = 0; y < gridSizey; y++)
-    ///      {
-    /////Vector3 position = GetPositionFromGridIndex(new Vector2Int(x, y));
-    ///Gizmos.DrawWireCube(position, new Vector3(roomWidth, roomHeight, 1));
-    ///}
-    ///  }
-    /// }
-
-
 }

@@ -418,9 +418,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   topDoor: {fileID: 7211794820387693999}
-  bottomDoor: {fileID: 7078384141184533603}
+  botDoor: {fileID: 7078384141184533603}
   leftDoor: {fileID: 7981281949923858468}
   rightDoor: {fileID: 4696963305604938666}
+  TEST: {fileID: 2860189610143575837, guid: fc4a41c65a7863846b56437372bf2f6b, type: 3}
 --- !u!1 &5952853126275904162
 GameObject:
   m_ObjectHideFlags: 0
