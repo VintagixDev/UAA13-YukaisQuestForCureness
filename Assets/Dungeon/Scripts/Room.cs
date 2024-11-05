@@ -4,27 +4,33 @@ using UnityEngine;
 
 public class Room : MonoBehaviour
 {
-    [Header("Doors Prefab")]
+    [Header("Doors Prefab : Positions")]
     [SerializeField] GameObject topDoor;
     [SerializeField] GameObject botDoor;
     [SerializeField] GameObject leftDoor;
     [SerializeField] GameObject rightDoor;
 
+    [Header("Doors Prefab : To Replace")]
+    [SerializeField] GameObject topDoorPrefab;
+    [SerializeField] GameObject botDoorPrefab;
+    [SerializeField] GameObject leftDoorPrefab;
+    [SerializeField] GameObject rightDoorPrefab;
+
     [Header("Door Container")]
-    [SerializeField] Transform doorsContainer; // conteneur des portes
+    [SerializeField] Transform doorsContainer;
 
     public Vector2Int RoomIndex { get; set; }
-
     public void OpenDoor(Vector2 direction, int roomCount)
     {
-        if (direction == Vector2.up)      // Open top door
+        if (direction == Vector2.up) // Open top door
         {
             Debug.Log("Top door is opening");
             topDoor.SetActive(true);
             if (!topDoor.activeInHierarchy)
             {
-                var newDoor = Instantiate(topDoor, topDoor.transform.position, Quaternion.identity);
-                newDoor.name = $"UpDoor-{roomCount}";
+                var newDoor = Instantiate(topDoorPrefab, topDoor.transform.position, Quaternion.identity);
+                newDoor.name = $"UpDoor";
+                Destroy(topDoor);
             }
         }
         if (direction == Vector2.down) // Open bottom door
@@ -33,8 +39,9 @@ public class Room : MonoBehaviour
             botDoor.SetActive(true);
             if (!botDoor.activeInHierarchy)
             {
-                var newDoor = Instantiate(botDoor, botDoor.transform.position, Quaternion.identity);
-                newDoor.name = $"BotDoor-{roomCount}";
+                var newDoor = Instantiate(botDoorPrefab, botDoor.transform.position, Quaternion.identity);
+                newDoor.name = $"BotDoor";
+                Destroy(botDoor);
             }
         }
         if (direction == Vector2.left) // Open left door
@@ -43,8 +50,9 @@ public class Room : MonoBehaviour
             leftDoor.SetActive(true);
             if (!leftDoor.activeInHierarchy)
             {
-                var newDoor = Instantiate(leftDoor, leftDoor.transform.position, Quaternion.identity);
-                newDoor.name = $"LeftDoor-{roomCount}";
+                var newDoor = Instantiate(leftDoorPrefab, leftDoor.transform.position, Quaternion.identity);
+                newDoor.name = $"LeftDoor";
+                Destroy(leftDoor);
             }
         }
         if (direction == Vector2.right) // Open right door
@@ -53,12 +61,12 @@ public class Room : MonoBehaviour
             rightDoor.SetActive(true);
             if (!rightDoor.activeInHierarchy)
             {
-                var newDoor = Instantiate(rightDoor, rightDoor.transform.position, Quaternion.identity);
-                newDoor.name = $"RightDoor-{roomCount}";
+                var newDoor = Instantiate(rightDoorPrefab, rightDoor.transform.position, Quaternion.identity);
+                newDoor.name = $"RightDooR";
+                Destroy(rightDoor);
             }
         }
     }
-
     public void CloseDoor(Vector2Int direction)
     {
         if (direction == Vector2Int.up)   

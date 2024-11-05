@@ -93,6 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1157493757000661324}
+  - component: {fileID: 5596694292808697835}
   m_Layer: 0
   m_Name: BossRoom
   m_TagString: Untagged
@@ -117,6 +118,27 @@ Transform:
   - {fileID: 3393412356789345605}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5596694292808697835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1829676572362382078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44d7cb51f372e9341b8a14c4770614d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  topDoor: {fileID: 5617329420487069409}
+  botDoor: {fileID: 1614802360266971112}
+  leftDoor: {fileID: 7517570653403388917}
+  rightDoor: {fileID: 6012854376433851162}
+  topDoorPrefab: {fileID: 6193630413247003090, guid: f077570f8b1850240b6da4269f2598c1, type: 3}
+  botDoorPrefab: {fileID: 717855064626030997, guid: a050c88b343289242919dfc8575d0e3a, type: 3}
+  leftDoorPrefab: {fileID: 6625690551001669293, guid: 8cbccb1aea0312f4f9f77449cc85ec22, type: 3}
+  rightDoorPrefab: {fileID: 6683336914798158909, guid: 89f7986d4a470b6418deb31c6a34c2bf, type: 3}
+  doorsContainer: {fileID: 0}
 --- !u!1 &4767035164702118351
 GameObject:
   m_ObjectHideFlags: 0
@@ -671,7 +693,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3393412356789345605
 Transform:
   m_ObjectHideFlags: 0
