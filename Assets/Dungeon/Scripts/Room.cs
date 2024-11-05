@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Room : MonoBehaviour
 {
+    //[Header("Door Container")]
+    //public GameObject AllDoors;
+
     [Header("Doors Prefab : Positions")]
     [SerializeField] GameObject topDoor;
     [SerializeField] GameObject botDoor;
@@ -15,10 +19,6 @@ public class Room : MonoBehaviour
     [SerializeField] GameObject botDoorPrefab;
     [SerializeField] GameObject leftDoorPrefab;
     [SerializeField] GameObject rightDoorPrefab;
-
-    [Header("Door Container")]
-    [SerializeField] Transform doorsContainer;
-
     public Vector2Int RoomIndex { get; set; }
     public void OpenDoor(Vector2 direction, int roomCount)
     {
@@ -62,7 +62,7 @@ public class Room : MonoBehaviour
             if (!rightDoor.activeInHierarchy)
             {
                 var newDoor = Instantiate(rightDoorPrefab, rightDoor.transform.position, Quaternion.identity);
-                newDoor.name = $"RightDooR";
+                newDoor.name = $"RightDoor";
                 Destroy(rightDoor);
             }
         }

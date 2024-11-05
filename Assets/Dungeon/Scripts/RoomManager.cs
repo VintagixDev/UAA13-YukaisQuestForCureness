@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 public class RoomManager : MonoBehaviour
 {
+    [Header("Room Container")]
+    public GameObject AllRooms;
+
+    [Header("Door Container")]
+    public Transform doorContainer;
+
     [Header("Prefabs")]
     // Prefabs pour la génération de pièces
     [SerializeField] GameObject RoomPrefab;
@@ -51,6 +57,13 @@ public class RoomManager : MonoBehaviour
         {
             Debug.Log($"Génération complète, {roomCount} pièces créées");
             generationComplete = true;
+
+            //Mettre les pieces au bonne endroit à gauche
+            foreach (var room in roomObjects)
+            {
+                Debug.Log("Room dans le parent");
+                room.transform.SetParent(AllRooms.transform, false);
+            }
         }
         else if (roomCount < minRoom)
         {
@@ -173,11 +186,11 @@ public class RoomManager : MonoBehaviour
         }
 
         // Instancier la pièce choisie et l'ajouter à la liste des pièces
-        var newRoom = Instantiate(roomToInstantiate, GetPositionFromGridIndex(roomIndex), Quaternion.identity);
+
+        GameObject newRoom = Instantiate(roomToInstantiate, GetPositionFromGridIndex(roomIndex), Quaternion.identity);
         newRoom.GetComponent<Room>().RoomIndex = roomIndex;
         newRoom.name = $"ROOM-{roomCount}";
         roomObjects.Add(newRoom);
-
         return true;
     }
     private void OpenAllDoors()
