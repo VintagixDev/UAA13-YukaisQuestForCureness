@@ -6,14 +6,24 @@ public class RoomManager : MonoBehaviour
     [Header("Prefabs")]
     // Prefabs pour la génération de pièces
     [SerializeField] GameObject RoomPrefab;
-    [SerializeField] GameObject roomBossPrefabTest;
-    [SerializeField] List<GameObject> roomPrefabs;
+    [SerializeField] GameObject BossRoomPrefab;
+    [SerializeField] List<GameObject> BattleRoomPrefabs;
+    [SerializeField] List<GameObject> SpecialRoomPrefabs;
+
+    [Header("Numbers of rooms")]
+    // Nombre de pieces max et min
     [SerializeField] private int maxRoom = 15;
     [SerializeField] private int minRoom = 10;
 
+    [Header("Prefabs")]
+    // Pourcentage de type de pieces
+    [SerializeField] int BattleRoomPurcent;
+    [SerializeField] int SpecialRoomPurcent;
+
+    [Header("Room max dimensions")]
     // Dimensions pour l'espacement des pièces
-    int roomWidth = 20;
-    int roomHeight = 12;
+    [SerializeField] int roomWidth = 20;
+    [SerializeField] int roomHeight = 12;
 
     [Header("Grid Size")]
     // Dimensions de la grille
@@ -29,11 +39,10 @@ public class RoomManager : MonoBehaviour
     private bool generationComplete = false;
     private void Start()
     {
-        // Initialisation de la grille et démarrage de la génération à partir du centre
         roomGrid = new int[gridSizex, gridSizey];
         Vector2Int initialRoomIndex = new Vector2Int(gridSizex / 2, gridSizey / 2);
         StartRoomGenerationFromRoom(initialRoomIndex);
-        OpenAllDoors(); // Ouvrir toutes les portes après la génération des pièces
+        OpenAllDoors(); 
     }
     private void Update()
     {
@@ -51,30 +60,76 @@ public class RoomManager : MonoBehaviour
     }
     private void StartRoomGenerationFromRoom(Vector2Int roomIndex)
     {
-        // Démarre la génération de pièces à partir d'un indice donné
+        // Initialisation de la file d'attente et de la première pièce
         roomQueue.Enqueue(roomIndex);
         roomGrid[roomIndex.x, roomIndex.y] = 1;
         roomCount++;
 
-        // Instancie la pièce initiale
         var initialRoom = Instantiate(RoomPrefab, GetPositionFromGridIndex(roomIndex), Quaternion.identity);
         initialRoom.name = $"ROOM-{roomCount}";
         initialRoom.GetComponent<Room>().RoomIndex = roomIndex;
         roomObjects.Add(initialRoom);
 
-        // Continue à générer des pièces jusqu'à atteindre le nombre minimum requis
+        // Générer les pièces adjacentes jusqu'à atteindre le maximum ou minimum requis
         while (roomQueue.Count > 0 && roomCount < maxRoom)
         {
             Vector2Int currentRoomIndex = roomQueue.Dequeue();
             GenerateAdjacentRooms(currentRoomIndex);
         }
 
-        // Vérifie après la génération si nous avons atteint le minimum
-        if (roomCount < minRoom)
+        // Placer la salle de boss à l'extrémité la plus éloignée si le minimum de pièces est atteint
+        if (roomCount >= minRoom)
+        {
+            PlaceBossRoomAtExtremity(); // Crée la BossRoom à l'extrémité
+        }
+        else
         {
             Debug.LogWarning("Moins de pièces générées que prévu, essayez à nouveau.");
             RegenerateRooms();
         }
+    }
+    private void PlaceBossRoomAtExtremity()
+    {
+        Vector2Int extremityIndex = FindFarthestExtremity();
+        if (extremityIndex == Vector2Int.zero) return;
+
+        // Détruire l'ancienne pièce de l'extrémité pour la remplacer par la BossRoom
+        GameObject extremityRoom = roomObjects.Find(r => r.GetComponent<Room>().RoomIndex == extremityIndex);
+        if (extremityRoom != null)
+        {
+            roomObjects.Remove(extremityRoom);
+            Destroy(extremityRoom);
+        }
+
+        // Instancie la BossRoom à l'extrémité
+        var bossRoom = Instantiate(BossRoomPrefab, GetPositionFromGridIndex(extremityIndex), Quaternion.identity);
+        bossRoom.GetComponent<Room>().RoomIndex = extremityIndex;
+        bossRoom.name = "BOSS_ROOM";
+        roomObjects.Add(bossRoom);
+
+        // Marque la BossRoom dans la grille
+        roomGrid[extremityIndex.x, extremityIndex.y] = 2; // 2 pour indiquer la BossRoom
+    }
+    private Vector2Int FindFarthestExtremity()
+    {
+        Vector2Int startRoomIndex = new Vector2Int(gridSizex / 2, gridSizey / 2);
+        Vector2Int extremityIndex = Vector2Int.zero;
+        float maxDistance = 0;
+
+        foreach (var roomObject in roomObjects)
+        {
+            Vector2Int roomIndex = roomObject.GetComponent<Room>().RoomIndex;
+            float distance = Vector2Int.Distance(startRoomIndex, roomIndex);
+
+            // Vérifie que la pièce est une extrémité (une seule pièce adjacente)
+            if (distance > maxDistance && CountAdjacentRooms(roomIndex) == 1)
+            {
+                maxDistance = distance;
+                extremityIndex = roomIndex;
+            }
+        }
+
+        return extremityIndex;
     }
     private void GenerateAdjacentRooms(Vector2Int roomIndex)
     {
@@ -86,34 +141,39 @@ public class RoomManager : MonoBehaviour
     }
     private bool TryGenerateRoom(Vector2Int roomIndex)
     {
-        int x = roomIndex.x;
-        int y = roomIndex.y;
+        if (roomCount >= maxRoom) return false;
 
-        // Vérifie si le nombre maximum de pièces est atteint
-        if (roomCount >= maxRoom)
-        {
-            return false;
-        }
+        // Vérification des conditions pour éviter la surpopulation des pièces
+        if (Random.value < 0.5f && roomIndex != Vector2Int.zero) return false;
+        if (CountAdjacentRooms(roomIndex) > 1) return false;
 
-        // Vérifie si la génération de la pièce doit échouer aléatoirement
-        if (Random.value < 0.5f && roomIndex != Vector2Int.zero)
-        {
-            return false;
-        }
-
-        // Vérifie le nombre de pièces adjacentes pour éviter de trop densifier
-        if (CountAdjacentRooms(roomIndex) > 1)
-        {
-            return false;
-        }
-
-        // Ajoute la pièce à la queue et à la grille
+        // Enfile la pièce dans la file d'attente et enregistre sa position dans la grille
         roomQueue.Enqueue(roomIndex);
-        roomGrid[x, y] = 1;
+        roomGrid[roomIndex.x, roomIndex.y] = 1;
         roomCount++;
 
-        // Instancie la nouvelle pièce
-        var newRoom = Instantiate(RoomPrefab, GetPositionFromGridIndex(roomIndex), Quaternion.identity);
+        // Déterminer le type de préfab à instancier en fonction des pourcentages
+        GameObject roomToInstantiate;
+        float roomTypeRoll = Random.Range(0f, 100f);
+
+        if (roomTypeRoll < BattleRoomPurcent && BattleRoomPrefabs.Count > 0)
+        {
+            // Choisir aléatoirement un préfab de BattleRoomPrefabs
+            roomToInstantiate = BattleRoomPrefabs[Random.Range(0, BattleRoomPrefabs.Count)];
+        }
+        else if (roomTypeRoll < BattleRoomPurcent + SpecialRoomPurcent && SpecialRoomPrefabs.Count > 0)
+        {
+            // Choisir aléatoirement un préfab de SpecialRoomPrefabs
+            roomToInstantiate = SpecialRoomPrefabs[Random.Range(0, SpecialRoomPrefabs.Count)];
+        }
+        else
+        {
+            // Si aucun critère n'est rempli, utiliser le préfab de base
+            roomToInstantiate = RoomPrefab;
+        }
+
+        // Instancier la pièce choisie et l'ajouter à la liste des pièces
+        var newRoom = Instantiate(roomToInstantiate, GetPositionFromGridIndex(roomIndex), Quaternion.identity);
         newRoom.GetComponent<Room>().RoomIndex = roomIndex;
         newRoom.name = $"ROOM-{roomCount}";
         roomObjects.Add(newRoom);
