@@ -10,7 +10,7 @@ public class EnemyStats : MonoBehaviour
 
     [Header("Stats")]
     public int enemyHP;
-    public double enemyDmg;
+    public int enemyDmg;
     public float enemyMovementSpeed;
     public bool enemyIsRange;
 
@@ -27,31 +27,19 @@ public class EnemyStats : MonoBehaviour
     public bool defaultMovement = true;
     public bool isStunned;
 
+    [Header("Methods")]
+    public EnemyMethods methods;
     public void Update()
     {
-
-        if (defaultMovement && !isStunned)
+        if (!isStunned)
         {
-            Movements();
-
+            if(defaultMovement) methods.Movements();
         }
-    }
-
-    public void Movements()
-    {
         
-        if (transform.position.x < player.position.x)
-        {
-
-            transform.rotation = Quaternion.Euler(0, 180, 0);
-        }
-        else
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-        }
-        transform.position = Vector2.MoveTowards(transform.position, player.position, Time.deltaTime * enemyMovementSpeed);
         
     }
+
+    
 }
 
 
