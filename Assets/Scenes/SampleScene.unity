@@ -383,12 +383,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1354ef04a2aaa64aa51477d3712d295, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allDoorsParent: {fileID: 799600320}
-  doorNames:
-  - UpDoor
-  - BotDoor
-  - LeftDoor
-  - RightDoor
 --- !u!1 &810016695
 GameObject:
   m_ObjectHideFlags: 0
@@ -605,6 +599,8 @@ MonoBehaviour:
   BattleRoomPrefabs:
   - {fileID: 5745419445754764464, guid: 54301d055be6da247b965c2095d28f0a, type: 3}
   - {fileID: 387377226215177955, guid: d362a7d5c5822304ab46f9b86dd1ce91, type: 3}
+  - {fileID: 3967383231478308994, guid: 81caf6cb25fff194d8c23b3b62ff283f, type: 3}
+  - {fileID: 844679335374742802, guid: 5b20bfb29d155b54b9e255b8dbe0f2a5, type: 3}
   SpecialRoomPrefabs:
   - {fileID: 2705485155749547671, guid: d829579c4509b00419d12aa10b21fd8c, type: 3}
   - {fileID: 4473149939997547675, guid: 2726d50ce595ff84aa9b4a615580ffa1, type: 3}
