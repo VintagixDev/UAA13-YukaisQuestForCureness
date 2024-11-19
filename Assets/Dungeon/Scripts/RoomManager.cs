@@ -11,7 +11,8 @@ public class RoomManager : MonoBehaviour
 
     [Header("Prefabs")]
     // Prefabs pour la génération de pièces
-    [SerializeField] GameObject RoomPrefab;
+    [SerializeField] GameObject SpawnRoomPrefabs; // Réservé pour le spawn
+    [SerializeField] GameObject RoomPrefab; // Piece basique et ne doit jamais etre vide
     [SerializeField] GameObject BossRoomPrefab;
     [SerializeField] List<GameObject> BattleRoomPrefabs;
     [SerializeField] List<GameObject> SpecialRoomPrefabs;
@@ -48,7 +49,7 @@ public class RoomManager : MonoBehaviour
         roomGrid = new int[gridSizex, gridSizey];
         Vector2Int initialRoomIndex = new Vector2Int(gridSizex / 2, gridSizey / 2);
         StartRoomGenerationFromRoom(initialRoomIndex);
-        OpenAllDoors(); 
+        OpenAllDoors();
     }
     private void Update()
     {
