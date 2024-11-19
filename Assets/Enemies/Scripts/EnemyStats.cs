@@ -14,13 +14,15 @@ public class EnemyStats : MonoBehaviour
     public float enemyMovementSpeed;
     public bool enemyIsRange;
 
-    [Header("Melee")]
-    public double enemyMeleeRange;
+
 
     [Header("Ranged")]
-    public double enemyProjectileSize = 1;
-    public double enemyProjectileReach = 1;
-    public double enemyProjectileSpeed = 1;
+    public float enemyProjectileSize = 1;
+    public float enemyProjectileReach = 1;
+    public float enemyProjectileSpeed = 1;
+    public int enemyAttackSpeed = 60; // Nombre de frame
+
+    public GameObject enemyProjectile;
 
     [Header("Movements")]
     public Transform player;
