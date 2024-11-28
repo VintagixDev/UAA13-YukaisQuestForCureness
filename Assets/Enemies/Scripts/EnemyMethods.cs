@@ -8,14 +8,12 @@ public class EnemyMethods : MonoBehaviour
 
     public PlayerMethods playerMethods;
     public EnemyStats stats;
-    private int cooldown = 60;
-    private int cdTime;
+   
     private int cdAttackSpeed;
 
     public void Start()
     {
         
-        cdTime = cooldown;
         cdAttackSpeed = stats.enemyAttackSpeed;
     }
 
@@ -38,14 +36,7 @@ public class EnemyMethods : MonoBehaviour
     private void Update()
     {
         
-        if (cdTime < cooldown)
-        {
-            cdTime--;
-            if (cdTime == 0)
-            {
-                cdTime = cooldown;
-            }
-        }
+        
 
 
         if (stats.enemyIsRange)
@@ -72,11 +63,9 @@ public class EnemyMethods : MonoBehaviour
         if(collision.gameObject.name == "Player")
         {
             
-            if(cdTime == cooldown)
-            {
-                playerMethods.DamagePlayer(stats.enemyDmg);
-                cdTime--;
-            }
+           
+            playerMethods.DamagePlayer(stats.enemyDmg);
+               
             
             
         }

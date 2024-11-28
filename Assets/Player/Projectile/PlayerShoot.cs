@@ -40,25 +40,21 @@ public class PlayerShoot : MonoBehaviour
             if (Input.GetKey(KeyCode.LeftArrow))
             {
                 Shoot(LeftSpawn, new Vector2(-1, 0));
-                Debug.Log("Left");
             }
             // Droite
             if (Input.GetKey(KeyCode.RightArrow))
             {
                 Shoot(RightSpawn, new Vector2(1, 0));
-                Debug.Log("Right");
             }
             // Haut
             if (Input.GetKey(KeyCode.UpArrow))
             {
                 Shoot(UpSpawn, new Vector2(0, 1));
-                Debug.Log("Up");
             }
             // Bas
             if (Input.GetKey(KeyCode.DownArrow))
             {
                 Shoot(DownSpawn, new Vector2(0, -1));
-                Debug.Log("Down");
             }
         }
         
