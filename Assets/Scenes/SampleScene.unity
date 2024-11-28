@@ -474,7 +474,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -594,14 +594,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AllRooms: {fileID: 378194746}
   doorContainer: {fileID: 0}
-  SpawnRoomPrefabs: {fileID: 8687541612879129657, guid: 16215d9645387ce40a94fe29a7eed23f, type: 3}
-  RoomPrefab: {fileID: 5745419445754764464, guid: 54301d055be6da247b965c2095d28f0a, type: 3}
+  SpawnRoomPrefabs: {fileID: 481221351583195767, guid: f357540d72bad99498287dbba32709ac, type: 3}
+  RoomPrefab: {fileID: 481221351583195767, guid: f357540d72bad99498287dbba32709ac, type: 3}
   BossRoomPrefab: {fileID: 1829676572362382078, guid: 10c1e61ef1c75854482fd0c23abeea6c, type: 3}
   BattleRoomPrefabs:
-  - {fileID: 2326811673000760582, guid: 0a423ce6cdaf52240acc6fcd20ca4b46, type: 3}
-  SpecialRoomPrefabs:
-  - {fileID: 2705485155749547671, guid: d829579c4509b00419d12aa10b21fd8c, type: 3}
-  - {fileID: 4473149939997547675, guid: 2726d50ce595ff84aa9b4a615580ffa1, type: 3}
+  - {fileID: 481221351583195767, guid: f357540d72bad99498287dbba32709ac, type: 3}
+  SpecialRoomPrefabs: []
   maxRoom: 15
   minRoom: 10
   BattleRoomPurcent: 75
