@@ -75,6 +75,7 @@
     <Compile Include="Assets\Ressources\Cainos\Pixel Art Top Down - Basic\Script\SpriteColorAnimation.cs" />
     <Compile Include="Assets\Enemies\Scripts\EnemyMethods.cs" />
     <Compile Include="Assets\Enemies\Scripts\Snail.cs" />
+    <Compile Include="Assets\Scenes\Main Menu\SettingsScript.cs" />
     <Compile Include="Assets\Dungeon\Scripts\Room.cs" />
   </ItemGroup>
   <ItemGroup>
