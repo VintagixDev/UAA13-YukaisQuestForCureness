@@ -53,7 +53,7 @@
     <UnityVersion>2022.3.9f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="D:\SOFT\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.9f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.9f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
@@ -67,6 +67,7 @@
     <Compile Include="Assets\Ui\Scripts\StatsUI.cs" />
     <Compile Include="Assets\Player\Projectile\BulletShoot.cs" />
     <Compile Include="Assets\Player\Scripts\PlayerMovements.cs" />
+    <Compile Include="Assets\PartyManager\GameSupervisor.cs" />
     <Compile Include="Assets\Ressources\Cainos\Pixel Art Top Down - Basic\Script\TopDownCharacterController.cs" />
     <Compile Include="Assets\Player\Scripts\PlayerStats.cs" />
     <Compile Include="Assets\Player\Scripts\PlayerMethods.cs" />
@@ -75,7 +76,11 @@
     <Compile Include="Assets\Ressources\Cainos\Pixel Art Top Down - Basic\Script\SpriteColorAnimation.cs" />
     <Compile Include="Assets\Enemies\Scripts\EnemyMethods.cs" />
     <Compile Include="Assets\Enemies\Scripts\Snail.cs" />
+<<<<<<< HEAD
     <Compile Include="Assets\Scenes\Main Menu\SettingsScript.cs" />
+=======
+    <Compile Include="Assets\Dungeon\Scripts\Door.cs" />
+>>>>>>> b9a8fa2805038fca1ff170da2aa8544caf6d1f98
     <Compile Include="Assets\Dungeon\Scripts\Room.cs" />
   </ItemGroup>
   <ItemGroup>

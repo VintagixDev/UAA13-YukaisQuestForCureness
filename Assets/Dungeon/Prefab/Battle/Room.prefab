@@ -506,10 +506,9 @@ MonoBehaviour:
   leftDoor: {fileID: 4867912238379175192}
   rightDoor: {fileID: 5909672420686960394}
   topDoorPrefab: {fileID: 6193630413247003090, guid: f077570f8b1850240b6da4269f2598c1, type: 3}
-  botDoorPrefab: {fileID: 717855064626030997, guid: a050c88b343289242919dfc8575d0e3a, type: 3}
+  botDoorPrefab: {fileID: 1931725228791023984, guid: 024553377e0a43d4bb2a53f7e67bd93b, type: 3}
   leftDoorPrefab: {fileID: 6625690551001669293, guid: 8cbccb1aea0312f4f9f77449cc85ec22, type: 3}
   rightDoorPrefab: {fileID: 6683336914798158909, guid: 89f7986d4a470b6418deb31c6a34c2bf, type: 3}
-  doorsContainer: {fileID: 2647850210805213689}
 --- !u!1 &5909672420686960394
 GameObject:
   m_ObjectHideFlags: 0
