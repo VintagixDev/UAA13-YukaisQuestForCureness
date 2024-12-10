@@ -10,6 +10,7 @@ public class EnemyMethods : MonoBehaviour
     public EnemyStats stats;
    
     private int cdAttackSpeed;
+    private Vector3 offset;
 
     public void Start()
     {
@@ -17,7 +18,7 @@ public class EnemyMethods : MonoBehaviour
         cdAttackSpeed = stats.enemyAttackSpeed;
     }
 
-    public void Movements()
+    public void Movements(bool range)
     {
 
         if (transform.position.x < stats.player.position.x)
@@ -29,7 +30,16 @@ public class EnemyMethods : MonoBehaviour
         {
             transform.rotation = Quaternion.Euler(0, 0, 0);
         }
-        transform.position = Vector2.MoveTowards(transform.position, stats.player.position, Time.deltaTime * stats.enemyMovementSpeed);
+        if (range == false)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, stats.player.position, Time.deltaTime * stats.enemyMovementSpeed);
+        }
+        else
+        {
+            
+            offset = transform.position - stats.player.position;
+            transform.position = new Vector2(transform.position.x, stats.player.position.y + offset.y);
+        }
 
     }
 
@@ -41,7 +51,6 @@ public class EnemyMethods : MonoBehaviour
 
         if (stats.enemyIsRange)
         {
-            Debug.Log(cdAttackSpeed);
             cdAttackSpeed--;
             if(cdAttackSpeed == 0)
             {
@@ -59,7 +68,7 @@ public class EnemyMethods : MonoBehaviour
     /// <param name="collision"></param>
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (stats.enemyIsRange) return;
+   
         if(collision.gameObject.name == "Player")
         {
             
@@ -83,6 +92,8 @@ public class EnemyMethods : MonoBehaviour
 
         float currentSize = projectile.transform.localScale.x;
         projectile.transform.localScale = new Vector2(currentSize * stats.enemyProjectileSize, currentSize * stats.enemyProjectileSize);
+        projectile.GetComponent<EnemyShoot>().stats = stats;
+        projectile.GetComponent<EnemyShoot>().playerMethods = playerMethods;
 
         projectile.GetComponent<Rigidbody2D>().velocity = direction * stats.enemyProjectileSpeed;
         projectile.GetComponent<BulletShoot>().timeToDeath = stats.enemyProjectileReach;

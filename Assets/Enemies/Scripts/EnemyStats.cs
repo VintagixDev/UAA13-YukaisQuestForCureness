@@ -35,7 +35,7 @@ public class EnemyStats : MonoBehaviour
     {
         if (!isStunned)
         {
-            if(defaultMovement) methods.Movements();
+            if(defaultMovement) methods.Movements(enemyIsRange);
         }
         
         

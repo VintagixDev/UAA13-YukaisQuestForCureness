@@ -63,22 +63,21 @@ public class SettingsScript : MonoBehaviour
         Transform child = button.transform.GetChild(0);
         TextMeshProUGUI text = child.GetComponent<TextMeshProUGUI>();
         text.text = "...";
-        /*while (text.text == "...")
+        while (text.text == "...")
         {
-            foreach (KeyCode keycode in Enum.GetValues(typeof(KeyCode)))
+            
+            /*if (Input.GetKey())
             {
-                if (Input.GetKey(keycode))
-                {
-                    text.text = keycode.ToString();
-                    PlayerPrefs.SetString(button.transform.parent.name, keycode.ToString());
-                    PlayerPrefs.Save();
+                text.text = keycode.ToString();
+                PlayerPrefs.SetString(button.transform.parent.name, keycode.ToString());
+                PlayerPrefs.Save();
 
-                    KeyCode key = (KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString(button.transform.parent.name));
-                    Debug.Log(key);
-                    Debug.Log(button.transform.parent.name);
-                    Debug.Log(PlayerPrefs.GetString(button.transform.parent.name));
-                }
+                KeyCode key = (KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString(button.transform.parent.name));
+                Debug.Log(key);
+                Debug.Log(button.transform.parent.name);
+                Debug.Log(PlayerPrefs.GetString(button.transform.parent.name));
             }
-        }*/
+            */
+        }
     }
 }
