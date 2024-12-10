@@ -10,10 +10,12 @@ public class EnemyShoot : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-       
-        if (collision.gameObject.name == "Player")
+        playerMethods = collision.gameObject.GetComponent<PlayerMethods>();
+        if (playerMethods != null && stats != null)
         {
-            playerMethods.DamagePlayer(1);
+            playerMethods.DamagePlayer(stats.enemyDmg);
         }
+        
+
     }
 }

@@ -37,8 +37,8 @@ public class EnemyMethods : MonoBehaviour
         else
         {
             
-            offset = transform.position - stats.player.position;
-            transform.position = new Vector2(transform.position.x, stats.player.position.y + offset.y);
+            Vector2 pos = new Vector2(transform.position.x, stats.player.position.y);
+            transform.position = Vector2.MoveTowards(transform.position, pos, Time.deltaTime * stats.enemyMovementSpeed);
         }
 
     }
