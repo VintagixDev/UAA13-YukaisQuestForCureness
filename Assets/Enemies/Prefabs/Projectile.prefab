@@ -12,7 +12,9 @@ GameObject:
   - component: {fileID: 6929736472918996777}
   - component: {fileID: 8599802816935866460}
   - component: {fileID: 893551096242481044}
+  - component: {fileID: 30358420612867433}
   - component: {fileID: 7222204215042680596}
+  - component: {fileID: 4348243210140201341}
   m_Layer: 0
   m_Name: Projectile
   m_TagString: Untagged
@@ -127,6 +129,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToDeath: 1
+--- !u!114 &30358420612867433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4437136641128486480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d3f8d43ff89ae243860c8536f42c30d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 0}
+  playerMethods: {fileID: 0}
 --- !u!58 &7222204215042680596
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -162,3 +178,17 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.010938942}
   serializedVersion: 2
   m_Radius: 0.4234256
+--- !u!114 &4348243210140201341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4437136641128486480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d3f8d43ff89ae243860c8536f42c30d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 0}
+  playerMethods: {fileID: 0}
