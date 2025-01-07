@@ -17,20 +17,6 @@ public class PlayerStats : MonoBehaviour
     public int playerGolds = 0;
     public int playerKeys = 0;
 
-  
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-   
+    [Header("Pièce actuelle du joueur")]
+    [SerializeField] public string currentRoom; // 
 }

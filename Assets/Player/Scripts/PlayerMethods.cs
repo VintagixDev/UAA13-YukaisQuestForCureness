@@ -6,8 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMethods : MonoBehaviour
 {
-
-
     public int iFrames = 160;
     private int cdTime;
     public PlayerStats stats;

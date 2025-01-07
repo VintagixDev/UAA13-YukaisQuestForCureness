@@ -10,40 +10,32 @@ public class RoomManager : MonoBehaviour
     public Transform doorContainer;
 
     [Header("Prefabs")]
-    // Prefabs pour la génération de pièces
-    [SerializeField] GameObject SpawnRoomPrefabs; // Réservé pour le spawn
-    [SerializeField] GameObject RoomPrefab; // Piece basique et ne doit jamais etre vide
+    [SerializeField] GameObject SpawnRoomPrefabs;
+    [SerializeField] GameObject RoomPrefab;
     [SerializeField] GameObject BossRoomPrefab;
     [SerializeField] List<GameObject> BattleRoomPrefabs;
     [SerializeField] List<GameObject> SpecialRoomPrefabs;
 
     [Header("Numbers of rooms")]
-    // Nombre de pieces max et min
     [SerializeField] private int maxRoom = 15;
     [SerializeField] private int minRoom = 10;
 
-    [Header("Prefabs")]
-    // Pourcentage de type de pieces
-    [SerializeField] int BattleRoomPurcent;
-    [SerializeField] int SpecialRoomPurcent;
-
     [Header("Room max dimensions")]
-    // Dimensions pour l'espacement des pièces
     [SerializeField] int roomWidth = 20;
     [SerializeField] int roomHeight = 12;
 
     [Header("Grid Size")]
-    // Dimensions de la grille
     [SerializeField] int gridSizex = 10;
     [SerializeField] int gridSizey = 10;
 
-    // Listes pour stocker les objets des pièces générées
     private List<GameObject> roomObjects = new List<GameObject>();
     private Queue<Vector2Int> roomQueue = new Queue<Vector2Int>();
 
     private int[,] roomGrid;
     private int roomCount;
     private bool generationComplete = false;
+
+    private int nextRoomID = 1; // ID initial pour la première pièce
     private void Start()
     {
         roomGrid = new int[gridSizex, gridSizey];
@@ -74,31 +66,31 @@ public class RoomManager : MonoBehaviour
     }
     private void StartRoomGenerationFromRoom(Vector2Int roomIndex)
     {
-        // Initialisation de la file d'attente et de la première pièce
         roomQueue.Enqueue(roomIndex);
         roomGrid[roomIndex.x, roomIndex.y] = 1;
         roomCount++;
 
+        // Créer la première pièce
         var initialRoom = Instantiate(RoomPrefab, GetPositionFromGridIndex(roomIndex), Quaternion.identity);
         initialRoom.name = $"ROOM-{roomCount}";
         initialRoom.GetComponent<Room>().RoomIndex = roomIndex;
+
+        // Assigner un ID à la pièce
+        initialRoom.GetComponent<Room>().SetRoomID(nextRoomID++);
         roomObjects.Add(initialRoom);
 
-        // Générer les pièces adjacentes jusqu'à atteindre le maximum ou minimum requis
         while (roomQueue.Count > 0 && roomCount < maxRoom)
         {
             Vector2Int currentRoomIndex = roomQueue.Dequeue();
             GenerateAdjacentRooms(currentRoomIndex);
         }
 
-        // Placer la salle de boss à l'extrémité la plus éloignée si le minimum de pièces est atteint
         if (roomCount >= minRoom)
         {
-            PlaceBossRoomAtExtremity(); // Crée la BossRoom à l'extrémité
+            PlaceBossRoomAtExtremity();
         }
         else
         {
-            Debug.LogWarning("Moins de pièces générées que prévu, essayez à nouveau.");
             RegenerateRooms();
         }
     }
@@ -157,40 +149,21 @@ public class RoomManager : MonoBehaviour
     {
         if (roomCount >= maxRoom) return false;
 
-        // Vérification des conditions pour éviter la surpopulation des pièces
         if (Random.value < 0.5f && roomIndex != Vector2Int.zero) return false;
         if (CountAdjacentRooms(roomIndex) > 1) return false;
 
-        // Enfile la pièce dans la file d'attente et enregistre sa position dans la grille
         roomQueue.Enqueue(roomIndex);
         roomGrid[roomIndex.x, roomIndex.y] = 1;
         roomCount++;
 
-        // Déterminer le type de préfab à instancier en fonction des pourcentages
-        GameObject roomToInstantiate;
-        float roomTypeRoll = Random.Range(0f, 100f);
-
-        if (roomTypeRoll < BattleRoomPurcent && BattleRoomPrefabs.Count > 0)
-        {
-            // Choisir aléatoirement un préfab de BattleRoomPrefabs
-            roomToInstantiate = BattleRoomPrefabs[Random.Range(0, BattleRoomPrefabs.Count)];
-        }
-        else if (roomTypeRoll < BattleRoomPurcent + SpecialRoomPurcent && SpecialRoomPrefabs.Count > 0)
-        {
-            // Choisir aléatoirement un préfab de SpecialRoomPrefabs
-            roomToInstantiate = SpecialRoomPrefabs[Random.Range(0, SpecialRoomPrefabs.Count)];
-        }
-        else
-        {
-            // Si aucun critère n'est rempli, utiliser le préfab de base
-            roomToInstantiate = RoomPrefab;
-        }
-
-        // Instancier la pièce choisie et l'ajouter à la liste des pièces
+        GameObject roomToInstantiate = RoomPrefab; 
 
         GameObject newRoom = Instantiate(roomToInstantiate, GetPositionFromGridIndex(roomIndex), Quaternion.identity);
         newRoom.GetComponent<Room>().RoomIndex = roomIndex;
         newRoom.name = $"ROOM-{roomCount}";
+
+        // Assigner un ID à la pièce
+        newRoom.GetComponent<Room>().SetRoomID(nextRoomID++);
         roomObjects.Add(newRoom);
         return true;
     }
@@ -209,38 +182,22 @@ public class RoomManager : MonoBehaviour
     {
         Room newRoomScript = room.GetComponent<Room>();
 
-        Room leftRoomScript = GetRoomScriptAt(new Vector2Int(x - 1, y));
-        Room rightRoomScript = GetRoomScriptAt(new Vector2Int(x + 1, y));
-        Room topRoomScript = GetRoomScriptAt(new Vector2Int(x, y + 1));
-        Room bottomRoomScript = GetRoomScriptAt(new Vector2Int(x, y - 1));
-
         // Ouvrir les portes vers les pièces adjacentes
         if (x > 0 && roomGrid[x - 1, y] != 0) // Gauche
         {
-            //Debug.Log($"({x}, {y}) vers ({x - 1}, {y})");
-            newRoomScript.OpenDoor(Vector2Int.left, roomCount);
-            leftRoomScript?.OpenDoor(Vector2Int.right, roomCount);
+            newRoomScript.SetDoor(Vector2Int.left, roomCount);
         }
-
         if (x < gridSizex - 1 && roomGrid[x + 1, y] != 0) // Droite
         {
-            //Debug.Log($"({x}, {y}) vers ({x + 1}, {y})");
-            newRoomScript.OpenDoor(Vector2Int.right, roomCount);
-            rightRoomScript?.OpenDoor(Vector2Int.left, roomCount);
+            newRoomScript.SetDoor(Vector2Int.right, roomCount);
         }
-
         if (y > 0 && roomGrid[x, y - 1] != 0) // Bas
         {
-            //Debug.Log($"({x}, {y}) vers ({x}, {y - 1})");
-            newRoomScript.OpenDoor(Vector2Int.down, roomCount);
-            bottomRoomScript?.OpenDoor(Vector2Int.up, roomCount);
+            newRoomScript.SetDoor(Vector2Int.down, roomCount);
         }
-
         if (y < gridSizey - 1 && roomGrid[x, y + 1] != 0) // Haut
         {
-            //Debug.Log($"({x}, {y}) vers ({x}, {y + 1})");
-            newRoomScript.OpenDoor(Vector2Int.up, roomCount);
-            topRoomScript?.OpenDoor(Vector2Int.down, roomCount);
+            newRoomScript.SetDoor(Vector2Int.up, roomCount);
         }
     }
     Room GetRoomScriptAt(Vector2Int index)

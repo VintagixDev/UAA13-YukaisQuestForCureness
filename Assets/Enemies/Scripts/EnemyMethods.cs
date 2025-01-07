@@ -35,10 +35,6 @@ public class EnemyMethods : MonoBehaviour
 
     private void Update()
     {
-        
-        
-
-
         if (stats.enemyIsRange)
         {
             Debug.Log(cdAttackSpeed);
@@ -62,19 +58,12 @@ public class EnemyMethods : MonoBehaviour
         if (stats.enemyIsRange) return;
         if(collision.gameObject.name == "Player")
         {
-            
-           
             playerMethods.DamagePlayer(stats.enemyDmg);
-               
-            
-            
         }
     }
 
     private void EnemyDefaultRangeAttack()
     {
-        
-        
         Vector2 pos = stats.player.position - gameObject.transform.position;
         var distance = pos.magnitude;
         var direction = pos / distance;
@@ -86,7 +75,5 @@ public class EnemyMethods : MonoBehaviour
 
         projectile.GetComponent<Rigidbody2D>().velocity = direction * stats.enemyProjectileSpeed;
         projectile.GetComponent<BulletShoot>().timeToDeath = stats.enemyProjectileReach;
-        
     }
-
 }

@@ -6,18 +6,14 @@ using UnityEngine.SceneManagement;
 
 public class ManagerScene : MonoBehaviour
 {
-    
     AsyncOperation asyncLoad;
     bool bLoadDone;
-
     public enum Scenes
     {
         MainMenu = 0,
         GameScene = 1,
         DeathScene = 3
     }
-
-
     public IEnumerator LoadAsyncScene(Scenes scene)
     {
         bLoadDone = false;

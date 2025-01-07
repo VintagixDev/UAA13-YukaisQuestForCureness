@@ -2,12 +2,13 @@ using UnityEngine;
 
 public class GameSupervisor : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private string roomIdAtPlayer;
+    
     private void Start()
     {
         if (InitializeComponents())
         {
-            //Lancer le jeu ^^
+            // Lancer le jeu ^^
         }
     }
 
@@ -40,21 +41,33 @@ public class GameSupervisor : MonoBehaviour
         }
     }
 
-    // Génére le Donjon en arrière plan : piece->porte
+    // Génère le Donjon en arrière plan : piece->porte
     public bool SetDungeon()
     {
         return true;
     }
 
-    // Génére le joueur en arrière plan : Stat->ui
+    // Génère le joueur en arrière plan : Stat->ui
     public bool SetPlayer()
     {
         return true;
     }
 
-    // Génére l'interface en arrière plan
+    // Génère l'interface en arrière plan
     public bool SetUI()
     {
+        return true;
+    }
+    public void EndBattle()
+    {
+        if (IsBattleIsFinished())
+        {
+            
+        }
+    }
+    public bool IsBattleIsFinished()
+    {
+
         return true;
     }
 }
