@@ -72,6 +72,22 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: -20
       objectReference: {fileID: 0}
+    - target: {fileID: 5248416160582710135, guid: 54301d055be6da247b965c2095d28f0a, type: 3}
+      propertyPath: botDoorPrefab
+      value: 
+      objectReference: {fileID: 1931725228791023984, guid: 1d809f673f961f54fbc4437adbd44414, type: 3}
+    - target: {fileID: 5248416160582710135, guid: 54301d055be6da247b965c2095d28f0a, type: 3}
+      propertyPath: topDoorPrefab
+      value: 
+      objectReference: {fileID: 5074764154232242637, guid: 4b77c18eea5d2a441a9174fdeb79e0f9, type: 3}
+    - target: {fileID: 5248416160582710135, guid: 54301d055be6da247b965c2095d28f0a, type: 3}
+      propertyPath: leftDoorPrefab
+      value: 
+      objectReference: {fileID: 1931725228791023984, guid: 588e405e07e87654b8d37a5e2bd58e96, type: 3}
+    - target: {fileID: 5248416160582710135, guid: 54301d055be6da247b965c2095d28f0a, type: 3}
+      propertyPath: rightDoorPrefab
+      value: 
+      objectReference: {fileID: 1931725228791023984, guid: ee670559e1709744a9cd64dd86cf42ec, type: 3}
     - target: {fileID: 5745419445754764464, guid: 54301d055be6da247b965c2095d28f0a, type: 3}
       propertyPath: m_Name
       value: RoomLong2 Variant

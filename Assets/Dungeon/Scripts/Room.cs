@@ -3,35 +3,52 @@ using UnityEngine;
 
 public class Room : MonoBehaviour
 {
+    // préfabs pré_existant servant à garder en mémoire les positions
     [Header("Doors Prefab : Positions")]
-    [SerializeField] GameObject topDoor;
-    [SerializeField] GameObject botDoor;
-    [SerializeField] GameObject leftDoor;
-    [SerializeField] GameObject rightDoor;
+    [SerializeField] GameObject topDoor; // HAUT/NORTH
+    [SerializeField] GameObject botDoor; // BAS/SOUNTH
+    [SerializeField] GameObject leftDoor; // GAUCHE/WEST
+    [SerializeField] GameObject rightDoor; // DROITE/EAST
 
+    // préfabs des portes pour instanciation
     [Header("Doors Prefab : To Replace")]
-    [SerializeField] GameObject topDoorPrefab;
-    [SerializeField] GameObject botDoorPrefab;
-    [SerializeField] GameObject leftDoorPrefab;
-    [SerializeField] GameObject rightDoorPrefab;
+    [SerializeField] GameObject topDoorPrefab; // HAUT/NORTH
+    [SerializeField] GameObject botDoorPrefab; // BAS/SOUNTH
+    [SerializeField] GameObject leftDoorPrefab; // GAUCHE/WEST
+    [SerializeField] GameObject rightDoorPrefab; // DROITE/EAST
 
     [SerializeField] private int roomID;
-    public int RoomID => roomID;
-    public Vector2Int RoomIndex { get; set; }
+    public int RoomID => roomID; // Identifiant unique de la salle.
+    public Vector2Int RoomIndex { get; set; } // Indice de la salle dans une grille (coordonnées).
+    private Dictionary<Vector2, Door> doors = new Dictionary<Vector2, Door>(); // pour stocker les informations des portes
 
-    // pour stocker les informations des portes
-    private Dictionary<Vector2, Door> doors = new Dictionary<Vector2, Door>();
+    /// <summary>
+    /// Définit l'identifiant de la salle.
+    /// </summary>
+    /// <param name="id">Identifiant unique de la salle.</param>
     public void SetRoomID(int id)
     {
         roomID = id;
     }
+
+    /// <summary>
+    /// Configure une porte dans une direction donnée et initialise ses propriétés.
+    /// </summary>
+    /// <param name="direction">Direction de la porte (Vector2).</param>
+    /// <param name="roomCount">Nombre total de salles dans le niveau.</param>
+    /// <param name="isLocked">Indique si la porte est verrouillée.</param>
+    /// <param name="isLockedByBattle">Indique si la porte est verrouillée par un combat.</param>
+    /// <param name="isBossDoor">Indique si la porte est une porte de boss.</param>
     public void SetDoor(Vector2 direction, int roomCount, bool isLocked = false, bool isLockedByBattle = false, bool isBossDoor = false)
     {
         GameObject doorPrefab = null;
         Vector3 position = Vector3.zero;
         string orientation = "";
         string doorName = "";
+        Door connectedDoor = null;
+        Vector2Int connectedDoorPosition = Vector2Int.zero;
 
+        // Récupération de la porte et de la position en fonction de la direction
         if (direction == Vector2.up)
         {
             doorPrefab = topDoorPrefab;
@@ -39,6 +56,7 @@ public class Room : MonoBehaviour
             orientation = "N";
             doorName = "UpDoor";
             Destroy(topDoor);
+            connectedDoorPosition = new Vector2Int(RoomIndex.x, RoomIndex.y + 1); // Coordonnée de la porte voisine
         }
         else if (direction == Vector2.down)
         {
@@ -47,6 +65,7 @@ public class Room : MonoBehaviour
             orientation = "S";
             doorName = "BotDoor";
             Destroy(botDoor);
+            connectedDoorPosition = new Vector2Int(RoomIndex.x, RoomIndex.y - 1);
         }
         else if (direction == Vector2.left)
         {
@@ -55,6 +74,7 @@ public class Room : MonoBehaviour
             orientation = "W";
             doorName = "LeftDoor";
             Destroy(leftDoor);
+            connectedDoorPosition = new Vector2Int(RoomIndex.x - 1, RoomIndex.y);
         }
         else if (direction == Vector2.right)
         {
@@ -63,6 +83,7 @@ public class Room : MonoBehaviour
             orientation = "E";
             doorName = "RightDoor";
             Destroy(rightDoor);
+            connectedDoorPosition = new Vector2Int(RoomIndex.x + 1, RoomIndex.y);
         }
 
         if (doorPrefab != null)
@@ -75,8 +96,14 @@ public class Room : MonoBehaviour
             {
                 string doorId = $"Door_{roomID}_{doorName}";
                 doorScript.InitializeDoor(doorId, position.x, position.y, orientation, isLocked, isLockedByBattle, isBossDoor);
+
+                // Relier la porte à la porte voisine
+                doorScript.connectedDoorPosition = connectedDoorPosition;
+
+                // Ajoutez la porte à un dictionnaire de portes ou à toute autre structure de votre choix
                 doors[direction] = doorScript;
-                Debug.Log($"Door {doorId} instantiated and initialized");
+
+                //Debug.Log($"Porte {doorId} instanciée et reliée");
             }
             else
             {
@@ -84,6 +111,12 @@ public class Room : MonoBehaviour
             }
         }
     }
+   
+    /// <summary>
+    /// Récupère une porte dans une direction donnée.
+    /// </summary>
+    /// <param name="direction">Direction de la porte (Vector2).</param>
+    /// <returns>Instance de la porte correspondante ou null si introuvable.</returns>
     public Door GetDoor(Vector2 direction)
     {
         if (doors.TryGetValue(direction, out Door door))
@@ -92,50 +125,21 @@ public class Room : MonoBehaviour
         }
         return null;
     }
+
+    /// <summary>
+    /// Connecte deux portes entre deux salles dans des directions opposées.
+    /// </summary>
+    /// <param name="otherRoom">Salle à connecter.</param>
+    /// <param name="direction">Direction de la connexion (Vector2).</param>
+    public void ConnectDoors(Room otherRoom, Vector2 direction)
+    {
+        Door thisDoor = GetDoor(direction);
+        Door otherDoor = otherRoom.GetDoor(-direction);
+
+        if (thisDoor != null && otherDoor != null)
+        {
+            thisDoor.connectedDoor = otherDoor;
+            otherDoor.connectedDoor = thisDoor;
+        }
+    }
 }
-
-// Ancienne fonction
-
-//public void OpenDoor(Vector2 direction, int roomCount)
-//{
-//    if (direction == Vector2.up) // Open top door
-//    {
-//        Debug.Log("Top door is opening");
-//        if (!topDoor.activeInHierarchy)
-//        {
-//            var newDoor = Instantiate(topDoorPrefab, topDoor.transform.position, Quaternion.identity);
-//            newDoor.name = $"UpDoor";
-//            Destroy(topDoor);
-//        }
-//    }
-//    if (direction == Vector2.down) // Open bottom door
-//    {
-//        Debug.Log("Bottom door is opening");
-//        if (!botDoor.activeInHierarchy)
-//        {
-//            var newDoor = Instantiate(botDoorPrefab, botDoor.transform.position, Quaternion.identity);
-//            newDoor.name = $"BotDoor";
-//            Destroy(botDoor);
-//        }
-//    }
-//    if (direction == Vector2.left) // Open left door
-//    {
-//        Debug.Log("Left door is opening");
-//        if (!leftDoor.activeInHierarchy)
-//        {
-//            var newDoor = Instantiate(leftDoorPrefab, leftDoor.transform.position, Quaternion.identity);
-//            newDoor.name = $"LeftDoor";
-//            Destroy(leftDoor);
-//        }
-//    }
-//    if (direction == Vector2.right) // Open right door
-//    {
-//        Debug.Log("Right door is opening");
-//        if (!rightDoor.activeInHierarchy)
-//        {
-//            var newDoor = Instantiate(rightDoorPrefab, rightDoor.transform.position, Quaternion.identity);
-//            newDoor.name = $"RightDoor";
-//            Destroy(rightDoor);
-//        }
-//    }
-//}

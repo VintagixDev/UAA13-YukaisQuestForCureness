@@ -104,14 +104,36 @@ MonoBehaviour:
   y: 0
   z: 0
   orientation: 
-  spriteOpen: []
-  spriteClose: []
-  spriteLock: []
-  spriteBossOpen: []
-  spriteBossClose: []
+  spriteOpen:
+  - {fileID: 21300000, guid: e2f1a4c97f7af9045a5aefeddf99588e, type: 3}
+  - {fileID: 21300000, guid: 4a019190ca262f645b00e4cb673dc066, type: 3}
+  - {fileID: 21300000, guid: b9151f2575b128e4686bdd5ba5d17e53, type: 3}
+  - {fileID: 21300000, guid: cd8d25b9b820cd146a5b4f847fba5401, type: 3}
+  spriteClose:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  spriteLock:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  spriteBossOpen:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  spriteBossClose:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   isLocked: 0
   isLockedByBattle: 0
   isBossDoor: 0
+  connectedDoorPosition: {x: 0, y: 0}
+  connectedDoor: {fileID: 0}
 --- !u!61 &1098380555565375080
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -141,7 +163,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
