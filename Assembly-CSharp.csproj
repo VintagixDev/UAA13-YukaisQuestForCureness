@@ -65,6 +65,7 @@
     <Compile Include="Assets\Enemies\Scripts\EnemyStats.cs" />
     <Compile Include="Assets\Scenes\ManagerScene.cs" />
     <Compile Include="Assets\Ui\Scripts\StatsUI.cs" />
+    <Compile Include="Assets\Enemies\Scripts\Enemy.cs" />
     <Compile Include="Assets\Player\Projectile\BulletShoot.cs" />
     <Compile Include="Assets\Player\Scripts\PlayerMovements.cs" />
     <Compile Include="Assets\PartyManager\GameSupervisor.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="Assets\Dungeon\Scripts\RoomManager.cs" />
     <Compile Include="Assets\Ressources\Cainos\Pixel Art Top Down - Basic\Script\SpriteColorAnimation.cs" />
     <Compile Include="Assets\Enemies\Scripts\EnemyMethods.cs" />
+    <Compile Include="Assets\Dungeon\Scripts\Chest.cs" />
     <Compile Include="Assets\Enemies\Scripts\Snail.cs" />
     <Compile Include="Assets\Dungeon\Scripts\Door.cs" />
     <Compile Include="Assets\PartyManager\PlayerManager.cs" />
