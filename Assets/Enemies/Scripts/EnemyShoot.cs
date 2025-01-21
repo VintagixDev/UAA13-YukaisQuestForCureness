@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class EnemyShoot : MonoBehaviour
 {
-    public EnemyStats stats;
+    public int enemyDmg;
     public PlayerMethods playerMethods;
 
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         playerMethods = collision.gameObject.GetComponent<PlayerMethods>();
-        if (playerMethods != null && stats != null)
+        if (playerMethods != null && enemyDmg != null)
         {
-            playerMethods.DamagePlayer(stats.enemyDmg);
+            playerMethods.DamagePlayer(enemyDmg);
         }
         
 

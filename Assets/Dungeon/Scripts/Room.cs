@@ -45,7 +45,7 @@ public class Room : MonoBehaviour
         Vector3 position = Vector3.zero;
         string orientation = "";
         string doorName = "";
-        Door connectedDoor = null;
+        //Door connectedDoor = null;
         Vector2Int connectedDoorPosition = Vector2Int.zero;
 
         // Récupération de la porte et de la position en fonction de la direction

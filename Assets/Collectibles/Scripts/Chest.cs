@@ -6,14 +6,17 @@ public class Chest : MonoBehaviour
 {
 
     public bool isOpen = false;
+    public List<GameObject> Items;
     // Start is called before the first frame update
-    private void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("collided");
         GameObject gameObject = collision.gameObject;
-        if(gameObject.name == "Player")
+        if (gameObject.name == "Player" && isOpen == false)
         {
             isOpen = true;
+
+
         }
     }
 }

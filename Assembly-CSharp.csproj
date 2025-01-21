@@ -53,16 +53,17 @@
     <UnityVersion>2022.3.9f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="D:\SOFT\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.9f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.9f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Player\Projectile\PlayerShoot.cs" />
+    <Compile Include="Assets\Enemies\Enemies\Snail.cs" />
     <Compile Include="Assets\Ressources\Cainos\Pixel Art Top Down - Basic\Script\PropsAltar.cs" />
     <Compile Include="Assets\Ressources\Cainos\Pixel Art Top Down - Basic\Script\CameraFollow.cs" />
     <Compile Include="Assets\Scenes\Main Menu\Buttons.cs" />
-    <Compile Include="Assets\Enemies\Scripts\EnemyStats.cs" />
+    <Compile Include="Assets\Collectibles\Scripts\Chest.cs" />
     <Compile Include="Assets\Scenes\ManagerScene.cs" />
     <Compile Include="Assets\Ui\Scripts\StatsUI.cs" />
     <Compile Include="Assets\Enemies\Scripts\Enemy.cs" />
@@ -76,9 +77,6 @@
     <Compile Include="Assets\Ressources\Cainos\Pixel Art Top Down - Basic\Script\LayerTrigger.cs" />
     <Compile Include="Assets\Dungeon\Scripts\RoomManager.cs" />
     <Compile Include="Assets\Ressources\Cainos\Pixel Art Top Down - Basic\Script\SpriteColorAnimation.cs" />
-    <Compile Include="Assets\Enemies\Scripts\EnemyMethods.cs" />
-    <Compile Include="Assets\Dungeon\Scripts\Chest.cs" />
-    <Compile Include="Assets\Enemies\Scripts\Snail.cs" />
     <Compile Include="Assets\Dungeon\Scripts\Door.cs" />
     <Compile Include="Assets\PartyManager\PlayerManager.cs" />
     <Compile Include="Assets\Scenes\Main Menu\SettingsScript.cs" />
