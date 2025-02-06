@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Assets\Player\Projectile\PlayerShoot.cs" />
     <Compile Include="Assets\Enemies\Enemies\Snail.cs" />
+    <Compile Include="Assets\Upgrades\Upgrades\DamageUp.cs" />
     <Compile Include="Assets\Ressources\Cainos\Pixel Art Top Down - Basic\Script\PropsAltar.cs" />
     <Compile Include="Assets\Ressources\Cainos\Pixel Art Top Down - Basic\Script\CameraFollow.cs" />
     <Compile Include="Assets\Scenes\Main Menu\Buttons.cs" />
@@ -68,10 +69,10 @@
     <Compile Include="Assets\Ui\Scripts\StatsUI.cs" />
     <Compile Include="Assets\Enemies\Scripts\Enemy.cs" />
     <Compile Include="Assets\Player\Projectile\BulletShoot.cs" />
+    <Compile Include="Assets\Upgrades\Upgrade.cs" />
     <Compile Include="Assets\Player\Scripts\PlayerMovements.cs" />
     <Compile Include="Assets\PartyManager\GameSupervisor.cs" />
     <Compile Include="Assets\PartyManager\TeleportationManager.cs" />
-    <Compile Include="Assets\Items\Upgrade.cs" />
     <Compile Include="Assets\Ressources\Cainos\Pixel Art Top Down - Basic\Script\TopDownCharacterController.cs" />
     <Compile Include="Assets\Player\Scripts\PlayerStats.cs" />
     <Compile Include="Assets\Player\Scripts\PlayerMethods.cs" />

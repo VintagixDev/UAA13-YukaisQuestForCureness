@@ -15,6 +15,7 @@ public class Upgrade : MonoBehaviour
 
     private void Start()
     {
+        gameObject.GetComponent<SpriteRenderer>().sprite = upgradeSprite;
         if (upgradeStart)
         {
             UpgradeAction();
