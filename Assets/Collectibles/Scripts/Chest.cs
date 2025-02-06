@@ -18,7 +18,7 @@ public class Chest : MonoBehaviour
             isOpen = true;
             Vector3 pos = transform.position;
             pos.y += 1;
-            pos.x -= 1;
+            pos.x -= 2;
             foreach(GameObject item in Items)
             {
                 pos.x += 1;
@@ -27,6 +27,9 @@ public class Chest : MonoBehaviour
                 instanciated.name = item.name;
                 
             }
+            Destroy(this.gameObject.GetComponent<Rigidbody2D>());
+            Destroy(this.gameObject.GetComponent<BoxCollider2D>());
+
 
         }
     }
