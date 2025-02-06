@@ -58,6 +58,8 @@ public class RoomManager : MonoBehaviour
                 //Debug.Log("Room dans le parent");
                 room.transform.SetParent(AllRooms.transform, false);
             }
+
+
         }
         else if (roomCount < minRoom)
         {

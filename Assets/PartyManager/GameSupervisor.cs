@@ -52,14 +52,20 @@ public class GameSupervisor : MonoBehaviour
         return true;
     }
 
-    // Génère le joueur en arrière plan : Stat->ui
+    // Génère le joueur en arrière plan : Stat->camera
     public bool SetPlayer()
     {
         GameObject playerToInstantiate = playerPrefab;
-
-        //GameObject player = Instantiate(playerToInstantiate, , Quaternion.identity);
-        //player.name = $"PLAYER";
-        return true;
+        if(playerToInstantiate != null)
+        {
+            GameObject player = Instantiate(playerToInstantiate ,new Vector2(0,0), Quaternion.identity);
+            player.name = $"Player";
+            return true;
+        } else
+        {
+            return false;
+        }
+        
     }
 
     // Génère l'interface en arrière plan
