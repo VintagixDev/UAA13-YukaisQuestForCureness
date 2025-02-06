@@ -2,13 +2,18 @@ using UnityEngine;
 
 public class GameSupervisor : MonoBehaviour
 {
-    private string roomIdAtPlayer;
-    
+    [Header("a")]
+    [SerializeField] string roomIdAtPlayer;
+    [SerializeField] bool BattleStarted;
+
+    [Header("Player prefab")]
+    [SerializeField] GameObject playerPrefab; 
+
     private void Start()
     {
         if (InitializeComponents())
         {
-            // Lancer le jeu ^^
+
         }
     }
 
@@ -50,6 +55,10 @@ public class GameSupervisor : MonoBehaviour
     // Génère le joueur en arrière plan : Stat->ui
     public bool SetPlayer()
     {
+        GameObject playerToInstantiate = playerPrefab;
+
+        //GameObject player = Instantiate(playerToInstantiate, , Quaternion.identity);
+        //player.name = $"PLAYER";
         return true;
     }
 
