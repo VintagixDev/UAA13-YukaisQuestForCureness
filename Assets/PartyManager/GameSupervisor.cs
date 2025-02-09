@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class GameSupervisor : MonoBehaviour
 {
+    [Header("Other class")]
+    [SerializeField] private RoomManager roomManager;
+
     [Header("a")]
     [SerializeField] string roomIdAtPlayer;
     [SerializeField] bool BattleStarted;
@@ -49,7 +52,16 @@ public class GameSupervisor : MonoBehaviour
     // Génère le Donjon en arrière plan : piece->porte
     public bool SetDungeon()
     {
-        return true;
+        if (roomManager != null)
+        {
+            roomManager.StartDungeonGeneration(); // On déclenche la génération
+            return true;
+        }
+        else
+        {
+            Debug.LogError("RoomManager non assigné !");
+            return false;
+        }
     }
 
     // Génère le joueur en arrière plan : Stat->camera

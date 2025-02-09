@@ -22,33 +22,31 @@ public class TeleportationManager : MonoBehaviour
 
             if (targetDoor.orientation == "N")
             {
-                teleportPosition.y -= 2; // Diminue l'axe Y pour l'orientation "N"
-            }
-            else if (targetDoor.orientation == "E")
+                teleportPosition.y -= 2; 
+            } else if (targetDoor.orientation == "E")
             {
-                teleportPosition.x -= 2; // Diminue l'axe X pour l'orientation "E"
+                teleportPosition.x -= 2; 
             } else if (targetDoor.orientation == "S")
             {
-                teleportPosition.y += 2; // Augmente l'axe Y pour l'orientation "S"
+                teleportPosition.y += 2; 
             } else if (targetDoor.orientation == "W")
             {
-                teleportPosition.x += 2; // Augmente l'axe X pour l'orientation "W"
+                teleportPosition.x += 2; 
             }
-            //Vector3 teleportPosition = targetDoor.transform.position;
             player.transform.position = teleportPosition;
 
             PlayerStats playerStats = player.GetComponent<PlayerStats>();
             if (playerStats != null)
             {
                 playerStats.currentRoom = targetDoor.id.Split('_')[1];
-                Debug.Log("La pièce actuelle du joueur est '" + playerStats.currentRoom + "'");
-                // Affiche un message dans la console pour indiquer le changement de salle
+
+                //Debug.Log("La pièce actuelle du joueur est '" + playerStats.currentRoom + "'");
                 //Debug.Log($"Le joueur est maintenant dans la pièce {playerStats.currentRoom}");
             }
         }
         else
         {
-            Debug.LogWarning("La porte connectée n'est pas définie.");
+            Debug.LogWarning("Warning 309: No door connected is instantiated for this door");
         }
     }
 }

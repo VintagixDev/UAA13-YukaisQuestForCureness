@@ -31,40 +31,23 @@ public class RoomManager : MonoBehaviour
     private int roomCount; // Compteur du nombre total de salles générées
     private bool generationComplete = false; // Indique si la génération est terminée
     private int nextRoomID = 1; // ID pour la prochaine salle à générer
-
-    /// <summary>
-    /// Initialise la génération de salles.
-    /// </summary>
-    private void Start() 
+    public void StartDungeonGeneration()
     {
         roomGrid = new int[gridSizex, gridSizey];
+        roomQueue.Clear();
+        roomObjects.Clear();
+        roomCount = 0;
+        generationComplete = false;
+
         Vector2Int initialRoomIndex = new Vector2Int(gridSizex / 2, gridSizey / 2);
         StartRoomGenerationFromRoom(initialRoomIndex);
+
         OpenAllDoors();
-    }
 
-    /// <summary>
-    /// Vérifie l'état de la génération à chaque frame.
-    /// </summary>
-    private void Update()
-    {
-        if (!generationComplete && roomCount >= minRoom)
+        foreach (var room in roomObjects)
         {
-            Debug.Log($"Full generation, {roomCount} parts created");
-            generationComplete = true;
-
-            foreach (var room in roomObjects)
-            {
-                //Debug.Log("Room dans le parent");
-                room.transform.SetParent(AllRooms.transform, false);
-            }
-
-
-        }
-        else if (roomCount < minRoom)
-        {
-            Debug.Log($"Pas assez de pièces générées, recommençons.");
-            RegenerateRooms();
+            //Debug.Log("Room dans le parent");
+            room.transform.SetParent(AllRooms.transform, false);
         }
     }
 
