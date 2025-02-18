@@ -2,13 +2,25 @@ using UnityEngine;
 
 public class GameSupervisor : MonoBehaviour
 {
-    private string roomIdAtPlayer;
-    
+    [Header("Other class")]
+    [SerializeField] private RoomManager roomManager;
+    [SerializeField] private GameStat gameStat;
+
+    [Header("Room Container")] // Conteneur principal pour toutes les salles générées
+    [SerializeField] private GameObject AllRooms;
+
+    [Header("Player prefab")]
+    [SerializeField] GameObject playerPrefab;
+    private GameObject currentPlayer;
+
     private void Start()
     {
         if (InitializeComponents())
         {
-            // Lancer le jeu ^^
+            Debug.Log("Game Initialized Successfully");
+        } else
+        {
+            Debug.LogWarning("Something Wrong here !");
         }
     }
 
@@ -44,19 +56,61 @@ public class GameSupervisor : MonoBehaviour
     // Génère le Donjon en arrière plan : piece->porte
     public bool SetDungeon()
     {
-        return true;
+        if (roomManager != null)
+        {
+            roomManager.StartDungeonGeneration(AllRooms.transform);
+            return true;
+        }
+        else
+        {
+            Debug.LogError("RoomManager not assigned!");
+            return false;
+        }
     }
 
-    // Génère le joueur en arrière plan : Stat->ui
+    // Génère le joueur en arrière plan : Stat->camera
     public bool SetPlayer()
     {
-        return true;
+        if (currentPlayer != null)
+        {
+            Destroy(currentPlayer);
+        }
+
+        if (playerPrefab != null)
+        {
+            currentPlayer = Instantiate(playerPrefab, new Vector2(0, 0), Quaternion.identity);
+            currentPlayer.name = "Player";
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     // Génère l'interface en arrière plan
     public bool SetUI()
     {
         return true;
+    }
+    public void AdvanceToNextFloor()
+    {
+        Debug.Log("Advancing to next floor...");
+        GenerateNewFloor();
+    }
+    private void GenerateNewFloor()
+    {
+        if (roomManager != null)
+        {
+            roomManager.ClearDungeon();
+            gameStat.CurrentFloor++;
+            SetDungeon();
+            SetPlayer();
+        }
+        else
+        {
+            Debug.LogError("RoomManager not assigned! Cannot generate new floor.");
+        }
     }
     public void EndBattle()
     {

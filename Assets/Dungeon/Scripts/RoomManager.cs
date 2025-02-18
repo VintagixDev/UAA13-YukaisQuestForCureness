@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 public class RoomManager : MonoBehaviour
 {
-    [Header("Room Container")]
-    public GameObject AllRooms; // Conteneur principal pour toutes les salles générées
-
     [Header("Prefabs")]
     [SerializeField] GameObject SpawnRoomPrefabs; // La salle de départ
     [SerializeField] GameObject RoomPrefab; // une salle générique
@@ -31,39 +28,41 @@ public class RoomManager : MonoBehaviour
     private int roomCount; // Compteur du nombre total de salles générées
     private bool generationComplete = false; // Indique si la génération est terminée
     private int nextRoomID = 1; // ID pour la prochaine salle à générer
-
-    /// <summary>
-    /// Initialise la génération de salles.
-    /// </summary>
-    private void Start() 
+    public void StartDungeonGeneration(Transform AllRooms)
     {
         roomGrid = new int[gridSizex, gridSizey];
+        roomQueue.Clear();
+        roomObjects.Clear();
+        roomCount = 0;
+        generationComplete = false;
+
         Vector2Int initialRoomIndex = new Vector2Int(gridSizex / 2, gridSizey / 2);
         StartRoomGenerationFromRoom(initialRoomIndex);
+
         OpenAllDoors();
+
+        /// Pour le moment on ne peut pas les faires intervenir dans ALLROOMS
+        //foreach (var room in roomObjects)
+        //{
+        //    //Debug.Log("Room dans le parent");
+        //    room.transform.SetParent(AllRooms, false);
+        //}
     }
 
-    /// <summary>
-    /// Vérifie l'état de la génération à chaque frame.
-    /// </summary>
-    private void Update()
+    public void ClearDungeon()
     {
-        if (!generationComplete && roomCount >= minRoom)
+        foreach (GameObject room in roomObjects)
         {
-            Debug.Log($"Full generation, {roomCount} parts created");
-            generationComplete = true;
+            Destroy(room);
+        }
+        roomObjects.Clear();
+        roomGrid = new int[gridSizex, gridSizey];
+        roomQueue.Clear();
+        roomCount = 0;
+        generationComplete = false;
+        nextRoomID = 1;
 
-            foreach (var room in roomObjects)
-            {
-                //Debug.Log("Room dans le parent");
-                room.transform.SetParent(AllRooms.transform, false);
-            }
-        }
-        else if (roomCount < minRoom)
-        {
-            Debug.Log($"Pas assez de pièces générées, recommençons.");
-            RegenerateRooms();
-        }
+        Debug.Log("Dungeon cleared.");
     }
 
     /// <summary>

@@ -11,7 +11,7 @@ public class EnemyShoot : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         playerMethods = collision.gameObject.GetComponent<PlayerMethods>();
-        if (playerMethods != null && enemyDmg != null)
+        if (playerMethods != null)
         {
             playerMethods.DamagePlayer(enemyDmg);
         }

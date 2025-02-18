@@ -6,10 +6,12 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMethods : MonoBehaviour
 {
-    public int iFrames = 160;
-    private int cdTime;
-    public PlayerStats stats;
-    public StatsUI statsUI;
+    [Header("")]
+    [SerializeField] public int iFrames = 160;
+    [SerializeField] private int cdTime;
+    [SerializeField] public PlayerStats stats;
+    [SerializeField] public StatsUI statsUI;
+
     // Start is called before the first frame update
 
     // Update is called once per frame
@@ -22,7 +24,6 @@ public class PlayerMethods : MonoBehaviour
     }
     void Update()
     {
-
         if (Input.GetKeyDown(KeyCode.U))
         {
             DamagePlayer(1);
