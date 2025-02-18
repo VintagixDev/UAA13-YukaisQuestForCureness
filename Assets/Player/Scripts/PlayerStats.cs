@@ -20,5 +20,5 @@ public class PlayerStats : MonoBehaviour
     [Header("Pièce actuelle du joueur")]
     public string currentRoom; // ID de la pièce actuelle du joueur
 
-    public List<Upgrade> items;
+    public List<GameObject> playerUpgrades;
 }
