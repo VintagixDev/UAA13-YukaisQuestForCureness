@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 public class RoomManager : MonoBehaviour
 {
-    [Header("Room Container")]
-    public GameObject AllRooms; // Conteneur principal pour toutes les salles générées
-
     [Header("Prefabs")]
     [SerializeField] GameObject SpawnRoomPrefabs; // La salle de départ
     [SerializeField] GameObject RoomPrefab; // une salle générique
@@ -31,7 +28,7 @@ public class RoomManager : MonoBehaviour
     private int roomCount; // Compteur du nombre total de salles générées
     private bool generationComplete = false; // Indique si la génération est terminée
     private int nextRoomID = 1; // ID pour la prochaine salle à générer
-    public void StartDungeonGeneration()
+    public void StartDungeonGeneration(Transform AllRooms)
     {
         roomGrid = new int[gridSizex, gridSizey];
         roomQueue.Clear();
@@ -44,11 +41,28 @@ public class RoomManager : MonoBehaviour
 
         OpenAllDoors();
 
-        foreach (var room in roomObjects)
+        /// Pour le moment on ne peut pas les faires intervenir dans ALLROOMS
+        //foreach (var room in roomObjects)
+        //{
+        //    //Debug.Log("Room dans le parent");
+        //    room.transform.SetParent(AllRooms, false);
+        //}
+    }
+
+    public void ClearDungeon()
+    {
+        foreach (GameObject room in roomObjects)
         {
-            //Debug.Log("Room dans le parent");
-            room.transform.SetParent(AllRooms.transform, false);
+            Destroy(room);
         }
+        roomObjects.Clear();
+        roomGrid = new int[gridSizex, gridSizey];
+        roomQueue.Clear();
+        roomCount = 0;
+        generationComplete = false;
+        nextRoomID = 1;
+
+        Debug.Log("Dungeon cleared.");
     }
 
     /// <summary>

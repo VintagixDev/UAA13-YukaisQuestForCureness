@@ -60,8 +60,10 @@
   <ItemGroup>
     <Compile Include="Assets\Player\Projectile\PlayerShoot.cs" />
     <Compile Include="Assets\Enemies\Enemies\Snail.cs" />
+    <Compile Include="Assets\PartyManager\GameStat.cs" />
     <Compile Include="Assets\Ressources\Cainos\Pixel Art Top Down - Basic\Script\PropsAltar.cs" />
     <Compile Include="Assets\Ressources\Cainos\Pixel Art Top Down - Basic\Script\CameraFollow.cs" />
+    <Compile Include="Assets\PartyManager\BattleManager.cs" />
     <Compile Include="Assets\Scenes\Main Menu\Buttons.cs" />
     <Compile Include="Assets\Collectibles\Scripts\Chest.cs" />
     <Compile Include="Assets\Scenes\ManagerScene.cs" />

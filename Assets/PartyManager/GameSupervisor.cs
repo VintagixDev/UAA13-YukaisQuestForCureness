@@ -4,19 +4,23 @@ public class GameSupervisor : MonoBehaviour
 {
     [Header("Other class")]
     [SerializeField] private RoomManager roomManager;
+    [SerializeField] private GameStat gameStat;
 
-    [Header("a")]
-    [SerializeField] string roomIdAtPlayer;
-    [SerializeField] bool BattleStarted;
+    [Header("Room Container")] // Conteneur principal pour toutes les salles générées
+    [SerializeField] private GameObject AllRooms;
 
     [Header("Player prefab")]
-    [SerializeField] GameObject playerPrefab; 
+    [SerializeField] GameObject playerPrefab;
+    private GameObject currentPlayer;
 
     private void Start()
     {
         if (InitializeComponents())
         {
-
+            Debug.Log("Game Initialized Successfully");
+        } else
+        {
+            Debug.LogWarning("Something Wrong here !");
         }
     }
 
@@ -54,12 +58,12 @@ public class GameSupervisor : MonoBehaviour
     {
         if (roomManager != null)
         {
-            roomManager.StartDungeonGeneration(); // On déclenche la génération
+            roomManager.StartDungeonGeneration(AllRooms.transform);
             return true;
         }
         else
         {
-            Debug.LogError("RoomManager non assigné !");
+            Debug.LogError("RoomManager not assigned!");
             return false;
         }
     }
@@ -67,23 +71,46 @@ public class GameSupervisor : MonoBehaviour
     // Génère le joueur en arrière plan : Stat->camera
     public bool SetPlayer()
     {
-        GameObject playerToInstantiate = playerPrefab;
-        if(playerToInstantiate != null)
+        if (currentPlayer != null)
         {
-            GameObject player = Instantiate(playerToInstantiate ,new Vector2(0,0), Quaternion.identity);
-            player.name = $"Player";
+            Destroy(currentPlayer);
+        }
+
+        if (playerPrefab != null)
+        {
+            currentPlayer = Instantiate(playerPrefab, new Vector2(0, 0), Quaternion.identity);
+            currentPlayer.name = "Player";
             return true;
-        } else
+        }
+        else
         {
             return false;
         }
-        
     }
 
     // Génère l'interface en arrière plan
     public bool SetUI()
     {
         return true;
+    }
+    public void AdvanceToNextFloor()
+    {
+        Debug.Log("Advancing to next floor...");
+        GenerateNewFloor();
+    }
+    private void GenerateNewFloor()
+    {
+        if (roomManager != null)
+        {
+            roomManager.ClearDungeon();
+            gameStat.CurrentFloor++;
+            SetDungeon();
+            SetPlayer();
+        }
+        else
+        {
+            Debug.LogError("RoomManager not assigned! Cannot generate new floor.");
+        }
     }
     public void EndBattle()
     {

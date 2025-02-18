@@ -31,49 +31,21 @@ public class PlayerMovements : MonoBehaviour
     [Header("Stats")]
     public PlayerStats stats;
 
-    /// <summary>
-    /// currentRoom : Référence à la pièce actuelle du joueur
-    /// </summary>
-    private Room currentRoom;
-
     // Start is called before the first frame update
     void Start()
     {
         horizontalVelocity = 0;
         verticalVelocity = 0;
-
-        // Initialiser la pièce actuelle
-        UpdateCurrentRoom();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (stats.currentRoom != null)
-        {
-            // Récupérez l'ID de la pièce actuelle
-            //if (int.TryParse(stats.currentRoom, out int currentRoomId))
-            //{
-            //    //Debug.Log($"Le joueur se trouve dans la pièce avec l'ID: {currentRoomId}");
-            //}
-            //else
-            //{
-            //    //Debug.LogWarning("Invalid room ID format");
-            //}
-
-            //Debug.Log($"Le joueur se trouve dans la pièce avec l'ID: {currentRoomId}");
-        }
-
-        // N'oubliez pas d'appeler Movements() si nécessaire
         if (canMove)
         {
             Movements();
         }
-
-        UpdateCurrentRoom();
     }
-
-
     /// <summary>
     /// Gère les mouvements du joueur en 2D avec un effet de glissement.
     /// Le joueur peut se déplacer horizontalement avec les touches A (gauche) et D (droite),
@@ -156,41 +128,4 @@ public class PlayerMovements : MonoBehaviour
         transform.Translate(direction * speed * stats.playerMoveSpeed * Time.deltaTime);
     }
 
-    /// <summary>
-    /// Met à jour la pièce actuelle du joueur en fonction de sa position.
-    /// </summary>
-    private void UpdateCurrentRoom()
-    {
-        Vector3 playerPosition = transform.position;
-        int roomX = Mathf.FloorToInt(playerPosition.x / 10);
-        int roomY = Mathf.FloorToInt(playerPosition.y / 10);
-
-        if (currentRoom == null || currentRoom.RoomIndex != new Vector2Int(roomX, roomY))
-        {
-            Room newRoom = FindRoomAtPosition(roomX, roomY);
-            if (newRoom != null)
-            {
-                currentRoom = newRoom;
-                stats.currentRoom = newRoom.RoomID.ToString(); // Met à jour l'ID de la pièce actuelle dans PlayerStats
-            }
-        }
-    }
-
-
-    /// <summary>
-    /// Recherche la pièce à une position donnée dans la grille.
-    /// Remplacez cette fonction par votre propre logique pour déterminer la pièce.
-    /// </summary>
-    private Room FindRoomAtPosition(int x, int y)
-    {
-        Room[] rooms = FindObjectsOfType<Room>();
-        foreach (Room room in rooms)
-        {
-            if (room.RoomIndex == new Vector2Int(x, y))
-            {
-                return room;
-            }
-        }
-        return null;
-    }
 }

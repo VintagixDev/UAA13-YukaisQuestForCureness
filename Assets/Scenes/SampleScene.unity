@@ -154,6 +154,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2085096512}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1263744127
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1263744128}
+  - component: {fileID: 1263744129}
+  m_Layer: 0
+  m_Name: BattleManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1263744128
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1263744127}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1443180229}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1263744129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1263744127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7961cef5b20d6447b84c7cba8dce836, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _battleComplete: 0
+  _EnemyAlive: 0
 --- !u!1 &1443180228
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,6 +231,7 @@ Transform:
   m_Children:
   - {fileID: 1939711357}
   - {fileID: 1811761951}
+  - {fileID: 1263744128}
   m_Father: {fileID: 2085096512}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1811761949
@@ -231,6 +278,55 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1443180229}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1921855426
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1921855427}
+  - component: {fileID: 1921855428}
+  m_Layer: 0
+  m_Name: Stats
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1921855427
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1921855426}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -5.7988567, y: 3.1381578, z: -0.5925077}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2085096512}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1921855428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1921855426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77c38635411c69642acc32230104950b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentRoom: 
+  CurrentFloor: 0
+  EnemiesKilled: 0
+  ChestsOpened: 0
+  DifficultyLevel: 0
 --- !u!1 &1939711355
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,7 +356,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71fd92cd72a50f44e8edf2740b3582ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AllRooms: {fileID: 378194746}
   SpawnRoomPrefabs: {fileID: 481221351583195767, guid: f357540d72bad99498287dbba32709ac, type: 3}
   RoomPrefab: {fileID: 481221351583195767, guid: f357540d72bad99498287dbba32709ac, type: 3}
   BossRoomPrefab: {fileID: 1829676572362382078, guid: 10c1e61ef1c75854482fd0c23abeea6c, type: 3}
@@ -318,8 +413,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomManager: {fileID: 1939711356}
-  roomIdAtPlayer: 
-  BattleStarted: 0
+  gameStat: {fileID: 0}
+  AllRooms: {fileID: 378194746}
   playerPrefab: {fileID: 3581254663874682067, guid: 621374009af104a4fa26cf62772045df, type: 3}
 --- !u!4 &2085096512
 Transform:
@@ -334,6 +429,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1921855427}
   - {fileID: 1443180229}
   - {fileID: 378194747}
   m_Father: {fileID: 0}

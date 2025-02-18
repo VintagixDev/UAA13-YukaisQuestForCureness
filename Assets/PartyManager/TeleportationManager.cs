@@ -34,19 +34,25 @@ public class TeleportationManager : MonoBehaviour
                 teleportPosition.x += 2; 
             }
             player.transform.position = teleportPosition;
-
-            PlayerStats playerStats = player.GetComponent<PlayerStats>();
+            //ChangeCurrentRoom(player, targetDoor);
+            GameStat playerStats = player.GetComponent<GameStat>();
             if (playerStats != null)
             {
-                playerStats.currentRoom = targetDoor.id.Split('_')[1];
-
-                //Debug.Log("La pièce actuelle du joueur est '" + playerStats.currentRoom + "'");
-                //Debug.Log($"Le joueur est maintenant dans la pièce {playerStats.currentRoom}");
+                playerStats.CurrentRoom = targetDoor.id.Split('_')[1];
             }
         }
         else
         {
             Debug.LogWarning("Warning 309: No door connected is instantiated for this door");
+        }
+    }
+
+    public void ChangeCurrentRoom(GameObject player, Door targetDoor)
+    {
+        GameStat playerStats = player.GetComponent<GameStat>();
+        if (playerStats != null)
+        {
+            playerStats.CurrentRoom = targetDoor.id.Split('_')[1];
         }
     }
 }
