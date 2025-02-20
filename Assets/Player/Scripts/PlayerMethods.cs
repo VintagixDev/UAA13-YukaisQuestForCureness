@@ -37,6 +37,16 @@ public class PlayerMethods : MonoBehaviour
                 cdTime = iFrames;
             }
         }
+
+        // Upgrade effects
+        foreach(GameObject upgrade in stats.playerUpgrades)
+        {
+            Upgrade upg = upgrade.GetComponent<Upgrade>();
+            if (!upg.upgradeEffectOnce || !upg.upgradeHasBeenUsed)
+            {
+                upg.UpgradeAction();
+            }
+        }
     }
      
     public void DamagePlayer(int damage)
