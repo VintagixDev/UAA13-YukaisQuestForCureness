@@ -5,9 +5,8 @@ public class GameSupervisor : MonoBehaviour
     [Header("Other class")]
     [SerializeField] private RoomManager roomManager;
     [SerializeField] private GameStat gameStat;
-
-    [Header("Room Container")] // Conteneur principal pour toutes les salles générées
-    [SerializeField] private GameObject AllRooms;
+    [SerializeField] private TeleportationManager teleportationManager;
+    [SerializeField] private changerdetage ChangingFloorMethod;
 
     [Header("Player prefab")]
     [SerializeField] GameObject playerPrefab;
@@ -18,7 +17,8 @@ public class GameSupervisor : MonoBehaviour
         if (InitializeComponents())
         {
             Debug.Log("Game Initialized Successfully");
-        } else
+        }
+        else
         {
             Debug.LogWarning("Something Wrong here !");
         }
@@ -58,7 +58,7 @@ public class GameSupervisor : MonoBehaviour
     {
         if (roomManager != null)
         {
-            roomManager.StartDungeonGeneration(AllRooms.transform);
+            roomManager.StartDungeonGeneration();
             return true;
         }
         else
@@ -98,25 +98,18 @@ public class GameSupervisor : MonoBehaviour
         Debug.Log("Advancing to next floor...");
         GenerateNewFloor();
     }
-    private void GenerateNewFloor()
+    public void GenerateNewFloor()
     {
-        if (roomManager != null)
-        {
-            roomManager.ClearDungeon();
-            gameStat.CurrentFloor++;
-            SetDungeon();
-            SetPlayer();
-        }
-        else
-        {
-            Debug.LogError("RoomManager not assigned! Cannot generate new floor.");
-        }
+        roomManager.ClearDungeon();
+        //gameStat.CurrentFloor++;
+        SetDungeon();
+        //SetPlayer();
     }
     public void EndBattle()
     {
         if (IsBattleIsFinished())
         {
-            
+
         }
     }
     public bool IsBattleIsFinished()

@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class GameStat : MonoBehaviour
 {
-    [Header("Pièce actuelle du joueur")]
-    [SerializeField] public string CurrentRoom;
+    [Header("Actual room of player")]
+    [SerializeField] public string CurrentRoom; //Id de la pièces actuelle du joueur
 
     [Header("")]
     [SerializeField] public int CurrentFloor;
@@ -16,6 +16,8 @@ public class GameStat : MonoBehaviour
     {
         EnemiesKilled = 0;
         ChestsOpened = 0;
-        DifficultyLevel = CurrentFloor; // La difficulté augmente avec l'étage
+        // La difficulté augmente avec l'étage
+        DifficultyLevel = 0;
+        CurrentFloor = 0; 
     }
 }

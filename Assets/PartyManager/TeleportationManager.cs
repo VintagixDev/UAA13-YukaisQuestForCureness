@@ -34,12 +34,21 @@ public class TeleportationManager : MonoBehaviour
                 teleportPosition.x += 2; 
             }
             player.transform.position = teleportPosition;
-            //ChangeCurrentRoom(player, targetDoor);
-            GameStat playerStats = player.GetComponent<GameStat>();
-            if (playerStats != null)
+
+            GameObject gameManager = GameObject.Find("Stats");
+            if (gameManager != null)
             {
-                playerStats.CurrentRoom = targetDoor.id.Split('_')[1];
+                GameStat stats = gameManager.GetComponent<GameStat>();
+                if (stats != null)
+                {
+                    stats.CurrentRoom = "RoomID: " + targetDoor.id.Split('_')[1];
+                }
             }
+            else
+            {
+                Debug.LogWarning("Stats introuvable !");
+            }
+
         }
         else
         {
@@ -47,12 +56,12 @@ public class TeleportationManager : MonoBehaviour
         }
     }
 
-    public void ChangeCurrentRoom(GameObject player, Door targetDoor)
+    // Recentre le joueur dans une nouvelle salle de spawn à un autre étage
+    public void RecenterPlayer(GameObject player)
     {
-        GameStat playerStats = player.GetComponent<GameStat>();
-        if (playerStats != null)
-        {
-            playerStats.CurrentRoom = targetDoor.id.Split('_')[1];
-        }
+        Vector3 teleportPosition = player.transform.position;
+        teleportPosition.x = 0;
+        teleportPosition.y = 0;
+        player.transform.position = teleportPosition;
     }
 }
