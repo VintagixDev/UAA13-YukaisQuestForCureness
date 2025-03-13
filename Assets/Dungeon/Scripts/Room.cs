@@ -18,6 +18,7 @@ public class Room : MonoBehaviour
     [SerializeField] GameObject rightDoorPrefab; // DROITE/EAST
 
     [SerializeField] private int roomID;
+    [SerializeField] public bool isBattleFinished;
     public int RoomID => roomID; // Identifiant unique de la salle.
     public Vector2Int RoomIndex { get; set; } // Indice de la salle dans une grille (coordonnées).
     private Dictionary<Vector2, Door> doors = new Dictionary<Vector2, Door>(); // pour stocker les informations des portes
