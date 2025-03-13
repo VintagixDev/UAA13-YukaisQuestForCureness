@@ -115,7 +115,7 @@ GameObject:
   - component: {fileID: 2700838981353950790}
   - component: {fileID: 2026551130507897744}
   - component: {fileID: 7090733110212524358}
-  - component: {fileID: 7286977895975659158}
+  - component: {fileID: 790775038681870805}
   - component: {fileID: 1675006545469444476}
   - component: {fileID: 8806418620462154453}
   - component: {fileID: 6176470446573273815}
@@ -260,7 +260,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
---- !u!114 &7286977895975659158
+--- !u!114 &790775038681870805
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -277,7 +277,7 @@ MonoBehaviour:
   canMove: 1
   horizontalVelocity: 0
   verticalVelocity: 0
-  stats: {fileID: 8806418620462154453}
+  stats: {fileID: 0}
 --- !u!114 &1675006545469444476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -319,7 +319,7 @@ MonoBehaviour:
   playerGolds: 0
   playerKeys: 0
   currentRoom: 
-  items: []
+  playerUpgrades: []
 --- !u!114 &6176470446573273815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,7 +336,6 @@ MonoBehaviour:
   cdTime: 0
   stats: {fileID: 0}
   statsUI: {fileID: 0}
-  currentRoom: {fileID: 0}
 --- !u!1 &3614174617194860174
 GameObject:
   m_ObjectHideFlags: 0

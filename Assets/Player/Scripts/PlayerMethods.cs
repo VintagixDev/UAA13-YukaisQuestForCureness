@@ -20,7 +20,10 @@ public class PlayerMethods : MonoBehaviour
     {
         cdTime = iFrames;
 
-
+        if (stats == null)
+        {
+            stats = GetComponent<PlayerStats>();
+        }
     }
     void Update()
     {

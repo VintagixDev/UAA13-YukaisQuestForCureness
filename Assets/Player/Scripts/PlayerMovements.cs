@@ -36,6 +36,11 @@ public class PlayerMovements : MonoBehaviour
     {
         horizontalVelocity = 0;
         verticalVelocity = 0;
+
+        if (stats == null)
+        {
+            stats = GetComponent<PlayerStats>();
+        }
     }
 
     // Update is called once per frame

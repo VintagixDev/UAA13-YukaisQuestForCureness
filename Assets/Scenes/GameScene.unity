@@ -808,7 +808,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &817894815
 Transform:
   m_ObjectHideFlags: 0
@@ -1194,9 +1194,11 @@ MonoBehaviour:
   upgradeName: Damage Up!
   upgradeDescription: Increase your damage
   upgradeSprite: {fileID: 21300000, guid: 151c8a7d5dbe20f439081b55c2c56aa8, type: 3}
-  upgradeStart: 0
-  dmgUpgrade: 2
+  upgradeEffectOnce: 0
+  upgradeHasBeenUsed: 0
   stats: {fileID: 1909056789}
+  UIAnimation: {fileID: 0}
+  dmgUpgrade: 2
 --- !u!4 &1080176400
 Transform:
   m_ObjectHideFlags: 0
@@ -2030,7 +2032,7 @@ MonoBehaviour:
   playerGolds: 0
   playerKeys: 0
   currentRoom: 
-  items: []
+  playerUpgrades: []
 --- !u!114 &1909056790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2064,6 +2066,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iFrames: 190
+  cdTime: 0
   stats: {fileID: 1909056789}
   statsUI: {fileID: 101245573}
 --- !u!114 &1909056792

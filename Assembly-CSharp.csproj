@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Assets\Player\Projectile\PlayerShoot.cs" />
     <Compile Include="Assets\Enemies\Enemies\Snail.cs" />
+    <Compile Include="Assets\PortesBouton.cs" />
     <Compile Include="Assets\changerdetage.cs" />
     <Compile Include="Assets\Upgrades\Upgrades\DamageUp.cs" />
     <Compile Include="Assets\PartyManager\GameStat.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="Assets\PartyManager\BattleManager.cs" />
     <Compile Include="Assets\Scenes\Main Menu\Buttons.cs" />
     <Compile Include="Assets\Collectibles\Scripts\Chest.cs" />
+    <Compile Include="Assets\FermerPorteBoutton.cs" />
     <Compile Include="Assets\Scenes\ManagerScene.cs" />
     <Compile Include="Assets\Upgrades\Upgrade.cs" />
     <Compile Include="Assets\Ui\Scripts\StatsUI.cs" />

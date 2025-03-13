@@ -23,8 +23,6 @@ public class StatsUI : MonoBehaviour
     {
         updateDisplayHearts();
         updateCollectableUI();
-       
-
     }
 
     /// <summary>

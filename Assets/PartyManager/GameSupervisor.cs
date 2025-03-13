@@ -105,6 +105,10 @@ public class GameSupervisor : MonoBehaviour
         SetDungeon();
         //SetPlayer();
     }
+    public void SetBattle()
+    {
+
+    }
     public void EndBattle()
     {
         if (IsBattleIsFinished())
