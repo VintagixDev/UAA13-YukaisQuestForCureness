@@ -60,11 +60,11 @@ public class Upgrade : MonoBehaviour
         rectTransform.DOLocalMoveY(0, 0);
 
 
-        rectTransform.DOShakeRotation(2f, 2f, 10, 90, false);
+        rectTransform.DOShakeRotation(1f, 1f, 7, 90, false);
 
         rectTransform.DOScale(Vector3.one, 1f);
         rectTransform.DOScale(Vector3.one, 1.5f).SetDelay(1);
-        rectTransform.DOLocalMoveY(750, 1.5f).SetEase(Ease.InSine).SetDelay(1.5f);
+        rectTransform.DOLocalMoveY(750, 1.5f).SetEase(Ease.InSine).SetDelay(3f);
 
         
     }

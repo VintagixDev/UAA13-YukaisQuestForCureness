@@ -277,7 +277,7 @@ MonoBehaviour:
   canMove: 1
   horizontalVelocity: 0
   verticalVelocity: 0
-  stats: {fileID: 0}
+  stats: {fileID: 8806418620462154453}
 --- !u!114 &1675006545469444476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -334,7 +334,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   iFrames: 160
   cdTime: 0
-  stats: {fileID: 0}
+  stats: {fileID: 8806418620462154453}
   statsUI: {fileID: 0}
 --- !u!1 &3614174617194860174
 GameObject:
