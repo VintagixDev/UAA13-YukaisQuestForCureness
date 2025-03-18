@@ -14,7 +14,7 @@ public class TeleportationManager : MonoBehaviour
     /// Si le joueur possède un composant <c>PlayerStats</c>, son ID de salle actuelle est mis à jour
     /// en fonction de l'ID de la porte connectée.
     /// </remarks>
-    public void TeleportPlayer(GameObject player, Door targetDoor)
+    public void TeleportPlayer(GameObject player, Door targetDoor, int roomId)
     {
         if (targetDoor != null)
         {
@@ -41,7 +41,7 @@ public class TeleportationManager : MonoBehaviour
                 GameStat stats = gameManager.GetComponent<GameStat>();
                 if (stats != null)
                 {
-                    stats.CurrentRoom = targetDoor.roomId;
+                    stats.CurrentRoom = roomId;
                 }
             }
             else

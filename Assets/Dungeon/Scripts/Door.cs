@@ -4,62 +4,52 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    [SerializeField] private TeleportationManager teleportationManager; // Script de gestion des déplacement dans le donjon
-    [SerializeField] private GameStat gameStat; // Script des stats de partie
+    [Header("Other")]
+    [SerializeField] private GameSupervisor MASTER; // Script de gestion tout entier du jeu
+    [SerializeField] private TeleportationManager TELEPORTATION; // Script de gestion des déplacement dans le donjon
+    [SerializeField] private GameStat GAMESTAT; // Script des stats de partie
 
     [Header("ID")]
-    [SerializeField] public string id;
-    [SerializeField] public int roomId;
+    [SerializeField] public int _doorId;
+    [SerializeField] public int _roomId;
 
-    [Header("Point de position")]
+    [Header("Position/Coordinate")]
+    [SerializeField] public string orientation;
     [SerializeField] public float x;
     [SerializeField] public float y;
-    [SerializeField] public float z;
+    //[SerializeField] public float z; // Techniquement pas besoin ?
 
-    [Header("Orientation de la porte")]
-    [SerializeField] public string orientation;
-
-    [Header("Sprites des portes")]
+    [Header("Sprites")]
     // Index 0:North / 1:South / 2:East / 3:West
     [SerializeField] public List<Sprite> spriteOpen;
     [SerializeField] public List<Sprite> spriteClose;
     [SerializeField] public List<Sprite> spriteLock;
     [SerializeField] public List<Sprite> spriteBossOpen;
     [SerializeField] public List<Sprite> spriteBossClose;
-
     private SpriteRenderer spriteRenderer;
 
+    [Header("State")]
     [SerializeField] public bool isLocked = false;
     [SerializeField] public bool isLockedByBattle = false;
     [SerializeField] public bool isBossDoor = false;
 
+    [Header("Link")]
     public Vector2Int connectedDoorPosition;// Coordonnées de la porte voisine
     public Door connectedDoor;// Référence à la porte voisine
-
-    public GameSupervisor master;
 
     /// <summary>
     /// Appelé lorsque le script est initialisé dans la scène.
     /// </summary>
     private void Start()
     {
-        master = FindObjectOfType<GameSupervisor>();
-        teleportationManager = FindObjectOfType<TeleportationManager>();
+        MASTER = FindObjectOfType<GameSupervisor>();
+        TELEPORTATION = FindObjectOfType<TeleportationManager>();
 
-        if (teleportationManager == null)
+        if (TELEPORTATION == null)
         {
             Debug.LogError("Error 701: TeleportationManager not found in the scene");
         }
 
-        if (!string.IsNullOrEmpty(id) && !string.IsNullOrEmpty(orientation))
-        {
-            InitializeDoor(id, x, y, orientation, isLocked, isLockedByBattle, isBossDoor);
-            master.Battle();
-        }
-        else
-        {
-            Debug.LogWarning("Warning 308: Door not properly initialized. Check id and orientation");
-        }
     }
 
     /// <summary>
@@ -72,11 +62,10 @@ public class Door : MonoBehaviour
     /// <param name="locked"></param>
     /// <param name="lockedByBattle"></param>
     /// <param name="bossDoor"></param>
-    public void InitializeDoor(string doorId, float posX, float posY, string doorOrientation, bool locked, bool lockedByBattle, bool bossDoor)
+    public void InitializeDoor(int doorIdCount, int roomId, float posX, float posY, string doorOrientation, bool locked, bool lockedByBattle, bool bossDoor)
     {
-        id = doorId;
-        string[] roomIdTemp = doorId.Split('_');
-        roomId = int.Parse(roomIdTemp[1]);
+        _doorId = doorIdCount;
+        _roomId = roomId;
         x = posX;
         y = posY;
         orientation = doorOrientation;
@@ -94,24 +83,18 @@ public class Door : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            //Debug.Log("Le joueur a touché la porte.");
-
             if (!isLocked && !isLockedByBattle)
             {
                 if (connectedDoor != null)
                 {
-                    teleportationManager.TeleportPlayer(collision.gameObject, connectedDoor);
-                    
+                    TELEPORTATION.TeleportPlayer(collision.gameObject, connectedDoor, _roomId);
+
                 }
                 else
                 {
                     Debug.LogWarning("Warning 309: No door connected is instantiated for this door");
                 }
             }
-            //else
-            //{
-            //    Debug.Log("La porte est verrouillée.");
-            //}
         }
     }
 
@@ -139,7 +122,7 @@ public class Door : MonoBehaviour
         }
         else
         {
-            Debug.Log($"ERROR 303 ({id}): La porte ne peut pas être mise à jour correctement");
+            Debug.Log($"ERROR 303 ({_doorId}): La porte ne peut pas être mise à jour correctement");
         }
     }
 

@@ -44,7 +44,7 @@ public class RoomManager : MonoBehaviour
 
         OpenAllDoors();
 
-        //// Pour le moment on ne peut pas les faires intervenir dans ALLROOMS
+        //// Pour le moment on ne peut pas les mettre dans ALLROOMS
         //foreach (var room in roomObjects)
         //{
         //    Debug.Log("Room dans le parent");
@@ -179,7 +179,7 @@ public class RoomManager : MonoBehaviour
         Room roomScript = newRoom.GetComponent<Room>();
         roomScript.RoomIndex = roomIndex;
         newRoom.name = $"ROOM-{roomCount}";
-        roomScript.SetRoomID(nextRoomID++);
+        roomScript.SetRoomID(roomCount);
         GameObject[] enemySpawners = GameObject.FindGameObjectsWithTag("EnemySpawner");
         
         foreach(GameObject enemySpawner in enemySpawners)
@@ -206,7 +206,7 @@ public class RoomManager : MonoBehaviour
             var roomScript = roomObject.GetComponent<Room>();
             int x = roomScript.RoomIndex.x;
             int y = roomScript.RoomIndex.y;
-            OpenDoors(roomObject, x, y);
+            SetDoorsRoomByRoom(roomObject, x, y);
         }
     }
 
@@ -216,7 +216,7 @@ public class RoomManager : MonoBehaviour
     /// <param name="room"></param>
     /// <param name="x"></param>
     /// <param name="y"></param>
-    void OpenDoors(GameObject room, int x, int y)
+    void SetDoorsRoomByRoom(GameObject room, int x, int y)
     {
         Room currentRoom = room.GetComponent<Room>();
 
