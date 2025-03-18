@@ -15,7 +15,6 @@ public class changerdetage : MonoBehaviour
 
             teleportationManager.RecenterPlayer(collision.gameObject);
             gameStat.CurrentFloor = gameStat.CurrentFloor + 1;
-
             MASTER.GenerateNewFloor();
         }
     }

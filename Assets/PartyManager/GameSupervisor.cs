@@ -2,11 +2,12 @@ using UnityEngine;
 
 public class GameSupervisor : MonoBehaviour
 {
-    [Header("Other class")]
+    [Header("Manager")]
     [SerializeField] private RoomManager roomManager;
-    [SerializeField] private GameStat gameStat;
     [SerializeField] private TeleportationManager teleportationManager;
-    [SerializeField] private changerdetage ChangingFloorMethod;
+
+    [Header("Stats")]
+    [SerializeField] private GameStat gameStat;
 
     [Header("Player prefab")]
     [SerializeField] GameObject playerPrefab;
@@ -71,11 +72,7 @@ public class GameSupervisor : MonoBehaviour
     // Génère le joueur en arrière plan : Stat->camera
     public bool SetPlayer()
     {
-        if (currentPlayer != null)
-        {
-            Destroy(currentPlayer);
-        }
-
+        Destroy(currentPlayer);
         if (playerPrefab != null)
         {
             currentPlayer = Instantiate(playerPrefab, new Vector2(0, 0), Quaternion.identity);
@@ -105,20 +102,31 @@ public class GameSupervisor : MonoBehaviour
         SetDungeon();
         //SetPlayer();
     }
-    public void SetBattle()
+    public void Battle()
     {
+        //Obtenir l'ID de la piece du joueur
+        string CurrentRoomMaster = gameStat.CurrentRoom;
+        CurrentRoomMaster.Remove(0,8);
 
-    }
-    public void EndBattle()
-    {
-        if (IsBattleIsFinished())
+        //Rechercher l'objet par son nom
+        GameObject RoomTempOBJMaster = GameObject.Find(CurrentRoomMaster); // ça doit etre l'objet Room
+        
+        if (RoomTempOBJMaster != null)
         {
+            if (RoomTempOBJMaster == false) // Si aucun combat n'a encore eu lieu
+            {
+                //Fermer les portes
+                //Faire Spawn les ennemis
 
+            } else // Si le combat a déjà eu lieu 
+            {
+                //Rien faire
+            }
         }
     }
-    public bool IsBattleIsFinished()
+    public void FinishBattle()
     {
-
-        return true;
+        //Si les ennemis sont tous mort
+        //ouvrir les portes
     }
 }
