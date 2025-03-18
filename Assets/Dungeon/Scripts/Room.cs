@@ -18,10 +18,11 @@ public class Room : MonoBehaviour
     [SerializeField] GameObject rightDoorPrefab; // DROITE/EAST
 
     [SerializeField] private int roomID;
+    private static int globalDoorIdCount = 1; // ID global des portes
     [SerializeField] public bool isBattleFinished;
 
     [SerializeField] public List<GameObject> enemySpawners;
-    public int RoomID => roomID; // Identifiant unique de la salle.
+    //public int RoomID; // Identifiant unique de la salle.
     public Vector2Int RoomIndex { get; set; } // Indice de la salle dans une grille (coordonnées).
     private Dictionary<Vector2, Door> doors = new Dictionary<Vector2, Door>(); // pour stocker les informations des portes
 
@@ -57,7 +58,7 @@ public class Room : MonoBehaviour
             doorPrefab = topDoorPrefab;
             position = topDoor.transform.position;
             orientation = "N";
-            doorName = "UpDoor";
+            doorName = "UpDoor-";
             Destroy(topDoor);
             connectedDoorPosition = new Vector2Int(RoomIndex.x, RoomIndex.y + 1); // Coordonnée de la porte voisine
         }
@@ -66,7 +67,7 @@ public class Room : MonoBehaviour
             doorPrefab = botDoorPrefab;
             position = botDoor.transform.position;
             orientation = "S";
-            doorName = "BotDoor";
+            doorName = "BotDoor-";
             Destroy(botDoor);
             connectedDoorPosition = new Vector2Int(RoomIndex.x, RoomIndex.y - 1);
         }
@@ -75,7 +76,7 @@ public class Room : MonoBehaviour
             doorPrefab = leftDoorPrefab;
             position = leftDoor.transform.position;
             orientation = "W";
-            doorName = "LeftDoor";
+            doorName = "LeftDoor-" ;
             Destroy(leftDoor);
             connectedDoorPosition = new Vector2Int(RoomIndex.x - 1, RoomIndex.y);
         }
@@ -84,7 +85,7 @@ public class Room : MonoBehaviour
             doorPrefab = rightDoorPrefab;
             position = rightDoor.transform.position;
             orientation = "E";
-            doorName = "RightDoor";
+            doorName = "RightDoor-";
             Destroy(rightDoor);
             connectedDoorPosition = new Vector2Int(RoomIndex.x + 1, RoomIndex.y);
         }
@@ -97,8 +98,10 @@ public class Room : MonoBehaviour
             Door doorScript = newDoorObj.GetComponent<Door>();
             if (doorScript != null)
             {
-                string doorId = $"Door_{roomID}_{doorName}";
-                doorScript.InitializeDoor(doorId, position.x, position.y, orientation, isLocked, isLockedByBattle, isBossDoor);
+                int uniqueDoorId = globalDoorIdCount++;
+
+                // Utilisation de doorId passé en paramètre pour garantir un ID unique
+                doorScript.InitializeDoor(uniqueDoorId, roomID, position.x, position.y, orientation, isLocked, isLockedByBattle, isBossDoor);
 
                 // Relier la porte à la porte voisine
                 doorScript.connectedDoorPosition = connectedDoorPosition;

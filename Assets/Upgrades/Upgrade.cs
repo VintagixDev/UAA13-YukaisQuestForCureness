@@ -47,10 +47,8 @@ public class Upgrade : MonoBehaviour
         UpgradeAnimationUI();
     }
 
-    public async void UpgradeAnimationUI()
+    public void UpgradeAnimationUI()
     {
-        
-        
         RectTransform rectTransform = UIAnimation.GetComponent<RectTransform>();
         rectTransform.Find("Upgrade Image").GetComponent<Image>().sprite = upgradeSprite;
         rectTransform.Find("Upgrade Name").GetComponent<TextMeshProUGUI>().text = upgradeName;
@@ -64,8 +62,12 @@ public class Upgrade : MonoBehaviour
 
         rectTransform.DOScale(Vector3.one, 1f);
         rectTransform.DOScale(Vector3.one, 1.5f).SetDelay(1);
+<<<<<<< HEAD
         rectTransform.DOLocalMoveY(750, 1.5f).SetEase(Ease.InSine).SetDelay(3f);
 
         
+=======
+        rectTransform.DOLocalMoveY(750, 1.5f).SetEase(Ease.InSine).SetDelay(1.5f);  
+>>>>>>> bd3cb444d4a196dd9a0bed2a7567ccffd73eed8b
     }
 }
