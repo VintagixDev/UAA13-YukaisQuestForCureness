@@ -4,7 +4,7 @@ using UnityEngine;
 public class GameStat : MonoBehaviour
 {
     [Header("Actual room of player")]
-    [SerializeField] public string CurrentRoom; //Id de la pièces actuelle du joueur
+    [SerializeField] public int CurrentRoom; //Id de la pièces actuelle du joueur
 
     [Header("")]
     [SerializeField] public int CurrentFloor;

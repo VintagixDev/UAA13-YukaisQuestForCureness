@@ -41,7 +41,7 @@ public class TeleportationManager : MonoBehaviour
                 GameStat stats = gameManager.GetComponent<GameStat>();
                 if (stats != null)
                 {
-                    stats.CurrentRoom = "RoomID: " + targetDoor.id.Split('_')[1];
+                    stats.CurrentRoom = targetDoor.roomId;
                 }
             }
             else

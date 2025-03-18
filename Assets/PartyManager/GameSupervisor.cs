@@ -105,18 +105,22 @@ public class GameSupervisor : MonoBehaviour
     public void Battle()
     {
         //Obtenir l'ID de la piece du joueur
-        string CurrentRoomMaster = gameStat.CurrentRoom;
-        CurrentRoomMaster.Remove(0,8);
+        int CurrentRoomMaster = gameStat.CurrentRoom;
 
         //Rechercher l'objet par son nom
-        GameObject RoomTempOBJMaster = GameObject.Find(CurrentRoomMaster); // ça doit etre l'objet Room
+        GameObject RoomTempOBJMaster = GameObject.Find("ROOM-"+CurrentRoomMaster); // ça doit etre l'objet Room
         
         if (RoomTempOBJMaster != null)
         {
             if (RoomTempOBJMaster == false) // Si aucun combat n'a encore eu lieu
             {
+                Room roomScript = RoomTempOBJMaster.GetComponent<Room>();
                 //Fermer les portes
-                //Faire Spawn les ennemis
+                foreach(GameObject enemySpawner in roomScript.enemySpawners)
+                {
+                    EnemySpawner enemySpawnerScript = enemySpawner.GetComponent<EnemySpawner>();
+                    enemySpawnerScript.SpawnRandomEnemy();
+                }
 
             } else // Si le combat a déjà eu lieu 
             {

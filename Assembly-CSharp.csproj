@@ -84,6 +84,7 @@
     <Compile Include="Assets\Dungeon\Scripts\Door.cs" />
     <Compile Include="Assets\PartyManager\PlayerManager.cs" />
     <Compile Include="Assets\Scenes\Main Menu\SettingsScript.cs" />
+    <Compile Include="Assets\Enemies\Scripts\EnemySpawner.cs" />
     <Compile Include="Assets\Enemies\Scripts\EnemyShoot.cs" />
     <Compile Include="Assets\Dungeon\Scripts\Room.cs" />
     <Compile Include="Assets\Dungeon\Scripts\changerdetage.cs" />

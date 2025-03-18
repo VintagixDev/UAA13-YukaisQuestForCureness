@@ -40,7 +40,7 @@ public class RoomManager : MonoBehaviour
         generationComplete = false;
 
         Vector2Int initialRoomIndex = new Vector2Int(gridSizex / 2, gridSizey / 2);
-        StartRoomGenerationFromRoom(initialRoomIndex);
+        StartRoomGenerationFromRoom(initialRoomIndex);  
 
         OpenAllDoors();
 
@@ -76,7 +76,6 @@ public class RoomManager : MonoBehaviour
     {
         roomQueue.Enqueue(roomIndex);
         roomGrid[roomIndex.x, roomIndex.y] = 1;
-        roomCount++;
 
         var initialRoom = Instantiate(SpawnRoomPrefabs, GetPositionFromGridIndex(roomIndex), Quaternion.identity);
         initialRoom.name = $"SPAWN_ROOM"; 
@@ -177,9 +176,22 @@ public class RoomManager : MonoBehaviour
         GameObject roomToInstantiate = RoomPrefab;
 
         GameObject newRoom = Instantiate(roomToInstantiate, GetPositionFromGridIndex(roomIndex), Quaternion.identity);
-        newRoom.GetComponent<Room>().RoomIndex = roomIndex;
+        Room roomScript = newRoom.GetComponent<Room>();
+        roomScript.RoomIndex = roomIndex;
         newRoom.name = $"ROOM-{roomCount}";
-        newRoom.GetComponent<Room>().SetRoomID(nextRoomID++);
+        roomScript.SetRoomID(nextRoomID++);
+        GameObject[] enemySpawners = GameObject.FindGameObjectsWithTag("EnemySpawner");
+        
+        foreach(GameObject enemySpawner in enemySpawners)
+        {
+            
+            EnemySpawner enemySpawnerScript = enemySpawner.GetComponent<EnemySpawner>();
+            if (enemySpawnerScript.roomId == -1)
+            {
+                enemySpawnerScript.roomId = roomCount;
+                roomScript.enemySpawners.Add(enemySpawner);
+            }
+        }
         roomObjects.Add(newRoom);
         return true;
     }
