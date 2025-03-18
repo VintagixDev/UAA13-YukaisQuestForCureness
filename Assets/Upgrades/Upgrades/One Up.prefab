@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1146504885563901308}
   - component: {fileID: 6224545619375737075}
   m_Layer: 0
-  m_Name: OneUp
+  m_Name: One Up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

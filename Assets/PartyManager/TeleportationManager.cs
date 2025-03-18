@@ -1,9 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TeleportationManager : MonoBehaviour
 {
+
+    GameSupervisor gameSupervisor;
+    void Start()
+    {
+        gameSupervisor = GameObject.Find("GameSupervisor").GetComponent<GameSupervisor>();
+    }
     /// <summary>
     /// Téléporte un joueur à la position d'une porte connectée et met à jour son état de salle actuelle.
     /// </summary>
@@ -41,7 +48,8 @@ public class TeleportationManager : MonoBehaviour
                 GameStat stats = gameManager.GetComponent<GameStat>();
                 if (stats != null)
                 {
-                    stats.CurrentRoom = "RoomID: " + targetDoor.id.Split('_')[1];
+                    stats.CurrentRoom = targetDoor.roomId;
+                    gameSupervisor.Battle();
                 }
             }
             else

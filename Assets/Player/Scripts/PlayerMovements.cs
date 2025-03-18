@@ -23,6 +23,7 @@ public class PlayerMovements : MonoBehaviour
     [Header("velocity axis")]
     public float horizontalVelocity;
     public float verticalVelocity;
+    SpriteRenderer spriteRenderer;
 
     /// <summary>
     /// stats : Sert à la récupération des statistiques du joueur
@@ -36,7 +37,7 @@ public class PlayerMovements : MonoBehaviour
     {
         horizontalVelocity = 0;
         verticalVelocity = 0;
-
+        spriteRenderer = GetComponent<SpriteRenderer>();
         if (stats == null)
         {
             stats = GetComponent<PlayerStats>();
@@ -65,6 +66,7 @@ public class PlayerMovements : MonoBehaviour
             if (horizontalVelocity > -1f)
             {
                 horizontalVelocity -= .1f;
+                spriteRenderer.flipX = true;
             }
         }
         else if (Input.GetKey(KeyCode.D))
@@ -72,6 +74,7 @@ public class PlayerMovements : MonoBehaviour
             if (horizontalVelocity < 1f)
             {
                 horizontalVelocity += .1f;
+                spriteRenderer.flipX = false;
             }
         }
         else

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 public class Door : MonoBehaviour
@@ -8,6 +9,7 @@ public class Door : MonoBehaviour
 
     [Header("ID")]
     [SerializeField] public string id;
+    [SerializeField] public int roomId;
 
     [Header("Point de position")]
     [SerializeField] public float x;
@@ -34,11 +36,14 @@ public class Door : MonoBehaviour
     public Vector2Int connectedDoorPosition;// Coordonnées de la porte voisine
     public Door connectedDoor;// Référence à la porte voisine
 
+    public GameSupervisor master;
+
     /// <summary>
     /// Appelé lorsque le script est initialisé dans la scène.
     /// </summary>
     private void Start()
     {
+        master = FindObjectOfType<GameSupervisor>();
         teleportationManager = FindObjectOfType<TeleportationManager>();
 
         if (teleportationManager == null)
@@ -49,6 +54,7 @@ public class Door : MonoBehaviour
         if (!string.IsNullOrEmpty(id) && !string.IsNullOrEmpty(orientation))
         {
             InitializeDoor(id, x, y, orientation, isLocked, isLockedByBattle, isBossDoor);
+            master.Battle();
         }
         else
         {
@@ -69,6 +75,8 @@ public class Door : MonoBehaviour
     public void InitializeDoor(string doorId, float posX, float posY, string doorOrientation, bool locked, bool lockedByBattle, bool bossDoor)
     {
         id = doorId;
+        string[] roomIdTemp = doorId.Split('_');
+        roomId = int.Parse(roomIdTemp[1]);
         x = posX;
         y = posY;
         orientation = doorOrientation;
@@ -93,6 +101,7 @@ public class Door : MonoBehaviour
                 if (connectedDoor != null)
                 {
                     teleportationManager.TeleportPlayer(collision.gameObject, connectedDoor);
+                    
                 }
                 else
                 {
