@@ -497,7 +497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77c38635411c69642acc32230104950b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentRoom: 
+  CurrentRoom: 0
   CurrentFloor: 0
   EnemiesKilled: 0
   ChestsOpened: 0
