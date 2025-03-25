@@ -65,10 +65,7 @@ MonoBehaviour:
   botDoor: {fileID: 4298158337325267463}
   leftDoor: {fileID: 7937934802569660122}
   rightDoor: {fileID: 7129835540658173915}
-  topDoorPrefab: {fileID: 5074764154232242637, guid: 4b77c18eea5d2a441a9174fdeb79e0f9, type: 3}
-  botDoorPrefab: {fileID: 1931725228791023984, guid: 1d809f673f961f54fbc4437adbd44414, type: 3}
-  leftDoorPrefab: {fileID: 1931725228791023984, guid: 588e405e07e87654b8d37a5e2bd58e96, type: 3}
-  rightDoorPrefab: {fileID: 1931725228791023984, guid: ee670559e1709744a9cd64dd86cf42ec, type: 3}
+  DoorPrefab: {fileID: 5074764154232242637, guid: 4b77c18eea5d2a441a9174fdeb79e0f9, type: 3}
   roomID: 0
   isBattleFinished: 0
   enemySpawners: []
@@ -2717,7 +2714,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4175430529087320988}
   - component: {fileID: 1786406808594848778}
-  - component: {fileID: 8612937974047681442}
   m_Layer: 0
   m_Name: TopDoor
   m_TagString: Untagged
@@ -2792,37 +2788,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8612937974047681442
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2131163187388979966}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66989487def34034f9b685e7895c44e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  teleportationManager: {fileID: 0}
-  gameStat: {fileID: 0}
-  id: 
-  roomId: 0
-  x: 0
-  y: 0
-  z: 0
-  orientation: 
-  spriteOpen: []
-  spriteClose: []
-  spriteLock: []
-  spriteBossOpen: []
-  spriteBossClose: []
-  isLocked: 0
-  isLockedByBattle: 0
-  isBossDoor: 0
-  connectedDoorPosition: {x: 0, y: 0}
-  connectedDoor: {fileID: 0}
-  master: {fileID: 0}
 --- !u!1 &4298158337325267463
 GameObject:
   m_ObjectHideFlags: 0
@@ -2833,7 +2798,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8691144343112229998}
   - component: {fileID: 8391556621734016770}
-  - component: {fileID: 1905681229523985832}
   m_Layer: 0
   m_Name: 'BotDoor '
   m_TagString: Untagged
@@ -2908,37 +2872,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1905681229523985832
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4298158337325267463}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66989487def34034f9b685e7895c44e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  teleportationManager: {fileID: 0}
-  gameStat: {fileID: 0}
-  id: 
-  roomId: 0
-  x: 0
-  y: 0
-  z: 0
-  orientation: 
-  spriteOpen: []
-  spriteClose: []
-  spriteLock: []
-  spriteBossOpen: []
-  spriteBossClose: []
-  isLocked: 0
-  isLockedByBattle: 0
-  isBossDoor: 0
-  connectedDoorPosition: {x: 0, y: 0}
-  connectedDoor: {fileID: 0}
-  master: {fileID: 0}
 --- !u!1 &4573496546248598910
 GameObject:
   m_ObjectHideFlags: 0
@@ -5649,7 +5582,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6418868885213957090}
   - component: {fileID: 7089744882746124944}
-  - component: {fileID: 3673417395062793799}
   m_Layer: 0
   m_Name: RightDoor
   m_TagString: Untagged
@@ -5724,37 +5656,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3673417395062793799
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7129835540658173915}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66989487def34034f9b685e7895c44e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  teleportationManager: {fileID: 0}
-  gameStat: {fileID: 0}
-  id: 
-  roomId: 0
-  x: 0
-  y: 0
-  z: 0
-  orientation: 
-  spriteOpen: []
-  spriteClose: []
-  spriteLock: []
-  spriteBossOpen: []
-  spriteBossClose: []
-  isLocked: 0
-  isLockedByBattle: 0
-  isBossDoor: 0
-  connectedDoorPosition: {x: 0, y: 0}
-  connectedDoor: {fileID: 0}
-  master: {fileID: 0}
 --- !u!1 &7937934802569660122
 GameObject:
   m_ObjectHideFlags: 0
@@ -5765,7 +5666,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1127201435262933290}
   - component: {fileID: 1444484463072400506}
-  - component: {fileID: 6270281393802176651}
   m_Layer: 0
   m_Name: LeftDoor
   m_TagString: Untagged
@@ -5840,34 +5740,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6270281393802176651
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7937934802569660122}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66989487def34034f9b685e7895c44e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  teleportationManager: {fileID: 0}
-  gameStat: {fileID: 0}
-  id: 
-  roomId: 0
-  x: 0
-  y: 0
-  z: 0
-  orientation: 
-  spriteOpen: []
-  spriteClose: []
-  spriteLock: []
-  spriteBossOpen: []
-  spriteBossClose: []
-  isLocked: 0
-  isLockedByBattle: 0
-  isBossDoor: 0
-  connectedDoorPosition: {x: 0, y: 0}
-  connectedDoor: {fileID: 0}
-  master: {fileID: 0}

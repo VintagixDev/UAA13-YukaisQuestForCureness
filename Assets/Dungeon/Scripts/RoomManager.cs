@@ -312,6 +312,14 @@ public class RoomManager : MonoBehaviour
     {
         int x = roomIndex.x;
         int y = roomIndex.y;
+
+        // Vérification pour éviter l'accès hors limites
+        if (x < 0 || x >= gridSizex || y < 0 || y >= gridSizey)
+        {
+            Debug.LogWarning($"Tentative d'accès hors limites : {roomIndex}");
+            return 0;
+        }
+
         int count = 0;
 
         if (x > 0 && roomGrid[x - 1, y] != 0) count++;
@@ -321,6 +329,7 @@ public class RoomManager : MonoBehaviour
 
         return count;
     }
+
 
     /// <summary>
     /// Convertit un indice de grille en une position dans l'espace de jeu.

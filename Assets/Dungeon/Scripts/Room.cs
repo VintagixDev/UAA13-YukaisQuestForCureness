@@ -12,10 +12,7 @@ public class Room : MonoBehaviour
 
     // préfabs des portes pour instanciation
     [Header("Doors Prefab : To Replace")]
-    [SerializeField] GameObject topDoorPrefab; // HAUT/NORTH
-    [SerializeField] GameObject botDoorPrefab; // BAS/SOUNTH
-    [SerializeField] GameObject leftDoorPrefab; // GAUCHE/WEST
-    [SerializeField] GameObject rightDoorPrefab; // DROITE/EAST
+    [SerializeField] GameObject DoorPrefab;
 
     [SerializeField] private int roomID;
     private static int globalDoorIdCount = 1; // ID global des portes
@@ -55,38 +52,34 @@ public class Room : MonoBehaviour
         // Récupération de la porte et de la position en fonction de la direction
         if (direction == Vector2.up)
         {
-            doorPrefab = topDoorPrefab;
+            doorPrefab = DoorPrefab;
             position = topDoor.transform.position;
             orientation = "N";
             doorName = "UpDoor-";
-            Destroy(topDoor);
             connectedDoorPosition = new Vector2Int(RoomIndex.x, RoomIndex.y + 1); // Coordonnée de la porte voisine
         }
         else if (direction == Vector2.down)
         {
-            doorPrefab = botDoorPrefab;
+            doorPrefab = DoorPrefab;
             position = botDoor.transform.position;
             orientation = "S";
             doorName = "BotDoor-";
-            Destroy(botDoor);
             connectedDoorPosition = new Vector2Int(RoomIndex.x, RoomIndex.y - 1);
         }
         else if (direction == Vector2.left)
         {
-            doorPrefab = leftDoorPrefab;
+            doorPrefab = DoorPrefab;
             position = leftDoor.transform.position;
             orientation = "W";
-            doorName = "LeftDoor-" ;
-            Destroy(leftDoor);
+            doorName = "LeftDoor-";
             connectedDoorPosition = new Vector2Int(RoomIndex.x - 1, RoomIndex.y);
         }
         else if (direction == Vector2.right)
         {
-            doorPrefab = rightDoorPrefab;
+            doorPrefab = DoorPrefab;
             position = rightDoor.transform.position;
             orientation = "E";
             doorName = "RightDoor-";
-            Destroy(rightDoor);
             connectedDoorPosition = new Vector2Int(RoomIndex.x + 1, RoomIndex.y);
         }
 
@@ -117,7 +110,7 @@ public class Room : MonoBehaviour
             }
         }
     }
-   
+
     /// <summary>
     /// Récupère une porte dans une direction donnée.
     /// </summary>
