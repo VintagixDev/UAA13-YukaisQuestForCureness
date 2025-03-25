@@ -54,8 +54,8 @@ public class PlayerMovements : MonoBehaviour
     }
     /// <summary>
     /// Gère les mouvements du joueur en 2D avec un effet de glissement.
-    /// Le joueur peut se déplacer horizontalement avec les touches A (gauche) et D (droite),
-    /// ainsi que verticalement avec les touches W (haut) et S (bas).
+    /// Le joueur peut se déplacer horizontalement avec les touches Q (gauche) et D (droite),
+    /// ainsi que verticalement avec les touches Z (haut) et S (bas).
     /// Si aucune touche n'est enfoncée, la vitesse du joueur diminue progressivement jusqu'à s'arrêter.
     /// </summary>
     private void Movements()
@@ -69,6 +69,7 @@ public class PlayerMovements : MonoBehaviour
                 spriteRenderer.flipX = true;
             }
         }
+
         else if (Input.GetKey(KeyCode.D))
         {
             if (horizontalVelocity < 1f)

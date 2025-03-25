@@ -34,12 +34,15 @@ public class Enemy : MonoBehaviour
 
     [Header("Player")]
     public Transform player;
+    public PlayerStats stats;
     public PlayerMethods playerMethods;
 
     public void Start()
     {
 
         cdAttackSpeed = enemyAttackSpeed;
+        stats = player.GetComponent<PlayerStats>();
+
     }
 
     private void Update()
@@ -86,16 +89,18 @@ public class Enemy : MonoBehaviour
     }
 
 
-    /// <summary>
-    /// Si collision avec joueur, Damage player
-    /// </summary>
-    /// <param name="collision"></param>
+
     public void OnTriggerStay2D(Collider2D collision)
     {
-
-        if (collision.gameObject.name == "Player")
+        switch (collision.gameObject.name)
         {
-            playerMethods.DamagePlayer(enemyDmg);
+            case "Player":
+                playerMethods.DamagePlayer(enemyDmg);
+                break;
+            case "Bullet(Clone)":
+                DamageEnemy((int)stats.playerDamage);
+                break;
+            default:break; 
         }
     }
 
@@ -114,5 +119,14 @@ public class Enemy : MonoBehaviour
 
         projectile.GetComponent<Rigidbody2D>().velocity = direction * enemyProjectileSpeed;
         projectile.GetComponent<BulletShoot>().timeToDeath = enemyProjectileReach;
+    }
+
+    public void DamageEnemy(int damage)
+    {
+        enemyHP -= damage;
+        if(enemyHP <= 0)
+        {
+            Destroy(this);
+        }
     }
 }
