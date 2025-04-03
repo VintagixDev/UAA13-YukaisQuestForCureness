@@ -5,7 +5,7 @@ public class PlayerStats : MonoBehaviour
 {
     [Header("Statistiques du joueur")]
     public int playerHP = 6; // points de vie du joueur
-    public double playerDamage = 5; // // dégât du joueur
+    public int playerDamage = 5; // // dégât du joueur
     public float playerMoveSpeed = 1f; // Vitesse du joueur
 
     [Header("Statistiques des projectiles")]

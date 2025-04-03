@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Assets\Player\Projectile\PlayerShoot.cs" />
     <Compile Include="Assets\Enemies\Enemies\Snail.cs" />
+    <Compile Include="Assets\Boss\HeadfulBossScript.cs" />
     <Compile Include="Assets\Upgrades\Upgrades\DamageUp.cs" />
     <Compile Include="Assets\PartyManager\GameStat.cs" />
     <Compile Include="Assets\Ressources\Cainos\Pixel Art Top Down - Basic\Script\PropsAltar.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="Assets\Dungeon\Scripts\Room.cs" />
     <Compile Include="Assets\Upgrades\Upgrades\OneUp.cs" />
     <Compile Include="Assets\Dungeon\Scripts\changerdetage.cs" />
+    <Compile Include="Assets\Boss\Boss.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Lib\TextMesh Pro\Shaders\TMPro.cginc" />

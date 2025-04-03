@@ -69,7 +69,6 @@ public class PlayerMethods : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Collision with " + collision.gameObject.name);
         GameObject obj = collision.gameObject;
         switch(obj.name)
         {
