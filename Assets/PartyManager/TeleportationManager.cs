@@ -27,16 +27,16 @@ public class TeleportationManager : MonoBehaviour
         {
             Vector3 teleportPosition = targetDoor.transform.position;
 
-            if (targetDoor.orientation == "N")
+            if (targetDoor._orientation == "N")
             {
                 teleportPosition.y -= 2; 
-            } else if (targetDoor.orientation == "E")
+            } else if (targetDoor._orientation == "E")
             {
                 teleportPosition.x -= 2; 
-            } else if (targetDoor.orientation == "S")
+            } else if (targetDoor._orientation == "S")
             {
                 teleportPosition.y += 2; 
-            } else if (targetDoor.orientation == "W")
+            } else if (targetDoor._orientation == "W")
             {
                 teleportPosition.x += 2; 
             }
