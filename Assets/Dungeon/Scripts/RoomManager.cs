@@ -171,6 +171,7 @@ public class RoomManager : MonoBehaviour
 
         roomQueue.Enqueue(roomIndex);
         roomGrid[roomIndex.x, roomIndex.y] = 1;
+        Debug.LogWarning($"{roomIndex.x},{roomIndex.y}");
         roomCount++;
 
         GameObject roomToInstantiate = RoomPrefab;
@@ -316,7 +317,7 @@ public class RoomManager : MonoBehaviour
         // Vérification pour éviter l'accès hors limites
         if (x < 0 || x >= gridSizex || y < 0 || y >= gridSizey)
         {
-            Debug.LogWarning($"Tentative d'accès hors limites : {roomIndex}");
+            //Debug.LogWarning($"Tentative d'accès hors limites : {roomIndex}");
             return 0;
         }
 
