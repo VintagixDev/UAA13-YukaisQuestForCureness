@@ -171,7 +171,7 @@ public class RoomManager : MonoBehaviour
 
         roomQueue.Enqueue(roomIndex);
         roomGrid[roomIndex.x, roomIndex.y] = 1;
-        Debug.LogWarning($"{roomIndex.x},{roomIndex.y}");
+        //Debug.LogWarning($"{roomIndex.x},{roomIndex.y}");
         roomCount++;
 
         GameObject roomToInstantiate = RoomPrefab;

@@ -11,10 +11,6 @@ public class fermerPorte : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            //Debug.Log("Le joueur a touché la porte.");
-
-            //teleportationManager.RecenterPlayer(collision.gameObject);
-            //gameStat.CurrentFloor = gameStat.CurrentFloor + 1;
             MASTER.Battle();
         }
     }

@@ -51,6 +51,7 @@ public class TeleportationManager : MonoBehaviour
                     //stats.CurrentRoom = targetDoor.roomId;
                     gameSupervisor.Battle();
                     stats.CurrentRoom = roomId;
+                    Debug.Log("hey je suis là");
                 }
             }
             else

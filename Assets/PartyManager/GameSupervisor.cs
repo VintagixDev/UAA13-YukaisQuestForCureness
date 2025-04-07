@@ -104,10 +104,24 @@ public class GameSupervisor : MonoBehaviour
     }
     public void Battle()
     {
-        //Obtenir l'ID de la piece du joueur
-        
-        int CurrentRoomMaster = gameStat.CurrentRoom;
+        /// <aside>
+        /// Cette partie sert à détecter toute les portes de la pièce actuelle du joueur et de les fermer avant de lancer la bataille
+        /// </aside>
+        GameObject[] tousLesObjets = FindObjectsOfType<GameObject>; // true = inclut objets inactifs
 
+        foreach (GameObject obj in tousLesObjets)
+        {
+            // Vérifie s’il a un composant Door
+            Door door = obj.GetComponent<Door>();
+
+            if (door._roomId == gameStat.CurrentRoom)
+            {
+                door.CloseUnClose(true);
+            }
+        }
+        //
+
+        int CurrentRoomMaster = gameStat.CurrentRoom;
         //Rechercher l'objet par son nom
         GameObject RoomTempOBJMaster = GameObject.Find("ROOM-"+CurrentRoomMaster); // ça doit etre l'objet Room
         

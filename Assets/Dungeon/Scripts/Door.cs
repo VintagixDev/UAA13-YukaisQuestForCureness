@@ -142,6 +142,17 @@ public class Door : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
+    public void CloseUnClose(bool lockedByBattle)
+    {
+        _isLockedByBattle = lockedByBattle;
+        if(lockedByBattle) 
+        {
+            spriteRenderer.sprite = Close;
+        } else
+        {
+            spriteRenderer.sprite = Open;
+        }
+    }
     public void SetDoorState(bool lockedByBattle, bool bossDoor)
     {
         _isLockedByBattle = lockedByBattle;
