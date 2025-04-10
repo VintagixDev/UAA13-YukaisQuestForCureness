@@ -80,7 +80,9 @@ public class RoomManager : MonoBehaviour
         var initialRoom = Instantiate(SpawnRoomPrefabs, GetPositionFromGridIndex(roomIndex), Quaternion.identity);
         initialRoom.name = $"SPAWN_ROOM";
         initialRoom.GetComponent<Room>().RoomIndex = roomIndex;
-        initialRoom.GetComponent<Room>().SetRoomID(nextRoomID++);
+        initialRoom.GetComponent<Room>().SetRoomID(roomCount);
+        //initialRoom.GetComponent<Room>().SetIdToSpawner(roomCount);
+
         roomObjects.Add(initialRoom);
 
         while (roomQueue.Count > 0 && roomCount < maxRoom)
@@ -181,7 +183,7 @@ public class RoomManager : MonoBehaviour
         roomScript.RoomIndex = roomIndex;
         newRoom.name = $"ROOM-{roomCount}";
         roomScript.SetRoomID(roomCount);
-        
+
         roomObjects.Add(newRoom);
         return true;
     }
@@ -277,7 +279,7 @@ public class RoomManager : MonoBehaviour
                 }
             }
         }
-        
+
     }
 
     /// <summary>

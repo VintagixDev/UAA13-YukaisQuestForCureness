@@ -532,10 +532,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AllRooms: {fileID: 378194747}
   SpawnRoomPrefabs: {fileID: 7324905855109424736, guid: ddc247509dc24b441826efd21a8b2003, type: 3}
-  RoomPrefab: {fileID: 7324905855109424736, guid: ddc247509dc24b441826efd21a8b2003, type: 3}
+  RoomPrefab: {fileID: 481221351583195767, guid: f357540d72bad99498287dbba32709ac, type: 3}
   BossRoomPrefab: {fileID: 1829676572362382078, guid: 10c1e61ef1c75854482fd0c23abeea6c, type: 3}
   BattleRoomPrefabs:
-  - {fileID: 7324905855109424736, guid: ddc247509dc24b441826efd21a8b2003, type: 3}
+  - {fileID: 481221351583195767, guid: f357540d72bad99498287dbba32709ac, type: 3}
   SpecialRoomPrefabs: []
   maxRoom: 15
   minRoom: 10

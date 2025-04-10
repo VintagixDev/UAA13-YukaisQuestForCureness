@@ -14,11 +14,12 @@ public class Room : MonoBehaviour
     [Header("Doors Prefab : To Replace")]
     [SerializeField] GameObject DoorPrefab;
 
-    [SerializeField] public int roomID;
+    [SerializeField] private int roomID;
+    public int RoomID { get { return roomID; } }
     private static int globalDoorIdCount = 1; // ID global des portes
     [SerializeField] public bool isBattleFinished;
 
-    [SerializeField] public List<EnemySpawner> enemySpawners;
+    [SerializeField] private GameObject[] enemySpawners;
     //public int RoomID; // Identifiant unique de la salle.
     public Vector2Int RoomIndex { get; set; } // Indice de la salle dans une grille (coordonnées).
     private Dictionary<Vector2, Door> doors = new Dictionary<Vector2, Door>(); // pour stocker les informations des portes
@@ -30,11 +31,21 @@ public class Room : MonoBehaviour
     public void SetRoomID(int id)
     {
         roomID = id;
-        foreach (var enemySpawner in enemySpawners)
+        ///Debug.Log(id);
+        foreach (var enemy in enemySpawners)
         {
-            enemySpawner._roomID = id;
+            EnemySpawner enemySpawnerScript = enemy.GetComponent<EnemySpawner>();
+            enemySpawnerScript.RoomID = roomID;
         }
+        //if (enemySpawners.Count > 0)
+        //{
+        //    foreach (var enemySpawner in enemySpawners)
+        //    {
+        //        enemySpawner.RoomID = id;
+        //    }
+        //}
     }
+    
 
     /// <summary>
     /// Configure une porte dans une direction donnée et initialise ses propriétés.

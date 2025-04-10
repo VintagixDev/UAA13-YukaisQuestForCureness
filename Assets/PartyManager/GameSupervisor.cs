@@ -111,7 +111,7 @@ public class GameSupervisor : MonoBehaviour
         foreach (GameObject piece in pieces)
         {
             Room room = piece.GetComponent<Room>();
-            if (room.roomID == gameStat.CurrentRoom)
+            if (room.RoomID == gameStat.CurrentRoom)
             {
                 if (room.isBattleFinished == false)
                 {
@@ -135,7 +135,7 @@ public class GameSupervisor : MonoBehaviour
                     foreach (GameObject spawner in spawners)
                     {
                         EnemySpawner enemySpawnerScript = spawner.GetComponent<EnemySpawner>();
-                        if (enemySpawnerScript._roomID == gameStat.CurrentRoom)
+                        if (enemySpawnerScript.RoomID == gameStat.CurrentRoom)
                         {
                             enemySpawnerScript.SpawnRandomEnemy();
                         }
