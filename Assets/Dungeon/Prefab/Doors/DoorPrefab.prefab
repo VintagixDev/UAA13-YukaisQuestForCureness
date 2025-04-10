@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6875657985936984483}
   m_Layer: 0
   m_Name: DoorPrefab
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

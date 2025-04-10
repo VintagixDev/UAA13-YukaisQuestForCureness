@@ -8,7 +8,7 @@ public class EnemySpawner : MonoBehaviour
 {
     
     [SerializeField] public List<GameObject> enemies;
-    public int roomId = -1;
+    [SerializeField] public int _roomID;
 
     public void SpawnRandomEnemy()
     {
@@ -16,11 +16,6 @@ public class EnemySpawner : MonoBehaviour
         GameObject enemy = enemies.ElementAt(nb);
         GameObject instanciatedEnemy = Instantiate(enemy);
         instanciatedEnemy.GetComponent<SpriteRenderer>().sortingOrder = 2;
-
-    }
-
-    public void SetRoomID(int id)
-    {
-        roomId = id;
+        Destroy(gameObject);
     }
 }

@@ -40,7 +40,7 @@ public class RoomManager : MonoBehaviour
         generationComplete = false;
 
         Vector2Int initialRoomIndex = new Vector2Int(gridSizex / 2, gridSizey / 2);
-        StartRoomGenerationFromRoom(initialRoomIndex);  
+        StartRoomGenerationFromRoom(initialRoomIndex);
 
         OpenAllDoors();
 
@@ -78,7 +78,7 @@ public class RoomManager : MonoBehaviour
         roomGrid[roomIndex.x, roomIndex.y] = 1;
 
         var initialRoom = Instantiate(SpawnRoomPrefabs, GetPositionFromGridIndex(roomIndex), Quaternion.identity);
-        initialRoom.name = $"SPAWN_ROOM"; 
+        initialRoom.name = $"SPAWN_ROOM";
         initialRoom.GetComponent<Room>().RoomIndex = roomIndex;
         initialRoom.GetComponent<Room>().SetRoomID(nextRoomID++);
         roomObjects.Add(initialRoom);
@@ -181,18 +181,7 @@ public class RoomManager : MonoBehaviour
         roomScript.RoomIndex = roomIndex;
         newRoom.name = $"ROOM-{roomCount}";
         roomScript.SetRoomID(roomCount);
-        GameObject[] enemySpawners = GameObject.FindGameObjectsWithTag("EnemySpawner");
         
-        foreach(GameObject enemySpawner in enemySpawners)
-        {
-            
-            EnemySpawner enemySpawnerScript = enemySpawner.GetComponent<EnemySpawner>();
-            if (enemySpawnerScript.roomId == -1)
-            {
-                enemySpawnerScript.roomId = roomCount;
-                roomScript.enemySpawners.Add(enemySpawner);
-            }
-        }
         roomObjects.Add(newRoom);
         return true;
     }
@@ -221,73 +210,74 @@ public class RoomManager : MonoBehaviour
     {
         Room currentRoom = room.GetComponent<Room>();
 
-    // Gauche
-    if (x > 0 && roomGrid[x - 1, y] != 0)
-    {
-        currentRoom.SetDoor(Vector2.left, roomCount);
-        Room leftRoom = GetRoomScriptAt(new Vector2Int(x - 1, y));
-        if (leftRoom != null)
+        // Gauche
+        if (x > 0 && roomGrid[x - 1, y] != 0)
         {
-            Door currentDoor = currentRoom.GetDoor(Vector2.left);
-            Door leftDoor = leftRoom.GetDoor(Vector2.right);
-            if (currentDoor != null && leftDoor != null)
+            currentRoom.SetDoor(Vector2.left, roomCount);
+            Room leftRoom = GetRoomScriptAt(new Vector2Int(x - 1, y));
+            if (leftRoom != null)
             {
-                currentDoor.connectedDoor = leftDoor;
-                leftDoor.connectedDoor = currentDoor;
+                Door currentDoor = currentRoom.GetDoor(Vector2.left);
+                Door leftDoor = leftRoom.GetDoor(Vector2.right);
+                if (currentDoor != null && leftDoor != null)
+                {
+                    currentDoor.connectedDoor = leftDoor;
+                    leftDoor.connectedDoor = currentDoor;
+                }
             }
         }
-    }
 
-    // Droite
-    if (x < gridSizex - 1 && roomGrid[x + 1, y] != 0)
-    {
-        currentRoom.SetDoor(Vector2.right, roomCount);
-        Room rightRoom = GetRoomScriptAt(new Vector2Int(x + 1, y));
-        if (rightRoom != null)
+        // Droite
+        if (x < gridSizex - 1 && roomGrid[x + 1, y] != 0)
         {
-            Door currentDoor = currentRoom.GetDoor(Vector2.right);
-            Door rightDoor = rightRoom.GetDoor(Vector2.left);
-            if (currentDoor != null && rightDoor != null)
+            currentRoom.SetDoor(Vector2.right, roomCount);
+            Room rightRoom = GetRoomScriptAt(new Vector2Int(x + 1, y));
+            if (rightRoom != null)
             {
-                currentDoor.connectedDoor = rightDoor;
-                rightDoor.connectedDoor = currentDoor;
+                Door currentDoor = currentRoom.GetDoor(Vector2.right);
+                Door rightDoor = rightRoom.GetDoor(Vector2.left);
+                if (currentDoor != null && rightDoor != null)
+                {
+                    currentDoor.connectedDoor = rightDoor;
+                    rightDoor.connectedDoor = currentDoor;
+                }
             }
         }
-    }
 
-    // Bas
-    if (y > 0 && roomGrid[x, y - 1] != 0)
-    {
-        currentRoom.SetDoor(Vector2.down, roomCount);
-        Room bottomRoom = GetRoomScriptAt(new Vector2Int(x, y - 1));
-        if (bottomRoom != null)
+        // Bas
+        if (y > 0 && roomGrid[x, y - 1] != 0)
         {
-            Door currentDoor = currentRoom.GetDoor(Vector2.down);
-            Door bottomDoor = bottomRoom.GetDoor(Vector2.up);
-            if (currentDoor != null && bottomDoor != null)
+            currentRoom.SetDoor(Vector2.down, roomCount);
+            Room bottomRoom = GetRoomScriptAt(new Vector2Int(x, y - 1));
+            if (bottomRoom != null)
             {
-                currentDoor.connectedDoor = bottomDoor;
-                bottomDoor.connectedDoor = currentDoor;
+                Door currentDoor = currentRoom.GetDoor(Vector2.down);
+                Door bottomDoor = bottomRoom.GetDoor(Vector2.up);
+                if (currentDoor != null && bottomDoor != null)
+                {
+                    currentDoor.connectedDoor = bottomDoor;
+                    bottomDoor.connectedDoor = currentDoor;
+                }
             }
         }
-    }
 
-    // Haut
-    if (y < gridSizey - 1 && roomGrid[x, y + 1] != 0)
-    {
-        currentRoom.SetDoor(Vector2.up, roomCount);
-        Room topRoom = GetRoomScriptAt(new Vector2Int(x, y + 1));
-        if (topRoom != null)
+        // Haut
+        if (y < gridSizey - 1 && roomGrid[x, y + 1] != 0)
         {
-            Door currentDoor = currentRoom.GetDoor(Vector2.up);
-            Door topDoor = topRoom.GetDoor(Vector2.down);
-            if (currentDoor != null && topDoor != null)
+            currentRoom.SetDoor(Vector2.up, roomCount);
+            Room topRoom = GetRoomScriptAt(new Vector2Int(x, y + 1));
+            if (topRoom != null)
             {
-                currentDoor.connectedDoor = topDoor;
-                topDoor.connectedDoor = currentDoor;
+                Door currentDoor = currentRoom.GetDoor(Vector2.up);
+                Door topDoor = topRoom.GetDoor(Vector2.down);
+                if (currentDoor != null && topDoor != null)
+                {
+                    currentDoor.connectedDoor = topDoor;
+                    topDoor.connectedDoor = currentDoor;
+                }
             }
         }
-    }
+        
     }
 
     /// <summary>

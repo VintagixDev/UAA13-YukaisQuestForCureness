@@ -6,6 +6,8 @@ TagManager:
   tags:
   - EnemySpawner
   - FriendlyProjectile
+  - Door
+  - Room
   layers:
   - Default
   - TransparentFX

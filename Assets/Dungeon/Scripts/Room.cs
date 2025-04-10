@@ -14,11 +14,11 @@ public class Room : MonoBehaviour
     [Header("Doors Prefab : To Replace")]
     [SerializeField] GameObject DoorPrefab;
 
-    [SerializeField] private int roomID;
+    [SerializeField] public int roomID;
     private static int globalDoorIdCount = 1; // ID global des portes
     [SerializeField] public bool isBattleFinished;
 
-    [SerializeField] public List<GameObject> enemySpawners;
+    [SerializeField] public List<EnemySpawner> enemySpawners;
     //public int RoomID; // Identifiant unique de la salle.
     public Vector2Int RoomIndex { get; set; } // Indice de la salle dans une grille (coordonnées).
     private Dictionary<Vector2, Door> doors = new Dictionary<Vector2, Door>(); // pour stocker les informations des portes
@@ -30,6 +30,10 @@ public class Room : MonoBehaviour
     public void SetRoomID(int id)
     {
         roomID = id;
+        foreach (var enemySpawner in enemySpawners)
+        {
+            enemySpawner._roomID = id;
+        }
     }
 
     /// <summary>
@@ -110,6 +114,14 @@ public class Room : MonoBehaviour
             }
         }
     }
+
+    //public void SetSpawner()
+    //{
+    //    foreach (var enemySpawner in enemySpawners)
+    //    {
+    //        enemySpawner._roomID = roomID;
+    //    }
+    //}
 
     /// <summary>
     /// Récupère une porte dans une direction donnée.

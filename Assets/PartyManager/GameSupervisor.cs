@@ -105,48 +105,61 @@ public class GameSupervisor : MonoBehaviour
     public void Battle()
     {
         /// <aside>
-        /// Cette partie sert à détecter toute les portes de la pièce actuelle du joueur et de les fermer avant de lancer la bataille
+        /// Cette partie sert à détecter si la pieces doit lancer la bataille
         /// </aside>
-        GameObject[] tousLesObjets = FindObjectsOfType<GameObject>; // true = inclut objets inactifs
-
-        foreach (GameObject obj in tousLesObjets)
+        GameObject[] pieces = GameObject.FindGameObjectsWithTag("Room");
+        foreach (GameObject piece in pieces)
         {
-            // Vérifie s’il a un composant Door
-            Door door = obj.GetComponent<Door>();
-
-            if (door._roomId == gameStat.CurrentRoom)
+            Room room = piece.GetComponent<Room>();
+            if (room.roomID == gameStat.CurrentRoom)
             {
-                door.CloseUnClose(true);
-            }
-        }
-        //
-
-        int CurrentRoomMaster = gameStat.CurrentRoom;
-        //Rechercher l'objet par son nom
-        GameObject RoomTempOBJMaster = GameObject.Find("ROOM-"+CurrentRoomMaster); // ça doit etre l'objet Room
-        
-        if (RoomTempOBJMaster != null)
-        {
-            Room roomScript = RoomTempOBJMaster.GetComponent<Room>();
-            if (roomScript.isBattleFinished == false) // Si aucun combat n'a encore eu lieu
-            {
-                //Fermer les portes
-                foreach(GameObject enemySpawner in roomScript.enemySpawners)
+                if (room.isBattleFinished == false)
                 {
-                    EnemySpawner enemySpawnerScript = enemySpawner.GetComponent<EnemySpawner>();
-                    Debug.Log(enemySpawner);
-                    enemySpawnerScript.SpawnRandomEnemy();
-                }
+                    /// <aside>
+                    /// Cette partie sert à détecter toute les portes de la pièce actuelle du joueur et de les fermer avant de lancer la bataille
+                    /// </aside>
+                    GameObject[] portes = GameObject.FindGameObjectsWithTag("Door");
+                    foreach (GameObject porte in portes)
+                    {
+                        Door door = porte.GetComponent<Door>();
+                        if (door._roomId == gameStat.CurrentRoom)
+                        {
+                            door.CloseUnClose(true);
+                        }
+                    }
 
-            } else // Si le combat a déjà eu lieu 
-            {
-                //Rien faire
+                    /// <aside>
+                    /// Cette partie sert à faire apparaitre les ennemis
+                    /// </aside>
+                    GameObject[] spawners = GameObject.FindGameObjectsWithTag("EnemySpawner");
+                    foreach (GameObject spawner in spawners)
+                    {
+                        EnemySpawner enemySpawnerScript = spawner.GetComponent<EnemySpawner>();
+                        if (enemySpawnerScript._roomID == gameStat.CurrentRoom)
+                        {
+                            enemySpawnerScript.SpawnRandomEnemy();
+                        }
+                    }
+                }
             }
         }
+
+        
+
     }
     public void FinishBattle()
     {
         //Si les ennemis sont tous mort
         //ouvrir les portes
+
+        GameObject[] portes = GameObject.FindGameObjectsWithTag("Door");
+        foreach (GameObject porte in portes)
+        {
+            Door door = porte.GetComponent<Door>();
+            if (door._isLockedByBattle == true)
+            {
+                door.CloseUnClose(false);
+            }
+        }
     }
 }

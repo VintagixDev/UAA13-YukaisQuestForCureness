@@ -82,7 +82,13 @@ public class Door : MonoBehaviour
         {
             if (connectedDoor != null)
             {
-                TELEPORTATION.TeleportPlayer(collision.gameObject, connectedDoor, _roomId);
+                if (!_isLockedByBattle)
+                {
+                    TELEPORTATION.TeleportPlayer(collision.gameObject, connectedDoor, _roomId);
+                } else
+                {
+                    Debug.Log("La porte est fermée pendant les batailles");
+                } 
             }
             else
             {

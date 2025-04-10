@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 5596694292808697835}
   m_Layer: 0
   m_Name: BossRoom
-  m_TagString: Untagged
+  m_TagString: Room
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -134,11 +134,10 @@ MonoBehaviour:
   botDoor: {fileID: 1614802360266971112}
   leftDoor: {fileID: 7517570653403388917}
   rightDoor: {fileID: 6012854376433851162}
-  topDoorPrefab: {fileID: 6193630413247003090, guid: f077570f8b1850240b6da4269f2598c1, type: 3}
-  botDoorPrefab: {fileID: 717855064626030997, guid: a050c88b343289242919dfc8575d0e3a, type: 3}
-  leftDoorPrefab: {fileID: 6625690551001669293, guid: 8cbccb1aea0312f4f9f77449cc85ec22, type: 3}
-  rightDoorPrefab: {fileID: 6683336914798158909, guid: 89f7986d4a470b6418deb31c6a34c2bf, type: 3}
-  doorsContainer: {fileID: 0}
+  DoorPrefab: {fileID: 0}
+  roomID: 0
+  isBattleFinished: 0
+  enemySpawners: []
 --- !u!1 &4767035164702118351
 GameObject:
   m_ObjectHideFlags: 0
