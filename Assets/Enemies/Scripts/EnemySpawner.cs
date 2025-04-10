@@ -14,8 +14,6 @@ public class EnemySpawner : MonoBehaviour
         get { return _roomID; }
         set { _roomID = value; }
     }
-
-
     public void SpawnRandomEnemy()
     {
         int nb = Random.Range(0, enemies.Count);
@@ -24,6 +22,4 @@ public class EnemySpawner : MonoBehaviour
         instanciatedEnemy.GetComponent<SpriteRenderer>().sortingOrder = 2;
         Destroy(gameObject);
     }
-
-
 }

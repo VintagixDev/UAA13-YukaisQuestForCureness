@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2980365921029364933}
   - component: {fileID: 8397807763945059110}
   m_Layer: 0
-  m_Name: BattleRoom
+  m_Name: BattleRoomPrefab(1)
   m_TagString: Room
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

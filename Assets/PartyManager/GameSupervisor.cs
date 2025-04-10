@@ -107,39 +107,42 @@ public class GameSupervisor : MonoBehaviour
         /// <aside>
         /// Cette partie sert à détecter si la pieces doit lancer la bataille
         /// </aside>
-        GameObject[] pieces = GameObject.FindGameObjectsWithTag("Room");
+        GameObject[] pieces = GameObject.FindGameObjectsWithTag("Room"); // Recherche de tout les objets "Room"
         foreach (GameObject piece in pieces)
         {
-            Room room = piece.GetComponent<Room>();
-            if (room.RoomID == gameStat.CurrentRoom)
+            Room room = piece.GetComponent<Room>(); // Attribution des composants de scripts "Room.cs"
+            if (room.RoomID == gameStat.CurrentRoom) // Vérification si la pieces cible est celle ou le joueur est
             {
-                if (room.isBattleFinished == false)
+                if (room.isBattleFinished == false) // Vérification si la piece sert au combat ou non
                 {
                     /// <aside>
                     /// Cette partie sert à détecter toute les portes de la pièce actuelle du joueur et de les fermer avant de lancer la bataille
                     /// </aside>
-                    GameObject[] portes = GameObject.FindGameObjectsWithTag("Door");
+                    GameObject[] portes = GameObject.FindGameObjectsWithTag("Door"); // Recherche de tout les objets "Door"
                     foreach (GameObject porte in portes)
                     {
-                        Door door = porte.GetComponent<Door>();
-                        if (door._roomId == gameStat.CurrentRoom)
+                        Door door = porte.GetComponent<Door>(); // Attribution des composants de scripts "Door.cs"
+                        if (door._roomId == gameStat.CurrentRoom) // Vérification si les portes cible sont bien dans la piece cible
                         {
-                            door.CloseUnClose(true);
+                            door.CloseUnClose(true); // Sert à changer les sprites de la piece
+                            //Debug.Log("changement d'état de la porte");
+
+
                         }
                     }
 
                     /// <aside>
                     /// Cette partie sert à faire apparaitre les ennemis
                     /// </aside>
-                    GameObject[] spawners = GameObject.FindGameObjectsWithTag("EnemySpawner");
-                    foreach (GameObject spawner in spawners)
-                    {
-                        EnemySpawner enemySpawnerScript = spawner.GetComponent<EnemySpawner>();
-                        if (enemySpawnerScript.RoomID == gameStat.CurrentRoom)
-                        {
-                            enemySpawnerScript.SpawnRandomEnemy();
-                        }
-                    }
+                    //GameObject[] spawners = GameObject.FindGameObjectsWithTag("EnemySpawner");
+                    //foreach (GameObject spawner in spawners)
+                    //{
+                    //    EnemySpawner enemySpawnerScript = spawner.GetComponent<EnemySpawner>();
+                    //    if (enemySpawnerScript.RoomID == gameStat.CurrentRoom)
+                    //    {
+                    //        enemySpawnerScript.SpawnRandomEnemy();
+                    //    }
+                    //}
                 }
             }
         }
