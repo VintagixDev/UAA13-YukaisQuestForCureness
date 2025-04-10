@@ -74,6 +74,7 @@ public class RoomManager : MonoBehaviour
     /// <param name="roomIndex"></param>
     private void StartRoomGenerationFromRoom(Vector2Int roomIndex)
     {
+        // Ajout de la salle de spawn
         roomQueue.Enqueue(roomIndex);
         roomGrid[roomIndex.x, roomIndex.y] = 1;
 
@@ -81,22 +82,27 @@ public class RoomManager : MonoBehaviour
         initialRoom.name = $"SPAWN_ROOM";
         initialRoom.GetComponent<Room>().RoomIndex = roomIndex;
         initialRoom.GetComponent<Room>().SetRoomID(roomCount);
-        //initialRoom.GetComponent<Room>().SetIdToSpawner(roomCount);
 
         roomObjects.Add(initialRoom);
 
+        // Incrémenter roomCount après la création de la salle de spawn
+        roomCount++;
+
+        // Génération des salles adjacentes
         while (roomQueue.Count > 0 && roomCount < maxRoom)
         {
             Vector2Int currentRoomIndex = roomQueue.Dequeue();
             GenerateAdjacentRooms(currentRoomIndex);
         }
 
+        // Si nous avons généré suffisamment de salles, place une salle de boss
         if (roomCount >= minRoom)
         {
             PlaceBossRoomAtExtremity();
         }
         else
         {
+            // Si trop peu de salles, recommence la génération
             RegenerateRooms();
         }
     }
@@ -167,16 +173,16 @@ public class RoomManager : MonoBehaviour
     private bool TryGenerateRoom(Vector2Int roomIndex)
     {
         if (roomCount >= maxRoom) return false;
-
+        if (!IsInBounds(roomIndex)) return false;
         if (Random.value < 0.5f && roomIndex != Vector2Int.zero) return false;
         if (CountAdjacentRooms(roomIndex) > 1) return false;
 
         roomQueue.Enqueue(roomIndex);
         roomGrid[roomIndex.x, roomIndex.y] = 1;
-        //Debug.LogWarning($"{roomIndex.x},{roomIndex.y}");
         roomCount++;
 
-        GameObject roomToInstantiate = RoomPrefab;
+        // Choisir un prefab aléatoire depuis BattleRoomPrefabs
+        GameObject roomToInstantiate = BattleRoomPrefabs[Random.Range(0, BattleRoomPrefabs.Count)];
 
         GameObject newRoom = Instantiate(roomToInstantiate, GetPositionFromGridIndex(roomIndex), Quaternion.identity);
         Room roomScript = newRoom.GetComponent<Room>();
@@ -186,6 +192,10 @@ public class RoomManager : MonoBehaviour
 
         roomObjects.Add(newRoom);
         return true;
+    }
+    private bool IsInBounds(Vector2Int index)
+    {
+        return index.x >= 0 && index.x < gridSizex && index.y >= 0 && index.y < gridSizey;
     }
 
     /// <summary>

@@ -31,21 +31,24 @@ public class Room : MonoBehaviour
     public void SetRoomID(int id)
     {
         roomID = id;
-        ///Debug.Log(id);
-        foreach (var enemy in enemySpawners)
+
+        if (enemySpawners != null && enemySpawners.Length > 0)
         {
-            EnemySpawner enemySpawnerScript = enemy.GetComponent<EnemySpawner>();
-            enemySpawnerScript.RoomID = roomID;
+            foreach (var enemy in enemySpawners)
+            {
+                if (enemy != null)
+                {
+                    EnemySpawner spawnerScript = enemy.GetComponent<EnemySpawner>();
+                    if (spawnerScript != null)
+                    {
+                        spawnerScript.RoomID = roomID;
+                    }
+                }
+            }
         }
-        //if (enemySpawners.Count > 0)
-        //{
-        //    foreach (var enemySpawner in enemySpawners)
-        //    {
-        //        enemySpawner.RoomID = id;
-        //    }
-        //}
     }
-    
+
+
 
     /// <summary>
     /// Configure une porte dans une direction donnée et initialise ses propriétés.
