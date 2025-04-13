@@ -6,11 +6,8 @@ using UnityEngine;
 public class TeleportationManager : MonoBehaviour
 {
 
-    GameSupervisor gameSupervisor;
-    void Start()
-    {
-        gameSupervisor = GameObject.Find("GameSupervisor").GetComponent<GameSupervisor>();
-    }
+    public GameSupervisor gameSupervisor;
+    public GameStat gameStat;
     /// <summary>
     /// Téléporte un joueur à la position d'une porte connectée et met à jour son état de salle actuelle.
     /// </summary>
@@ -29,33 +26,25 @@ public class TeleportationManager : MonoBehaviour
 
             if (targetDoor._orientation == "N")
             {
-                teleportPosition.y -= 2; 
-            } else if (targetDoor._orientation == "E")
-            {
-                teleportPosition.x -= 2; 
-            } else if (targetDoor._orientation == "S")
-            {
-                teleportPosition.y += 2; 
-            } else if (targetDoor._orientation == "W")
-            {
-                teleportPosition.x += 2; 
+                teleportPosition.y -= 2;
             }
+            else if (targetDoor._orientation == "E")
+            {
+                teleportPosition.x -= 2;
+            }
+            else if (targetDoor._orientation == "S")
+            {
+                teleportPosition.y += 2;
+            }
+            else if (targetDoor._orientation == "W")
+            {
+                teleportPosition.x += 2;
+            }
+
             player.transform.position = teleportPosition;
 
-            GameObject gameManager = GameObject.Find("Stats");
-            if (gameManager != null)
-            {
-                GameStat stats = gameManager.GetComponent<GameStat>();
-                if (stats != null)
-                {
-                    stats.CurrentRoom = roomId;
-                    gameSupervisor.Battle();
-                }
-            }
-            else
-            {
-                Debug.LogWarning("Stats introuvable !");
-            }
+            gameStat.CurrentRoom = targetDoor._roomId;
+            gameSupervisor.Battle();
 
         }
         else

@@ -29,8 +29,8 @@ public class Door : MonoBehaviour
     [SerializeField] private BoxCollider2D boxCollider;
 
     [Header("State")]
-    public bool _isLockedByBattle;
-    public bool _isBossDoor;
+    public bool _isLockedByBattle; // Si vrai, la bataille est en cours et le sprite est différent
+    public bool _isBossDoor; // Si vrai, c'est une porte de boss et son sprite est différent
 
 
     [Header("Link")]
@@ -76,26 +76,21 @@ public class Door : MonoBehaviour
         UpdateDoorSprite();
 
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") && !_isLockedByBattle)
+        if (!collision.gameObject.CompareTag("Player") || _isLockedByBattle)
+            return;
+
+        if (connectedDoor == null)
         {
-            if (connectedDoor != null)
-            {
-                if (!_isLockedByBattle)
-                {
-                    TELEPORTATION.TeleportPlayer(collision.gameObject, connectedDoor, _roomId);
-                } else
-                {
-                    Debug.Log("La porte est fermée pendant les batailles");
-                } 
-            }
-            else
-            {
-                Debug.LogWarning("Warning 309: No door connected is instantiated for this door");
-            }
+            Debug.LogWarning("Warning 309: No connected door is instantiated for this door.");
+            return;
         }
+
+        TELEPORTATION.TeleportPlayer(collision.gameObject, connectedDoor, _roomId);
     }
+
 
     private void UpdateDoorSprite()
     {

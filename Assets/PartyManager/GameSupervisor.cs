@@ -134,15 +134,16 @@ public class GameSupervisor : MonoBehaviour
                     /// <aside>
                     /// Cette partie sert à faire apparaitre les ennemis
                     /// </aside>
-                    //GameObject[] spawners = GameObject.FindGameObjectsWithTag("EnemySpawner");
-                    //foreach (GameObject spawner in spawners)
-                    //{
-                    //    EnemySpawner enemySpawnerScript = spawner.GetComponent<EnemySpawner>();
-                    //    if (enemySpawnerScript.RoomID == gameStat.CurrentRoom)
-                    //    {
-                    //        enemySpawnerScript.SpawnRandomEnemy();
-                    //    }
-                    //}
+                    GameObject[] spawners = GameObject.FindGameObjectsWithTag("EnemySpawner");
+                    foreach (GameObject spawner in spawners)
+                    {
+                        EnemySpawner enemySpawnerScript = spawner.GetComponent<EnemySpawner>();
+                        if (enemySpawnerScript.RoomID == gameStat.CurrentRoom)
+                        {
+                            enemySpawnerScript.SpawnRandomEnemy();
+                            Destroy(spawner);
+                        }
+                    }
                 }
             }
         }

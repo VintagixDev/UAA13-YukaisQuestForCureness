@@ -65,7 +65,6 @@
     <Compile Include="Assets\PartyManager\GameStat.cs" />
     <Compile Include="Assets\PartyManager\BattleManager.cs" />
     <Compile Include="Assets\Scenes\Main Menu\Buttons.cs" />
-    <Compile Include="Assets\fermerPorte.cs" />
     <Compile Include="Assets\Collectibles\Scripts\Chest.cs" />
     <Compile Include="Assets\Scenes\ManagerScene.cs" />
     <Compile Include="Assets\Upgrades\Upgrade.cs" />

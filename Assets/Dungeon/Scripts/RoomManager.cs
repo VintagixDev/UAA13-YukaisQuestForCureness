@@ -29,15 +29,14 @@ public class RoomManager : MonoBehaviour
     private Queue<Vector2Int> roomQueue = new Queue<Vector2Int>(); // File des indices des salles à générer
     private int[,] roomGrid; // Grille pour suivre les salles générées
     private int roomCount; // Compteur du nombre total de salles générées
-    private bool generationComplete = false; // Indique si la génération est terminée
-    private int nextRoomID = 1; // ID pour la prochaine salle à générer
+    //private bool generationComplete = false; // Indique si la génération est terminée
     public void StartDungeonGeneration()
     {
         roomGrid = new int[gridSizex, gridSizey];
         roomQueue.Clear();
         roomObjects.Clear();
         roomCount = 0;
-        generationComplete = false;
+        //generationComplete = false;
 
         Vector2Int initialRoomIndex = new Vector2Int(gridSizex / 2, gridSizey / 2);
         StartRoomGenerationFromRoom(initialRoomIndex);
@@ -62,8 +61,7 @@ public class RoomManager : MonoBehaviour
         roomGrid = new int[gridSizex, gridSizey];
         roomQueue.Clear();
         roomCount = 0;
-        generationComplete = false;
-        nextRoomID = 1;
+        //generationComplete = false;
 
         Debug.Log("Dungeon cleared.");
     }
@@ -355,7 +353,7 @@ public class RoomManager : MonoBehaviour
         roomGrid = new int[gridSizex, gridSizey];
         roomQueue.Clear();
         roomCount = 0;
-        generationComplete = false;
+        //generationComplete = false;
 
         Vector2Int initialRoomIndex = new Vector2Int(gridSizex / 2, gridSizey / 2);
         StartRoomGenerationFromRoom(initialRoomIndex);
