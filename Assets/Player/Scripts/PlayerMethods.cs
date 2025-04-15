@@ -70,7 +70,8 @@ public class PlayerMethods : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         GameObject obj = collision.gameObject;
-        switch(obj.name)
+        Debug.Log(obj.tag);
+        switch(obj.tag)
         {
             case "Gold":
                 Destroy(obj);
@@ -81,6 +82,11 @@ public class PlayerMethods : MonoBehaviour
                 Destroy(obj);
                 stats.playerKeys++;
                 statsUI.updateCollectableUI();
+                break;
+            case "EnemyProjectile":
+                DamagePlayer(1);
+                Destroy(obj);
+                statsUI.updateDisplayHearts();
                 break;
             default:
                 break;

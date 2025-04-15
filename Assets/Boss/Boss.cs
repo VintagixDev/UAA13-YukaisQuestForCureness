@@ -70,6 +70,8 @@ public class Boss : MonoBehaviour
         {
             // WIN
             healthBar.value = 0;
+            Destroy(gameObject);
+            healthBar.gameObject.SetActive(false);
         }
         healthBar.value = 100 * bossCurrentHP / bossMaxHP;
     }

@@ -8,6 +8,9 @@ TagManager:
   - FriendlyProjectile
   - Door
   - Room
+  - EnemyProjectile
+  - Gold
+  - Key
   layers:
   - Default
   - TransparentFX

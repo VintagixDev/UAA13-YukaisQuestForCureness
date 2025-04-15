@@ -23,7 +23,7 @@ public class BulletShoot : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (!other.CompareTag("Player") && !other.CompareTag("FriendlyProjectile"))
+        if (!other.CompareTag("Player") && !other.CompareTag("FriendlyProjectile") && !other.CompareTag("EnemyProjectile"))
         {
             Destroy(gameObject);
         }
