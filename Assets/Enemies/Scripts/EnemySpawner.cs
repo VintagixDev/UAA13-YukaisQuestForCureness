@@ -26,8 +26,9 @@ public class EnemySpawner : MonoBehaviour
 
         int nb = Random.Range(0, enemies.Count);
         GameObject enemy = enemies[nb];
-
+        //enemy.GetComponent<Enemy>.
         GameObject instanciatedEnemy = Instantiate(enemy, transform.position, Quaternion.identity);
         instanciatedEnemy.GetComponent<SpriteRenderer>().sortingOrder = 2;
+        instanciatedEnemy.GetComponent<Enemy>()._roomID = _roomID;
     }
 }

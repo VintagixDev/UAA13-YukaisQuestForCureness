@@ -7,18 +7,14 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-
+    public int _roomID;
     public int enemyID;
 
     [Header("Stats")]
-
-
     public int enemyHP;
     public int enemyDmg;
     public float enemyMovementSpeed;
     public bool enemyIsRange;
-
-
 
     [Header("Ranged")]
     public float enemyProjectileSize = 1;
