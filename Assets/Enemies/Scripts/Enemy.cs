@@ -80,7 +80,7 @@ public class Enemy : MonoBehaviour
             Vector2 pos = new Vector2(transform.position.x, player.position.y);
             transform.position = Vector2.MoveTowards(transform.position, pos, Time.deltaTime * enemyMovementSpeed);
             float distance = Vector2.Distance(transform.position, player.position);
-            Debug.Log(distance);
+            //Debug.Log(distance);
         }
     }
 
