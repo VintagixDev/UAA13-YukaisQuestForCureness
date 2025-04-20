@@ -4,35 +4,21 @@ using UnityEngine;
 
 public class PlayerMovements : MonoBehaviour
 {
-    /// <summary>
-    /// speed : Vitesse du joueur
-    /// speedDecrease : Sert a diminuer la vitesse du joueur (facteur de glissance)
-    /// canMove : Détermine si le joueur peut bouger ou non
-    /// </summary>
-
     [Header("Speed")]
-    public float speed = 4.5f;
-    public float speedDecrease = 1.025f;
-    public bool canMove = true;
-
-    /// <summary>
-    /// horizontalVelocity : Vitesse horizontale
-    /// verticalVelocity : Vitesse verticale
-    /// </summary>
+    public float speed = 4.5f; // Vitesse du joueur
+    public float speedDecrease = 1.025f; // Sert a diminuer la vitesse du joueur (facteur de glissance)
+    public bool canMove = true; // Détermine si le joueur peut bouger ou non
 
     [Header("velocity axis")]
-    public float horizontalVelocity;
-    public float verticalVelocity;
+    public float horizontalVelocity; // Vitesse horizontale
+    public float verticalVelocity; // Vitesse verticale
+
+    [Header("Renderer")]
     SpriteRenderer spriteRenderer;
 
-    /// <summary>
-    /// stats : Sert à la récupération des statistiques du joueur
-    /// </summary>
-
     [Header("Stats")]
-    public PlayerStats stats;
+    public PlayerStats stats; 
 
-    // Start is called before the first frame update
     void Start()
     {
         horizontalVelocity = 0;
@@ -44,7 +30,6 @@ public class PlayerMovements : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (canMove)

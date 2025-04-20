@@ -17,7 +17,6 @@ public class PlayerStats : MonoBehaviour
     public int playerGolds = 0; // Nombre de pieces // Nombre de 
     public int playerKeys = 0; // Nombre de clef du joueur
 
-    [Header("Pièce actuelle du joueur")]
-    public string currentRoom; // ID de la pièce actuelle du joueur
+    [Header("upgrades du joueur")]
     public List<GameObject> playerUpgrades;
 }

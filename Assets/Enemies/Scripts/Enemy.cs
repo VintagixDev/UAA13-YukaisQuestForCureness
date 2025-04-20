@@ -83,22 +83,29 @@ public class Enemy : MonoBehaviour
             //Debug.Log(distance);
         }
     }
-
-
-
-    public void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        switch (collision.gameObject.name)
+        GameObject obj = collision.gameObject;
+
+        switch (obj.tag)
         {
             case "Player":
-                playerMethods.DamagePlayer(enemyDmg);
+                if (playerMethods != null)
+                {
+                    playerMethods.DamagePlayer(enemyDmg);
+                }
                 break;
-            case "Bullet(Clone)":
+
+            case "FriendlyProjectile":
                 DamageEnemy((int)stats.playerDamage);
+                Destroy(obj); 
                 break;
-            default:break; 
+
+            default:
+                break;
         }
     }
+
 
     public virtual void EnemyRangeAttack()
     {

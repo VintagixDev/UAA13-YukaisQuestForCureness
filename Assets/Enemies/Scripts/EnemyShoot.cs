@@ -10,12 +10,20 @@ public class EnemyShoot : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        playerMethods = collision.gameObject.GetComponent<PlayerMethods>();
-        if (playerMethods != null)
+        // Vérifie si la cible est bien le joueur (par le tag)
+        if (collision.CompareTag("Player"))
         {
-            playerMethods.DamagePlayer(enemyDmg);
-        }
-        
+            if (playerMethods == null)
+            {
+                playerMethods = collision.GetComponent<PlayerMethods>();
+            }
 
+            if (playerMethods != null)
+            {
+                playerMethods.DamagePlayer(enemyDmg);
+            }
+
+            Destroy(gameObject); // Le projectile disparaît après impact
+        }
     }
 }

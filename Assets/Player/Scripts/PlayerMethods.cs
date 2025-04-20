@@ -12,10 +12,6 @@ public class PlayerMethods : MonoBehaviour
     [SerializeField] public PlayerStats stats;
     [SerializeField] public StatsUI statsUI;
 
-    // Start is called before the first frame update
-
-    // Update is called once per frame
-
     void Start()
     {
         cdTime = iFrames;
@@ -42,7 +38,7 @@ public class PlayerMethods : MonoBehaviour
         }
 
         // Upgrade effects
-        foreach(GameObject upgrade in stats.playerUpgrades)
+        foreach (GameObject upgrade in stats.playerUpgrades)
         {
             Upgrade upg = upgrade.GetComponent<Upgrade>();
             if (!upg.upgradeEffectOnce || !upg.upgradeHasBeenUsed)
@@ -51,27 +47,19 @@ public class PlayerMethods : MonoBehaviour
             }
         }
     }
-     
-    public void DamagePlayer(int damage)
-    {
-        if (cdTime == iFrames)
-        {
-
-            stats.playerHP -= damage;
-            if(stats.playerHP <= 0) 
-            {
-                SceneManager.LoadScene("DeathScene");
-            }
-            statsUI.updateDisplayHearts();
-            cdTime--;
-        }
-    }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
         GameObject obj = collision.gameObject;
         Debug.Log(obj.tag);
-        switch(obj.tag)
+
+        // Si l'objet est un projectile amical, on l'ignore
+        if (obj.tag == "FriendlyProjectile")
+        {
+            return; 
+        }
+
+        switch (obj.tag)
         {
             case "Gold":
                 Destroy(obj);
@@ -84,12 +72,24 @@ public class PlayerMethods : MonoBehaviour
                 statsUI.updateCollectableUI();
                 break;
             case "EnemyProjectile":
-                DamagePlayer(1);
                 Destroy(obj);
-                statsUI.updateDisplayHearts();
+                DamagePlayer(1);
                 break;
             default:
                 break;
+        }
+    }
+    public void DamagePlayer(int damage)
+    {
+        if (cdTime == iFrames)
+        {
+            stats.playerHP -= damage;
+            if (stats.playerHP <= 0)
+            {
+                SceneManager.LoadScene("DeathScene");
+            }
+            statsUI.updateDisplayHearts(); 
+            cdTime--;
         }
     }
 }
