@@ -184,10 +184,12 @@ GameObject:
   - component: {fileID: 6481161714035375970}
   - component: {fileID: 522007300333139420}
   - component: {fileID: 7967005110710486512}
+  - component: {fileID: 967539110913926963}
   - component: {fileID: 1731003136794328679}
   - component: {fileID: 7830666540834944154}
   - component: {fileID: 5125743056109524963}
   - component: {fileID: 8761969947540343475}
+  - component: {fileID: 8209533424086984152}
   m_Layer: 0
   m_Name: Player prefab
   m_TagString: Player
@@ -252,7 +254,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 514506811, guid: 3f1b2032608fd2c4083d6e5e4889eeb2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -298,7 +300,7 @@ CapsuleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1839927486977741355}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -326,6 +328,51 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
+--- !u!61 &967539110913926963
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1839927486977741355}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.00035806, y: -0.78023684}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 2}
+    newSize: {x: 1, y: 2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.5050976, y: 0.43952632}
+  m_EdgeRadius: 0
 --- !u!114 &1731003136794328679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -384,7 +431,6 @@ MonoBehaviour:
   playerProjectileSpeed: 1
   playerGolds: 0
   playerKeys: 0
-  currentRoom: 
   playerUpgrades: []
 --- !u!114 &8761969947540343475
 MonoBehaviour:
@@ -402,6 +448,41 @@ MonoBehaviour:
   cdTime: 160
   stats: {fileID: 5125743056109524963}
   statsUI: {fileID: 0}
+  _foot: {fileID: 0}
+  _hitBox: {fileID: 0}
+--- !u!114 &8209533424086984152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1839927486977741355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a14de91fdd6287a4fa1926e52b5da272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upSprites:
+  - {fileID: -726794665, guid: 3f1b2032608fd2c4083d6e5e4889eeb2, type: 3}
+  - {fileID: 414781241, guid: 3f1b2032608fd2c4083d6e5e4889eeb2, type: 3}
+  - {fileID: -1266555573, guid: 3f1b2032608fd2c4083d6e5e4889eeb2, type: 3}
+  - {fileID: 1319610360, guid: 3f1b2032608fd2c4083d6e5e4889eeb2, type: 3}
+  downSprites:
+  - {fileID: 514506811, guid: 3f1b2032608fd2c4083d6e5e4889eeb2, type: 3}
+  - {fileID: -11272978, guid: 3f1b2032608fd2c4083d6e5e4889eeb2, type: 3}
+  - {fileID: 1698081942, guid: 3f1b2032608fd2c4083d6e5e4889eeb2, type: 3}
+  - {fileID: 2109751637, guid: 3f1b2032608fd2c4083d6e5e4889eeb2, type: 3}
+  leftSprites:
+  - {fileID: 215633693, guid: 3f1b2032608fd2c4083d6e5e4889eeb2, type: 3}
+  - {fileID: -1720264257, guid: 3f1b2032608fd2c4083d6e5e4889eeb2, type: 3}
+  - {fileID: 929703757, guid: 3f1b2032608fd2c4083d6e5e4889eeb2, type: 3}
+  - {fileID: -1810542728, guid: 3f1b2032608fd2c4083d6e5e4889eeb2, type: 3}
+  rightSprites:
+  - {fileID: -2115502616, guid: 3f1b2032608fd2c4083d6e5e4889eeb2, type: 3}
+  - {fileID: 2082910511, guid: 3f1b2032608fd2c4083d6e5e4889eeb2, type: 3}
+  - {fileID: 2140738884, guid: 3f1b2032608fd2c4083d6e5e4889eeb2, type: 3}
+  - {fileID: -2136897823, guid: 3f1b2032608fd2c4083d6e5e4889eeb2, type: 3}
+  animationSpeed: 0.1
 --- !u!1 &2850339341515915277
 GameObject:
   m_ObjectHideFlags: 0

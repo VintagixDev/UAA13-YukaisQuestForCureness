@@ -51,7 +51,7 @@ public class PlayerMovements : MonoBehaviour
             if (horizontalVelocity > -1f)
             {
                 horizontalVelocity -= .1f;
-                spriteRenderer.flipX = true;
+                //spriteRenderer.flipX = true;
             }
         }
 
@@ -60,7 +60,7 @@ public class PlayerMovements : MonoBehaviour
             if (horizontalVelocity < 1f)
             {
                 horizontalVelocity += .1f;
-                spriteRenderer.flipX = false;
+                //spriteRenderer.flipX = false;
             }
         }
         else

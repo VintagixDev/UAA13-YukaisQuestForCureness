@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Assets\Player\Projectile\PlayerShoot.cs" />
     <Compile Include="Assets\Enemies\Enemies\Snail.cs" />
+    <Compile Include="Assets\Player\Scripts\playerScriptAnimation.cs" />
     <Compile Include="Assets\Boss\HeadfulBossScript.cs" />
     <Compile Include="Assets\Upgrades\Upgrades\DamageUp.cs" />
     <Compile Include="Assets\PartyManager\GameStat.cs" />

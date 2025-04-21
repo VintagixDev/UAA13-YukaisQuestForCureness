@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     public int enemyID;
 
     [Header("Stats")]
+    public bool isAlive = true;
     public int enemyHP;
     public int enemyDmg;
     public float enemyMovementSpeed;
@@ -20,7 +21,7 @@ public class Enemy : MonoBehaviour
     public float enemyProjectileSize = 1;
     public float enemyProjectileReach = 1;
     public float enemyProjectileSpeed = 1;
-    public int enemyAttackSpeed = 60; // Nombre de frame
+    public int enemyAttackSpeed = 60; 
     public int cdAttackSpeed;
 
     public GameObject enemyProjectile;
@@ -129,7 +130,14 @@ public class Enemy : MonoBehaviour
         enemyHP -= damage;
         if(enemyHP <= 0)
         {
-            Destroy(this);
+            //Destroy(this);
+            Die();
         }
+    }
+    public void Die()
+    {
+        isAlive = false; // L'ennemi est mort
+        // Tu peux ici ajouter des effets ou des animations de mort si nécessaire
+        Destroy(gameObject); // Supprime l'objet ennemi du jeu
     }
 }

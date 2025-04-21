@@ -6,6 +6,9 @@ public class GameSupervisor : MonoBehaviour
     [SerializeField] private RoomManager roomManager;
     [SerializeField] private TeleportationManager teleportationManager;
 
+    [Header("Battle Manager Reference")]
+    [SerializeField] public BattleManager battleManager;
+
     [Header("Stats")]
     [SerializeField] private GameStat gameStat;
 
@@ -104,66 +107,14 @@ public class GameSupervisor : MonoBehaviour
     }
     public void Battle()
     {
-        /// <aside>
-        /// Cette partie sert à détecter si la pieces doit lancer la bataille
-        /// </aside>
-        GameObject[] pieces = GameObject.FindGameObjectsWithTag("Room"); // Recherche de tout les objets "Room"
-        foreach (GameObject piece in pieces)
+        // Appel de la méthode BattlePro() du BattleManager pour démarrer le combat
+        if (battleManager != null)
         {
-            Room room = piece.GetComponent<Room>(); // Attribution des composants de scripts "Room.cs"
-            if (room.RoomID == gameStat.CurrentRoom) // Vérification si la pieces cible est celle ou le joueur est
-            {
-                if (room.isBattleFinished == false) // Vérification si la piece sert au combat ou non
-                {
-                    /// <aside>
-                    /// Cette partie sert à détecter toute les portes de la pièce actuelle du joueur et de les fermer avant de lancer la bataille
-                    /// </aside>
-                    GameObject[] portes = GameObject.FindGameObjectsWithTag("Door"); // Recherche de tout les objets "Door"
-                    foreach (GameObject porte in portes)
-                    {
-                        Door door = porte.GetComponent<Door>(); // Attribution des composants de scripts "Door.cs"
-                        if (door._roomId == gameStat.CurrentRoom) // Vérification si les portes cible sont bien dans la piece cible
-                        {
-                            door.CloseUnClose(true); // Sert à changer les sprites de la piece
-                            //Debug.Log("changement d'état de la porte");
-
-
-                        }
-                    }
-
-                    /// <aside>
-                    /// Cette partie sert à faire apparaitre les ennemis
-                    /// </aside>
-                    GameObject[] spawners = GameObject.FindGameObjectsWithTag("EnemySpawner");
-                    foreach (GameObject spawner in spawners)
-                    {
-                        EnemySpawner enemySpawnerScript = spawner.GetComponent<EnemySpawner>();
-                        if (enemySpawnerScript.RoomID == gameStat.CurrentRoom)
-                        {
-                            enemySpawnerScript.SpawnRandomEnemy();
-                            Destroy(spawner);
-                        }
-                    }
-                }
-            }
+            battleManager.BattlePro();
         }
-
-        
-
-    }
-    public void FinishBattle()
-    {
-        //Si les ennemis sont tous mort
-        //ouvrir les portes
-
-        GameObject[] portes = GameObject.FindGameObjectsWithTag("Door");
-        foreach (GameObject porte in portes)
+        else
         {
-            Door door = porte.GetComponent<Door>();
-            if (door._isLockedByBattle == true)
-            {
-                door.CloseUnClose(false);
-            }
+            Debug.LogWarning("BattleManager non assigné !");
         }
     }
 }
