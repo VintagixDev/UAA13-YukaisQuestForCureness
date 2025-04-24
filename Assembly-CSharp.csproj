@@ -88,6 +88,7 @@
     <Compile Include="Assets\Dungeon\Scripts\Room.cs" />
     <Compile Include="Assets\Upgrades\Upgrades\OneUp.cs" />
     <Compile Include="Assets\Dungeon\Scripts\changerdetage.cs" />
+    <Compile Include="Assets\Dungeon\Scripts\ShopBuyItem.cs" />
     <Compile Include="Assets\Boss\Boss.cs" />
   </ItemGroup>
   <ItemGroup>
