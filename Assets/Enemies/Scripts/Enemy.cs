@@ -46,7 +46,6 @@ public class Enemy : MonoBehaviour
     {
 
         if (isStunned) return;
-        Movements();
         if (enemyIsRange)
         {
             cdAttackSpeed--;
@@ -55,8 +54,8 @@ public class Enemy : MonoBehaviour
                 cdAttackSpeed = enemyAttackSpeed;
                 EnemyRangeAttack();
             }
-
         }
+        Movements();
     }
 
 
@@ -73,7 +72,7 @@ public class Enemy : MonoBehaviour
         }
         if (!enemyIsRange)
         {
-            transform.position = Vector2.MoveTowards(transform.position, player.position, Time.deltaTime * enemyMovementSpeed);
+          //  transform.position = Vector2.MoveTowards(transform.position, player.position, Time.deltaTime * enemyMovementSpeed);
         }
         else
         {
@@ -84,10 +83,10 @@ public class Enemy : MonoBehaviour
             //Debug.Log(distance);
         }
     }
-    private void OnTriggerStay2D(Collider2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         GameObject obj = collision.gameObject;
-
+        Debug.Log("a");
         switch (obj.tag)
         {
             case "Player":

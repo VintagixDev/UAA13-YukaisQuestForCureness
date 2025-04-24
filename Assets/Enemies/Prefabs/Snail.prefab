@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3823078248724027083}
   - component: {fileID: 2796416764589017218}
-  - component: {fileID: 9107667982879321935}
   - component: {fileID: 8311184228697560693}
   - component: {fileID: 2817877496638852380}
+  - component: {fileID: -2956008771694217833}
   m_Layer: 0
   m_Name: Snail
   m_TagString: Untagged
@@ -87,33 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &9107667982879321935
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3457999521777122613}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!61 &8311184228697560693
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -171,7 +144,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37ba415fe97cee049b0a5e7bbf9a1b16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _roomID: 0
   enemyID: 0
+  isAlive: 1
   enemyHP: 3
   enemyDmg: 1
   enemyMovementSpeed: 3
@@ -186,3 +161,30 @@ MonoBehaviour:
   player: {fileID: 9218609843785898012, guid: 1e1d4a6ea9d57bb46810b97dfcaf319f, type: 3}
   stats: {fileID: 5125743056109524963, guid: 1e1d4a6ea9d57bb46810b97dfcaf319f, type: 3}
   playerMethods: {fileID: 8761969947540343475, guid: 1e1d4a6ea9d57bb46810b97dfcaf319f, type: 3}
+--- !u!50 &-2956008771694217833
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3457999521777122613}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

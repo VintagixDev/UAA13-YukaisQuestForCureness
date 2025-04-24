@@ -9,9 +9,11 @@ public class BulletShoot : MonoBehaviour
     /// </summary>
     [Header("Variables")]
     public float timeToDeath = 1f;
+    PlayerMethods playerMethods;
     // Start is called before the first frame update
     void Start()
     {
+        playerMethods = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMethods>();
         StartCoroutine(Despawn());
     }
 
@@ -26,6 +28,8 @@ public class BulletShoot : MonoBehaviour
         if (!other.CompareTag("Player") && !other.CompareTag("FriendlyProjectile") && !other.CompareTag("EnemyProjectile"))
         {
             Destroy(gameObject);
+            
+
         }
 
     }

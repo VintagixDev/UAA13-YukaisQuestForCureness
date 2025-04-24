@@ -20,7 +20,7 @@ public class EnemyShoot : MonoBehaviour
 
             if (playerMethods != null)
             {
-                playerMethods.DamagePlayer(enemyDmg);
+                playerMethods.DamagePlayer(1);
             }
 
             Destroy(gameObject); // Le projectile disparaît après impact
