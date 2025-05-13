@@ -154,13 +154,11 @@ MonoBehaviour:
   enemyProjectileSize: 1
   enemyProjectileReach: 3
   enemyProjectileSpeed: 1
-  enemyAttackSpeed: 320
-  cdAttackSpeed: 0
-  enemyProjectile: {fileID: 4437136641128486480, guid: 25cda84a41d531547843ed6cd0af895d, type: 3}
+  enemyAttackCooldown: 60
+  enemyProjectilePrefab: {fileID: 4437136641128486480, guid: 25cda84a41d531547843ed6cd0af895d, type: 3}
+  preferredDistanceFromPlayer: 5
   isStunned: 0
   player: {fileID: 9218609843785898012, guid: 1e1d4a6ea9d57bb46810b97dfcaf319f, type: 3}
-  stats: {fileID: 5125743056109524963, guid: 1e1d4a6ea9d57bb46810b97dfcaf319f, type: 3}
-  playerMethods: {fileID: 8761969947540343475, guid: 1e1d4a6ea9d57bb46810b97dfcaf319f, type: 3}
 --- !u!50 &-2956008771694217833
 Rigidbody2D:
   serializedVersion: 4

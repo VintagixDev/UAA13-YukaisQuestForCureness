@@ -16,7 +16,7 @@ public class RoomManager : MonoBehaviour
     [Header("Numbers of rooms")]
     [SerializeField] private int maxRoom = 15; // Nombre maximum de salles à générer
     [SerializeField] private int minRoom = 10; // Nombre minimum de salles à générer
-
+    
     [Header("Room max dimensions")]
     [SerializeField] int roomWidth = 20; // Largeur générique des salles en unités de jeu
     [SerializeField] int roomHeight = 12; // Hauteur générique des salles en unités de jeu

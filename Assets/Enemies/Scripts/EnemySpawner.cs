@@ -1,15 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    
     [SerializeField] public List<GameObject> enemies;
     [SerializeField] private int _roomID;
     [SerializeField] private Vector2 _position;
+
     public int RoomID
     {
         get { return _roomID; }
@@ -26,9 +24,17 @@ public class EnemySpawner : MonoBehaviour
 
         int nb = Random.Range(0, enemies.Count);
         GameObject enemy = enemies[nb];
-        //enemy.GetComponent<Enemy>.
-        GameObject instanciatedEnemy = Instantiate(enemy, transform.position, Quaternion.identity);
-        instanciatedEnemy.GetComponent<SpriteRenderer>().sortingOrder = 2;
-        instanciatedEnemy.GetComponent<Enemy>()._roomID = _roomID;
+
+        // Instantiate the enemy
+        GameObject instantiatedEnemy = Instantiate(enemy, transform.position, Quaternion.identity);
+
+        // Assigner roomID au Snail uniquement (en fonction de l'objet)
+        if (instantiatedEnemy.TryGetComponent(out Snail snail))
+        {
+            snail.roomID = _roomID;  // Assigner l'ID de la salle au Snail
+        }
+
+        // Initialiser le rendu et les autres comportements spécifiques
+        instantiatedEnemy.GetComponent<SpriteRenderer>().sortingOrder = 2;
     }
 }
