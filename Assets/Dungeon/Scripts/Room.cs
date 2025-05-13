@@ -48,8 +48,6 @@ public class Room : MonoBehaviour
         }
     }
 
-
-
     /// <summary>
     /// Configure une porte dans une direction donnée et initialise ses propriétés.
     /// </summary>

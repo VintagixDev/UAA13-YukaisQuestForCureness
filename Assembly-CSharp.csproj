@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{6E30A586-DC70-429E-287C-CCD1B43AFA9C}</ProjectGuid>
+    <ProjectGuid>{53661E92-5EF5-BE4A-D7C3-A9D8E8973158}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -71,11 +71,11 @@
     <Compile Include="Assets\Scenes\ManagerScene.cs" />
     <Compile Include="Assets\Upgrades\Upgrade.cs" />
     <Compile Include="Assets\Ui\Scripts\StatsUI.cs" />
-    <Compile Include="Assets\Enemies\Scripts\Enemy.cs" />
     <Compile Include="Assets\Player\Projectile\BulletShoot.cs" />
     <Compile Include="Assets\Player\Scripts\PlayerMovements.cs" />
     <Compile Include="Assets\PartyManager\GameSupervisor.cs" />
     <Compile Include="Assets\PartyManager\TeleportationManager.cs" />
+    <Compile Include="Assets\Enemies\Scripts\InterfacesMultiples.cs" />
     <Compile Include="Assets\Player\Scripts\PlayerStats.cs" />
     <Compile Include="Assets\Player\Scripts\PlayerMethods.cs" />
     <Compile Include="Assets\Dungeon\Scripts\RoomManager.cs" />
@@ -83,9 +83,10 @@
     <Compile Include="Assets\PartyManager\PlayerManager.cs" />
     <Compile Include="Assets\Scenes\Main Menu\SettingsScript.cs" />
     <Compile Include="Assets\Enemies\Scripts\EnemySpawner.cs" />
-    <Compile Include="Assets\Enemies\Scripts\EnemyShoot.cs" />
     <Compile Include="Assets\Upgrades\Upgrades\SpeedUp.cs" />
+    <Compile Include="Assets\Enemies\Scripts\Ranged\EnemyProjectileBehaviour.cs" />
     <Compile Include="Assets\Dungeon\Scripts\Room.cs" />
+    <Compile Include="Assets\Enemies\Scripts\Ranged\RangedEnemy.cs" />
     <Compile Include="Assets\Upgrades\Upgrades\OneUp.cs" />
     <Compile Include="Assets\Dungeon\Scripts\changerdetage.cs" />
     <Compile Include="Assets\Dungeon\Scripts\ShopBuyItem.cs" />
@@ -880,7 +881,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{A07F4436-88AB-1C4E-514E-71619FF077DD}</Project>
+      <Project>{A4703E1C-E5B7-427C-8545-EBA6BC4ED034}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
     </ProjectReference>
   </ItemGroup>

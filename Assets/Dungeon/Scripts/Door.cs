@@ -19,10 +19,10 @@ public class Door : MonoBehaviour
     [SerializeField] public float y;
 
     [Header("Sprites")]
-    [SerializeField] public Sprite Open;
-    [SerializeField] public Sprite Close;
-    [SerializeField] public Sprite BossOpen;
-    [SerializeField] public Sprite BossClose;
+    [SerializeField] private Sprite Open;
+    [SerializeField] private Sprite Close;
+    [SerializeField] private Sprite BossOpen;
+    [SerializeField] private Sprite BossClose;
     [SerializeField] private SpriteRenderer spriteRenderer;
 
     [Header("Box Collider 2D")]
@@ -31,7 +31,6 @@ public class Door : MonoBehaviour
     [Header("State")]
     public bool _isLockedByBattle; // Si vrai, la bataille est en cours et le sprite est différent
     public bool _isBossDoor; // Si vrai, c'est une porte de boss et son sprite est différent
-
 
     [Header("Link")]
     public Vector2Int connectedDoorPosition;
@@ -91,7 +90,6 @@ public class Door : MonoBehaviour
         TELEPORTATION.TeleportPlayer(collision.gameObject, connectedDoor, _roomId);
     }
 
-
     private void UpdateDoorSprite()
     {
         int getOrientationINT = GetOrientationIndex();
@@ -137,7 +135,6 @@ public class Door : MonoBehaviour
         }
     }
 
-
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -154,6 +151,7 @@ public class Door : MonoBehaviour
             spriteRenderer.sprite = Open;
         }
     }
+    
     public void SetDoorState(bool lockedByBattle, bool bossDoor)
     {
         _isLockedByBattle = lockedByBattle;

@@ -85,15 +85,15 @@ public class BattleManager : MonoBehaviour
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         bool allEnemiesDead = true;
 
-        foreach (GameObject enemy in enemies)
-        {
-            Enemy enemyScript = enemy.GetComponent<Enemy>();
-            if (enemyScript.isAlive) // Si un ennemi est encore vivant
-            {
-                allEnemiesDead = false;
-                break;
-            }
-        }
+        //foreach (GameObject enemy in enemies)
+        //{
+        //    RangedEnemy enemyScript = enemy.GetComponent<RangedEnemy>();
+        //    if (enemyScript.isAlive) // Si un ennemi est encore vivant
+        //    {
+        //        allEnemiesDead = false;
+        //        break;
+        //    }
+        //}
 
         if (allEnemiesDead)
         {
