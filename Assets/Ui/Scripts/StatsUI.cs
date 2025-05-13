@@ -19,10 +19,15 @@ public class StatsUI : MonoBehaviour
     [Header("Clés")]
     public TMP_Text KeysText;
     // Start is called before the first frame update
-    void Start()
+  
+    private void Update()
     {
-        updateDisplayHearts();
-        updateCollectableUI();
+        if (stats == null)
+        {
+            stats = GameObject.FindWithTag("Player").GetComponent<PlayerStats>();
+            updateDisplayHearts();
+            updateCollectableUI();
+        }
     }
 
     /// <summary>
