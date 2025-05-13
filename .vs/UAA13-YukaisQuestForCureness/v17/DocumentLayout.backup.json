@@ -3,19 +3,23 @@
   "WorkspaceRootPath": "C:\\Users\\vinta\\Desktop\\school\\UAA13-YukaisQuestForCureness\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{6E30A586-DC70-429E-287C-CCD1B43AFA9C}|Assembly-CSharp.csproj|c:\\users\\vinta\\desktop\\school\\uaa13-yukaisquestforcureness\\assets\\dungeon\\scripts\\shopbuyitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E30A586-DC70-429E-287C-CCD1B43AFA9C}|Assembly-CSharp.csproj|solutionrelative:assets\\dungeon\\scripts\\shopbuyitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{6E30A586-DC70-429E-287C-CCD1B43AFA9C}|Assembly-CSharp.csproj|c:\\users\\vinta\\desktop\\school\\uaa13-yukaisquestforcureness\\assets\\enemies\\scripts\\enemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6E30A586-DC70-429E-287C-CCD1B43AFA9C}|Assembly-CSharp.csproj|solutionrelative:assets\\enemies\\scripts\\enemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6E30A586-DC70-429E-287C-CCD1B43AFA9C}|Assembly-CSharp.csproj|c:\\users\\vinta\\desktop\\school\\uaa13-yukaisquestforcureness\\assets\\enemies\\scripts\\enemyshoot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{6E30A586-DC70-429E-287C-CCD1B43AFA9C}|Assembly-CSharp.csproj|C:\\Users\\vinta\\Desktop\\school\\UAA13-YukaisQuestForCureness\\assets\\enemies\\scripts\\enemyshoot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6E30A586-DC70-429E-287C-CCD1B43AFA9C}|Assembly-CSharp.csproj|solutionrelative:assets\\enemies\\scripts\\enemyshoot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6E30A586-DC70-429E-287C-CCD1B43AFA9C}|Assembly-CSharp.csproj|c:\\users\\vinta\\desktop\\school\\uaa13-yukaisquestforcureness\\assets\\player\\projectile\\bulletshoot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{6E30A586-DC70-429E-287C-CCD1B43AFA9C}|Assembly-CSharp.csproj|C:\\Users\\vinta\\Desktop\\school\\UAA13-YukaisQuestForCureness\\assets\\player\\projectile\\bulletshoot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6E30A586-DC70-429E-287C-CCD1B43AFA9C}|Assembly-CSharp.csproj|solutionrelative:assets\\player\\projectile\\bulletshoot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6E30A586-DC70-429E-287C-CCD1B43AFA9C}|Assembly-CSharp.csproj|c:\\users\\vinta\\desktop\\school\\uaa13-yukaisquestforcureness\\assets\\player\\scripts\\playermovements.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{6E30A586-DC70-429E-287C-CCD1B43AFA9C}|Assembly-CSharp.csproj|C:\\Users\\vinta\\Desktop\\school\\UAA13-YukaisQuestForCureness\\assets\\player\\scripts\\playermovements.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6E30A586-DC70-429E-287C-CCD1B43AFA9C}|Assembly-CSharp.csproj|solutionrelative:assets\\player\\scripts\\playermovements.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -31,6 +35,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "ShopBuyItem.cs",
+              "DocumentMoniker": "C:\\Users\\vinta\\Desktop\\school\\UAA13-YukaisQuestForCureness\\Assets\\Dungeon\\Scripts\\ShopBuyItem.cs",
+              "RelativeDocumentMoniker": "Assets\\Dungeon\\Scripts\\ShopBuyItem.cs",
+              "ToolTip": "C:\\Users\\vinta\\Desktop\\school\\UAA13-YukaisQuestForCureness\\Assets\\Dungeon\\Scripts\\ShopBuyItem.cs",
+              "RelativeToolTip": "Assets\\Dungeon\\Scripts\\ShopBuyItem.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAA1wBwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-24T13:33:28.613Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "Enemy.cs",
               "DocumentMoniker": "C:\\Users\\vinta\\Desktop\\school\\UAA13-YukaisQuestForCureness\\Assets\\Enemies\\Scripts\\Enemy.cs",
               "RelativeDocumentMoniker": "Assets\\Enemies\\Scripts\\Enemy.cs",
@@ -43,7 +60,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "EnemyShoot.cs",
               "DocumentMoniker": "C:\\Users\\vinta\\Desktop\\school\\UAA13-YukaisQuestForCureness\\Assets\\Enemies\\Scripts\\EnemyShoot.cs",
               "RelativeDocumentMoniker": "Assets\\Enemies\\Scripts\\EnemyShoot.cs",
@@ -51,12 +68,11 @@
               "RelativeToolTip": "Assets\\Enemies\\Scripts\\EnemyShoot.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-22T09:19:18.349Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-22T09:19:18.349Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "BulletShoot.cs",
               "DocumentMoniker": "C:\\Users\\vinta\\Desktop\\school\\UAA13-YukaisQuestForCureness\\Assets\\Player\\Projectile\\BulletShoot.cs",
               "RelativeDocumentMoniker": "Assets\\Player\\Projectile\\BulletShoot.cs",
@@ -64,12 +80,11 @@
               "RelativeToolTip": "Assets\\Player\\Projectile\\BulletShoot.cs",
               "ViewState": "AgIAAAsAAAAAAAAAAAAAwBsAAAB6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-22T09:09:35.384Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-22T09:09:35.384Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "PlayerMovements.cs",
               "DocumentMoniker": "C:\\Users\\vinta\\Desktop\\school\\UAA13-YukaisQuestForCureness\\Assets\\Player\\Scripts\\PlayerMovements.cs",
               "RelativeDocumentMoniker": "Assets\\Player\\Scripts\\PlayerMovements.cs",
@@ -77,8 +92,7 @@
               "RelativeToolTip": "Assets\\Player\\Scripts\\PlayerMovements.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAAEsAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-22T08:31:24.834Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-22T08:31:24.834Z"
             }
           ]
         }

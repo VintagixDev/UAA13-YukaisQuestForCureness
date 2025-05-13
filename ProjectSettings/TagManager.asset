@@ -11,6 +11,7 @@ TagManager:
   - EnemyProjectile
   - Gold
   - Key
+  - UI
   layers:
   - Default
   - TransparentFX

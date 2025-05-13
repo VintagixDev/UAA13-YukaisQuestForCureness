@@ -7,21 +7,28 @@ public class ShopBuyItem : MonoBehaviour
     public int price = 3;
     PlayerStats playerStats;
     StatsUI statsUI;
+    bool bought = false;
 
     private void Start()
     {
-        PlayerStats playerStats = GameObject.FindWithTag("Player").GetComponent<PlayerStats>();
+        playerStats = GameObject.FindWithTag("Player").GetComponent<PlayerStats>();
+
         statsUI = GameObject.FindWithTag("UI").GetComponent<StatsUI>();
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (gameObject.CompareTag("Player"))
+        GameObject gameobj = collision.gameObject;
+        Debug.Log(playerStats.playerGolds);
+        if (gameobj.CompareTag("Player"))
         {
-            if(playerStats.playerGolds >= price)
+            if (playerStats.playerGolds >= price && !bought)
             {
+                bought = true;
                 playerStats.playerHP++;
                 playerStats.playerGolds -= price;
-                statsUI.updateDisplayHearts();
+                
+                Object.Destroy(this.gameObject, 0);
+                if(statsUI) statsUI.updateDisplayHearts();
             }
         }
     }
