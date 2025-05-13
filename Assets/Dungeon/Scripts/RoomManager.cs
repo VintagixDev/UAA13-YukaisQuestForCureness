@@ -1,143 +1,131 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 public class RoomManager : MonoBehaviour
 {
-    [Header("Room Container")] // Conteneur principal pour toutes les salles générées
+    [Header("Room Container")]
+    [Tooltip("Stockage des pièces générées")]
     [SerializeField] private Transform AllRooms;
 
     [Header("Prefabs")]
-    [SerializeField] GameObject SpawnRoomPrefabs; // La salle de départ
-    [SerializeField] GameObject RoomPrefab; // une salle générique
-    [SerializeField] GameObject BossRoomPrefab; // la salle du boss
-    [SerializeField] List<GameObject> BattleRoomPrefabs; // Liste des préfabriqués pour les salles de combat
-    [SerializeField] List<GameObject> SpecialRoomPrefabs; // Liste des préfabriqués pour les salles spéciales
+    [Tooltip("Pièce d'apparition")]
+    [SerializeField] private GameObject SpawnRoomPrefabs;
+    [Tooltip("Pièce de combat par défaut")]
+    [SerializeField] private GameObject RoomPrefab;
+    [Tooltip("Pièce de combat de boss par défaut")]
+    [SerializeField] private GameObject BossRoomPrefab;
+    [Tooltip("Liste de pièce de combat")]
+    [SerializeField] private List<GameObject> BattleRoomPrefabs;
+    [Tooltip("Liste de pièce non dédié au combat")]
+    [SerializeField] private List<GameObject> SpecialRoomPrefabs;
 
-    [Header("Numbers of rooms")]
-    [SerializeField] private int maxRoom = 15; // Nombre maximum de salles à générer
-    [SerializeField] private int minRoom = 10; // Nombre minimum de salles à générer
-    
-    [Header("Room max dimensions")]
-    [SerializeField] int roomWidth = 20; // Largeur générique des salles en unités de jeu
-    [SerializeField] int roomHeight = 12; // Hauteur générique des salles en unités de jeu
+    [Header("Numbers of rooms")] // Peut être modifié plus tard ou dans l'inspecteur
+    [Tooltip("Nombre de pièce Maximum")]
+    [SerializeField] private int maxRoom = 15;
+    [Tooltip("Nombre de pièce Minimum")]
+    [SerializeField] private int minRoom = 10;
 
-    [Header("Grid Size")]
-    [SerializeField] int gridSizex = 10; // Taille de la grille en X pour la génération des salles
-    [SerializeField] int gridSizey = 10; // Taille de la grille en Y pour la génération des salles
+    [Header("Special Rooms")] // Peut être modifié plus tard ou dans l'inspecteur
+    [Tooltip("Nombre de pièce spéciale définie")]
+    [SerializeField] private int nbSpRoom = 2;
 
-    private List<GameObject> roomObjects = new List<GameObject>(); // Liste des objets des salles générées
-    private Queue<Vector2Int> roomQueue = new Queue<Vector2Int>(); // File des indices des salles à générer
-    private int[,] roomGrid; // Grille pour suivre les salles générées
-    private int roomCount; // Compteur du nombre total de salles générées
-    //private bool generationComplete = false; // Indique si la génération est terminée
+    [Header("Room max dimensions")] 
+    [Tooltip("Taille en longueur")]
+    [SerializeField] private int roomWidth = 20;
+    [Tooltip("Taille en largeur")]
+    [SerializeField] private int roomHeight = 12;
+
+    [Header("Grid Size")] // Peut être modifié plus tard ou dans l'inspecteur
+    [Tooltip("Taille de la grille en axe X")]
+    [SerializeField] private int gridSizeX = 10;
+    [Tooltip("Taille de la grille en axe Y")]
+    [SerializeField] private int gridSizeY = 10;
+
+    private List<GameObject> _roomObjects = new List<GameObject>();
+    private Queue<Vector2Int> _roomQueue = new Queue<Vector2Int>();
+    private int[,] _roomGrid;
+    private int _roomCount;
+
     public void StartDungeonGeneration()
     {
-        roomGrid = new int[gridSizex, gridSizey];
-        roomQueue.Clear();
-        roomObjects.Clear();
-        roomCount = 0;
-        //generationComplete = false;
+        _roomGrid = new int[gridSizeX, gridSizeY];
+        _roomQueue.Clear();
+        _roomObjects.Clear();
+        _roomCount = 0;
 
-        Vector2Int initialRoomIndex = new Vector2Int(gridSizex / 2, gridSizey / 2);
+        Vector2Int initialRoomIndex = new Vector2Int(gridSizeX / 2, gridSizeY / 2);
         StartRoomGenerationFromRoom(initialRoomIndex);
 
+        PlaceSpecialRooms();
         OpenAllDoors();
-
-        //// Pour le moment on ne peut pas les mettre dans ALLROOMS
-        //foreach (var room in roomObjects)
-        //{
-        //    Debug.Log("Room dans le parent");
-        //    room.transform.SetParent(AllRooms, false);
-        //}
     }
-
     public void ClearDungeon()
     {
-        foreach (GameObject room in roomObjects)
+        foreach (GameObject room in _roomObjects)
         {
             Destroy(room);
         }
-        roomObjects.Clear();
-        roomGrid = new int[gridSizex, gridSizey];
-        roomQueue.Clear();
-        roomCount = 0;
-        //generationComplete = false;
+        _roomObjects.Clear();
+        _roomGrid = new int[gridSizeX, gridSizeY];
+        _roomQueue.Clear();
+        _roomCount = 0;
 
         Debug.Log("Dungeon cleared.");
     }
-
-    /// <summary>
-    /// Lance la génération des salles à partir d'une salle initiale.
-    /// </summary>
-    /// <param name="roomIndex"></param>
     private void StartRoomGenerationFromRoom(Vector2Int roomIndex)
     {
-        // Ajout de la salle de spawn
-        roomQueue.Enqueue(roomIndex);
-        roomGrid[roomIndex.x, roomIndex.y] = 1;
+        _roomQueue.Enqueue(roomIndex);
+        _roomGrid[roomIndex.x, roomIndex.y] = 1;
 
         var initialRoom = Instantiate(SpawnRoomPrefabs, GetPositionFromGridIndex(roomIndex), Quaternion.identity);
         initialRoom.name = $"SPAWN_ROOM";
         initialRoom.GetComponent<Room>().RoomIndex = roomIndex;
-        initialRoom.GetComponent<Room>().SetRoomID(roomCount);
+        initialRoom.GetComponent<Room>().SetRoomID(_roomCount);
+        _roomObjects.Add(initialRoom);
+        _roomCount++;
 
-        roomObjects.Add(initialRoom);
-
-        // Incrémenter roomCount après la création de la salle de spawn
-        roomCount++;
-
-        // Génération des salles adjacentes
-        while (roomQueue.Count > 0 && roomCount < maxRoom)
+        while (_roomQueue.Count > 0 && _roomCount < maxRoom)
         {
-            Vector2Int currentRoomIndex = roomQueue.Dequeue();
+            Vector2Int currentRoomIndex = _roomQueue.Dequeue();
             GenerateAdjacentRooms(currentRoomIndex);
         }
 
-        // Si nous avons généré suffisamment de salles, place une salle de boss
-        if (roomCount >= minRoom)
+        if (_roomCount >= minRoom)
         {
             PlaceBossRoomAtExtremity();
         }
         else
         {
-            // Si trop peu de salles, recommence la génération
             RegenerateRooms();
         }
     }
-
-    /// <summary>
-    /// Place une salle de boss à l'extrémité la plus éloignée de la grille.
-    /// </summary>
     private void PlaceBossRoomAtExtremity()
     {
         Vector2Int extremityIndex = FindFarthestExtremity();
         if (extremityIndex == Vector2Int.zero) return;
 
-        GameObject extremityRoom = roomObjects.Find(r => r.GetComponent<Room>().RoomIndex == extremityIndex);
+        GameObject extremityRoom = _roomObjects.Find(r => r.GetComponent<Room>().RoomIndex == extremityIndex);
         if (extremityRoom != null)
         {
-            roomObjects.Remove(extremityRoom);
+            _roomObjects.Remove(extremityRoom);
             Destroy(extremityRoom);
         }
 
         var bossRoom = Instantiate(BossRoomPrefab, GetPositionFromGridIndex(extremityIndex), Quaternion.identity);
         bossRoom.GetComponent<Room>().RoomIndex = extremityIndex;
         bossRoom.name = "BOSS_ROOM";
-        roomObjects.Add(bossRoom);
+        _roomObjects.Add(bossRoom);
 
-        roomGrid[extremityIndex.x, extremityIndex.y] = 2;
+        _roomGrid[extremityIndex.x, extremityIndex.y] = 2;
     }
-
-    /// <summary>
-    /// Trouve l'indice de la salle la plus éloignée de la salle initiale.
-    /// </summary>
     private Vector2Int FindFarthestExtremity()
     {
-        Vector2Int startRoomIndex = new Vector2Int(gridSizex / 2, gridSizey / 2);
+        Vector2Int startRoomIndex = new Vector2Int(gridSizeX / 2, gridSizeY / 2);
         Vector2Int extremityIndex = Vector2Int.zero;
         float maxDistance = 0;
 
-        foreach (var roomObject in roomObjects)
+        foreach (var roomObject in _roomObjects)
         {
             Vector2Int roomIndex = roomObject.GetComponent<Room>().RoomIndex;
             float distance = Vector2Int.Distance(startRoomIndex, roomIndex);
@@ -151,11 +139,6 @@ public class RoomManager : MonoBehaviour
 
         return extremityIndex;
     }
-
-    /// <summary>
-    /// Génère des salles adjacentes à une salle donnée.
-    /// </summary>
-    /// <param name="roomIndex"></param>
     private void GenerateAdjacentRooms(Vector2Int roomIndex)
     {
         TryGenerateRoom(new Vector2Int(roomIndex.x - 1, roomIndex.y));
@@ -163,45 +146,34 @@ public class RoomManager : MonoBehaviour
         TryGenerateRoom(new Vector2Int(roomIndex.x, roomIndex.y - 1));
         TryGenerateRoom(new Vector2Int(roomIndex.x, roomIndex.y + 1));
     }
-
-    /// <summary>
-    /// Tente de générer une salle à un indice donné.
-    /// </summary>
-    /// <param name="roomIndex"></param>
     private bool TryGenerateRoom(Vector2Int roomIndex)
     {
-        if (roomCount >= maxRoom) return false;
+        if (_roomCount >= maxRoom) return false;
         if (!IsInBounds(roomIndex)) return false;
         if (Random.value < 0.5f && roomIndex != Vector2Int.zero) return false;
         if (CountAdjacentRooms(roomIndex) > 1) return false;
 
-        roomQueue.Enqueue(roomIndex);
-        roomGrid[roomIndex.x, roomIndex.y] = 1;
-        roomCount++;
+        _roomQueue.Enqueue(roomIndex);
+        _roomGrid[roomIndex.x, roomIndex.y] = 1;
+        _roomCount++;
 
-        // Choisir un prefab aléatoire depuis BattleRoomPrefabs
         GameObject roomToInstantiate = BattleRoomPrefabs[Random.Range(0, BattleRoomPrefabs.Count)];
-
         GameObject newRoom = Instantiate(roomToInstantiate, GetPositionFromGridIndex(roomIndex), Quaternion.identity);
         Room roomScript = newRoom.GetComponent<Room>();
         roomScript.RoomIndex = roomIndex;
-        newRoom.name = $"ROOM-{roomCount}";
-        roomScript.SetRoomID(roomCount);
+        newRoom.name = $"ROOM-{_roomCount}";
+        roomScript.SetRoomID(_roomCount);
 
-        roomObjects.Add(newRoom);
+        _roomObjects.Add(newRoom);
         return true;
     }
     private bool IsInBounds(Vector2Int index)
     {
-        return index.x >= 0 && index.x < gridSizex && index.y >= 0 && index.y < gridSizey;
+        return index.x >= 0 && index.x < gridSizeX && index.y >= 0 && index.y < gridSizeY;
     }
-
-    /// <summary>
-    /// Ouvre toutes les portes des salles générées.
-    /// </summary>
     private void OpenAllDoors()
     {
-        foreach (var roomObject in roomObjects)
+        foreach (var roomObject in _roomObjects)
         {
             var roomScript = roomObject.GetComponent<Room>();
             int x = roomScript.RoomIndex.x;
@@ -209,21 +181,13 @@ public class RoomManager : MonoBehaviour
             SetDoorsRoomByRoom(roomObject, x, y);
         }
     }
-
-    /// <summary>
-    /// Ouvre les portes d'une salle donnée en fonction de ses pièces adjacentes.
-    /// </summary>
-    /// <param name="room"></param>
-    /// <param name="x"></param>
-    /// <param name="y"></param>
-    void SetDoorsRoomByRoom(GameObject room, int x, int y)
+    public void SetDoorsRoomByRoom(GameObject room, int x, int y)
     {
         Room currentRoom = room.GetComponent<Room>();
 
-        // Gauche
-        if (x > 0 && roomGrid[x - 1, y] != 0)
+        if (x > 0 && _roomGrid[x - 1, y] != 0)
         {
-            currentRoom.SetDoor(Vector2.left, roomCount);
+            currentRoom.SetDoor(Vector2.left, _roomCount);
             Room leftRoom = GetRoomScriptAt(new Vector2Int(x - 1, y));
             if (leftRoom != null)
             {
@@ -237,10 +201,9 @@ public class RoomManager : MonoBehaviour
             }
         }
 
-        // Droite
-        if (x < gridSizex - 1 && roomGrid[x + 1, y] != 0)
+        if (x < gridSizeX - 1 && _roomGrid[x + 1, y] != 0)
         {
-            currentRoom.SetDoor(Vector2.right, roomCount);
+            currentRoom.SetDoor(Vector2.right, _roomCount);
             Room rightRoom = GetRoomScriptAt(new Vector2Int(x + 1, y));
             if (rightRoom != null)
             {
@@ -254,10 +217,9 @@ public class RoomManager : MonoBehaviour
             }
         }
 
-        // Bas
-        if (y > 0 && roomGrid[x, y - 1] != 0)
+        if (y > 0 && _roomGrid[x, y - 1] != 0)
         {
-            currentRoom.SetDoor(Vector2.down, roomCount);
+            currentRoom.SetDoor(Vector2.down, _roomCount);
             Room bottomRoom = GetRoomScriptAt(new Vector2Int(x, y - 1));
             if (bottomRoom != null)
             {
@@ -271,10 +233,9 @@ public class RoomManager : MonoBehaviour
             }
         }
 
-        // Haut
-        if (y < gridSizey - 1 && roomGrid[x, y + 1] != 0)
+        if (y < gridSizeY - 1 && _roomGrid[x, y + 1] != 0)
         {
-            currentRoom.SetDoor(Vector2.up, roomCount);
+            currentRoom.SetDoor(Vector2.up, _roomCount);
             Room topRoom = GetRoomScriptAt(new Vector2Int(x, y + 1));
             if (topRoom != null)
             {
@@ -287,75 +248,94 @@ public class RoomManager : MonoBehaviour
                 }
             }
         }
-
     }
-
-    /// <summary>
-    /// Obtient le script de la salle à un indice donné.
-    /// </summary>
-    /// <param name="index"></param>
-    Room GetRoomScriptAt(Vector2Int index)
+    public Room GetRoomScriptAt(Vector2Int index)
     {
-        GameObject roomObject = roomObjects.Find(r => r.GetComponent<Room>().RoomIndex == index);
+        GameObject roomObject = _roomObjects.Find(r => r.GetComponent<Room>().RoomIndex == index);
         if (roomObject != null)
             return roomObject.GetComponent<Room>();
 
         Debug.LogWarning($"Room not found at index: {index}");
         return null;
     }
-
-    /// <summary>
-    /// Compte le nombre de salles adjacentes à un indice donné.
-    /// </summary>
-    /// <param name="roomIndex"></param>
-    /// <returns></returns>
     private int CountAdjacentRooms(Vector2Int roomIndex)
     {
         int x = roomIndex.x;
         int y = roomIndex.y;
-
-        // Vérification pour éviter l'accès hors limites
-        if (x < 0 || x >= gridSizex || y < 0 || y >= gridSizey)
-        {
-            //Debug.LogWarning($"Tentative d'accès hors limites : {roomIndex}");
-            return 0;
-        }
-
         int count = 0;
 
-        if (x > 0 && roomGrid[x - 1, y] != 0) count++;
-        if (x < gridSizex - 1 && roomGrid[x + 1, y] != 0) count++;
-        if (y > 0 && roomGrid[x, y - 1] != 0) count++;
-        if (y < gridSizey - 1 && roomGrid[x, y + 1] != 0) count++;
+        if (x > 0 && _roomGrid[x - 1, y] != 0) count++;
+        if (x < gridSizeX - 1 && _roomGrid[x + 1, y] != 0) count++;
+        if (y > 0 && _roomGrid[x, y - 1] != 0) count++;
+        if (y < gridSizeY - 1 && _roomGrid[x, y + 1] != 0) count++;
 
         return count;
     }
-
-
-    /// <summary>
-    /// Convertit un indice de grille en une position dans l'espace de jeu.
-    /// </summary>
-    /// <param name="gridIndex"></param>
     private Vector3 GetPositionFromGridIndex(Vector2Int gridIndex)
     {
         int gridX = gridIndex.x;
         int gridY = gridIndex.y;
-        return new Vector3(roomWidth * (gridX - gridSizex / 2), roomHeight * (gridY - gridSizey / 2));
+        return new Vector3(roomWidth * (gridX - gridSizeX / 2), roomHeight * (gridY - gridSizeY / 2));
     }
-
-    /// <summary>
-    /// Réinitialise les variables et recommence la génération des salles.
-    /// </summary>
     private void RegenerateRooms()
     {
-        roomObjects.ForEach(Destroy);
-        roomObjects.Clear();
-        roomGrid = new int[gridSizex, gridSizey];
-        roomQueue.Clear();
-        roomCount = 0;
-        //generationComplete = false;
+        _roomObjects.ForEach(Destroy);
+        _roomObjects.Clear();
+        _roomGrid = new int[gridSizeX, gridSizeY];
+        _roomQueue.Clear();
+        _roomCount = 0;
 
-        Vector2Int initialRoomIndex = new Vector2Int(gridSizex / 2, gridSizey / 2);
+        Vector2Int initialRoomIndex = new Vector2Int(gridSizeX / 2, gridSizeY / 2);
         StartRoomGenerationFromRoom(initialRoomIndex);
+    }
+    private void PlaceSpecialRooms()
+    {
+        int placedSpecialRooms = 0;
+        List<Vector2Int> candidates = new List<Vector2Int>();
+
+        foreach (var roomObj in _roomObjects)
+        {
+            Vector2Int index = roomObj.GetComponent<Room>().RoomIndex;
+            if (CountAdjacentRooms(index) == 1 && _roomGrid[index.x, index.y] == 1)
+            {
+                candidates.Add(index);
+            }
+        }
+
+        ShuffleList(candidates);
+
+        foreach (var candidate in candidates)
+        {
+            if (placedSpecialRooms >= nbSpRoom) break;
+
+            GameObject oldRoom = _roomObjects.Find(r => r.GetComponent<Room>().RoomIndex == candidate);
+            if (oldRoom != null)
+            {
+                _roomObjects.Remove(oldRoom);
+                Destroy(oldRoom);
+            }
+
+            GameObject specialRoomPrefab = SpecialRoomPrefabs[Random.Range(0, SpecialRoomPrefabs.Count)];
+            GameObject specialRoom = Instantiate(specialRoomPrefab, GetPositionFromGridIndex(candidate), Quaternion.identity);
+            Room roomScript = specialRoom.GetComponent<Room>();
+            roomScript.RoomIndex = candidate;
+            roomScript.SetRoomID(_roomCount + placedSpecialRooms);
+            specialRoom.name = $"SPECIAL_ROOM_{placedSpecialRooms + 1}";
+
+            _roomObjects.Add(specialRoom);
+            _roomGrid[candidate.x, candidate.y] = 3;
+
+            placedSpecialRooms++;
+        }
+    }
+    private void ShuffleList<T>(List<T> list)
+    {
+        for (int i = 0; i < list.Count; i++)
+        {
+            int randIndex = Random.Range(i, list.Count);
+            T temp = list[i];
+            list[i] = list[randIndex];
+            list[randIndex] = temp;
+        }
     }
 }

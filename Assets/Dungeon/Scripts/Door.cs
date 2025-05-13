@@ -1,47 +1,72 @@
 using System.Collections.Generic;
-using System.ComponentModel;
 using UnityEngine;
 
 public class Door : MonoBehaviour
 {
     [Header("Other")]
-    [SerializeField] private GameSupervisor MASTER;
-    [SerializeField] private TeleportationManager TELEPORTATION;
-    [SerializeField] private GameStat GAMESTAT;
+    [Tooltip("Script de supervision de partie")]
+    [SerializeField] private GameSupervisor _master;
+    [Tooltip("Script qui gère les déplacement du joueur")]
+    [SerializeField] private TeleportationManager _teleportation;
+    [Tooltip("Script qui contient et gère les statistiques du jeu")]
+    [SerializeField] private GameStat _gameStat;
 
     [Header("ID")]
-    [SerializeField] public int _doorId;
-    [SerializeField] public int _roomId;
+    [Tooltip("Identifiant de la porte")]
+    [SerializeField] private int _doorId;
+    public int DoorID { get { return _doorId; } set { _doorId = value; } }
+
+    [Tooltip("Identifiant de la pièces")]
+    [SerializeField] private int _roomId;
+    public int RoomID { get { return _roomId; } set { _roomId = value; } }
 
     [Header("Position/Coordinate")]
-    [SerializeField] public string _orientation;
-    [SerializeField] public float x;
-    [SerializeField] public float y;
+    [Tooltip("N : Nord\n" +
+        "S : Sud\n" +
+        "E : Est\n" +
+        "W : Ouest\n")]
+    [SerializeField] private string _orientation;
+    public string Orientation { get { return _orientation; } set { _orientation = value; } }
+    [Tooltip("")]
+    [SerializeField] private float _x;
+    [Tooltip("")]
+    [SerializeField] private float _y;
 
     [Header("Sprites")]
-    [SerializeField] private Sprite Open;
-    [SerializeField] private Sprite Close;
-    [SerializeField] private Sprite BossOpen;
-    [SerializeField] private Sprite BossClose;
-    [SerializeField] private SpriteRenderer spriteRenderer;
+    [Tooltip("")]
+    [SerializeField] private Sprite _open;
+    [Tooltip("")]
+    [SerializeField] private Sprite _close;
+    [Tooltip("")]
+    [SerializeField] private Sprite _bossOpen;
+    [Tooltip("")]
+    [SerializeField] private Sprite _bossClose;
+    [Tooltip("")]
+    [SerializeField] private SpriteRenderer _spriteRenderer;
 
     [Header("Box Collider 2D")]
-    [SerializeField] private BoxCollider2D boxCollider;
+    [Tooltip("")]
+    [SerializeField] private BoxCollider2D _boxCollider;
 
     [Header("State")]
-    public bool _isLockedByBattle; // Si vrai, la bataille est en cours et le sprite est différent
-    public bool _isBossDoor; // Si vrai, c'est une porte de boss et son sprite est différent
+    private bool _isLockedByBattle; // Si vrai, la bataille est en cours et le sprite est différent
+    private bool _isBossDoor; // Si vrai, c'est une porte de boss et son sprite est différent
 
     [Header("Link")]
     public Vector2Int connectedDoorPosition;
     public Door connectedDoor;
 
+    private void Awake()
+    {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
     private void Start()
     {
-        MASTER = FindObjectOfType<GameSupervisor>();
-        TELEPORTATION = FindObjectOfType<TeleportationManager>();
+        _master = FindObjectOfType<GameSupervisor>();
+        _teleportation = FindObjectOfType<TeleportationManager>();
 
-        if (TELEPORTATION == null)
+        if (_teleportation == null)
         {
             Debug.LogError("Error 701: TeleportationManager not found in the scene");
         }
@@ -49,31 +74,18 @@ public class Door : MonoBehaviour
         UpdateDoorSprite();
     }
 
-    /// <summary>
-    /// Initialise les propriétés de la porte.
-    /// </summary>
-    /// <param name="doorIdCount"></param>
-    /// <param name="roomId"></param>
-    /// <param name="posX"></param>
-    /// <param name="posY"></param>
-    /// <param name="doorOrientation"></param>
-    /// <param name="locked"></param>
-    /// <param name="lockedByBattle"></param>
-    /// <param name="bossDoor"></param>
     public void InitializeDoor(int doorIdCount, int roomId, float posX, float posY, string doorOrientation,
         bool locked, bool lockedByBattle, bool bossDoor)
     {
         _doorId = doorIdCount;
         _roomId = roomId;
-        x = posX;
-        y = posY;
+        _x = posX;
+        _y = posY;
         _orientation = doorOrientation;
         _isLockedByBattle = lockedByBattle;
         _isBossDoor = bossDoor;
 
-        // Sélectionner le bon sprite
         UpdateDoorSprite();
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -87,7 +99,7 @@ public class Door : MonoBehaviour
             return;
         }
 
-        TELEPORTATION.TeleportPlayer(collision.gameObject, connectedDoor, _roomId);
+        _teleportation.TeleportPlayer(collision.gameObject, connectedDoor, _roomId);
     }
 
     private void UpdateDoorSprite()
@@ -95,63 +107,31 @@ public class Door : MonoBehaviour
         int getOrientationINT = GetOrientationIndex();
         if (getOrientationINT != -1)
         {
-            if (getOrientationINT == 0)
+            switch (getOrientationINT)
             {
-                // Nord / Orientation normale
-                transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-            } else if (getOrientationINT == 1)
-            {
-                transform.rotation = Quaternion.Euler(0f, 0f, 180f);
-            } else if (getOrientationINT == 2) 
-            {
-                transform.rotation = Quaternion.Euler(0f, 0f, -90f);
-            } else if (getOrientationINT == 3)
-            {
-                transform.rotation = Quaternion.Euler(0f, 0f, 90f);
+                case 0: transform.rotation = Quaternion.Euler(0f, 0f, 0f); break;      // N
+                case 1: transform.rotation = Quaternion.Euler(0f, 0f, 180f); break;    // S
+                case 2: transform.rotation = Quaternion.Euler(0f, 0f, -90f); break;    // E
+                case 3: transform.rotation = Quaternion.Euler(0f, 0f, 90f); break;     // W
             }
         }
 
         if (_isBossDoor)
         {
-            if (_isLockedByBattle)
-            {
-                spriteRenderer.sprite = BossClose; // Porte de boss fermée
-            }
-            else
-            {
-                spriteRenderer.sprite = BossOpen; // Porte de boss ouverte
-            }
+            _spriteRenderer.sprite = _isLockedByBattle ? _bossClose : _bossOpen;
         }
         else
         {
-            if (_isLockedByBattle)
-            {
-                spriteRenderer.sprite = Close; // Porte normale fermée
-            }
-            else
-            {
-                spriteRenderer.sprite = Open; // Porte normale ouverte
-            }
+            _spriteRenderer.sprite = _isLockedByBattle ? _close : _open;
         }
-    }
-
-    private void Awake()
-    {
-        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public void CloseUnClose(bool lockedByBattle)
     {
         _isLockedByBattle = lockedByBattle;
-        if(lockedByBattle) 
-        {
-            spriteRenderer.sprite = Close;
-        } else
-        {
-            spriteRenderer.sprite = Open;
-        }
+        _spriteRenderer.sprite = lockedByBattle ? _close : _open;
     }
-    
+
     public void SetDoorState(bool lockedByBattle, bool bossDoor)
     {
         _isLockedByBattle = lockedByBattle;
@@ -162,11 +142,20 @@ public class Door : MonoBehaviour
     {
         switch (_orientation)
         {
-            case "N": return 0;     // Nord (Valeur par défaut)
-            case "S": return 1;     // Est
-            case "E": return 2;     // Sud
-            case "W": return 3;     // Ouest
-            default: return -1;     // Valeur par défaut 
+            case "N": return 0;
+            case "S": return 1;
+            case "E": return 2;
+            case "W": return 3;
+            default: return -1;
         }
     }
+
+    // Optionally, add accessors if other classes need to retrieve these values
+    public int GetDoorId() => _doorId;
+    public int GetRoomId() => _roomId;
+    public string GetOrientation() => _orientation;
+    public float GetX() => _x;
+    public float GetY() => _y;
+    public bool IsLockedByBattle() => _isLockedByBattle;
+    public bool IsBossDoor() => _isBossDoor;
 }
