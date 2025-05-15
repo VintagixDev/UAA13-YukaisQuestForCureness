@@ -132,7 +132,7 @@ public class Snail : MonoBehaviour
         }
     }
 
-    // **Méthode pour changer le RoomId**
+    // Changer le RoomId
     public void ChangeRoomId(int newRoomId)
     {
         _roomID = newRoomId;
@@ -142,4 +142,29 @@ public class Snail : MonoBehaviour
     // Accès aux données pour l'ennemi
     public int GetHealth() { return _health; }
     public float GetMoveSpeed() { return _moveSpeed; }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("FriendlyProjectile"))
+        {
+            TakeDamage(1); 
+            Destroy(collision.gameObject);
+        }
+    }
+    private void TakeDamage(int amount)
+    {
+        _health -= amount;
+
+        if (_enemyAnimation != null)
+            _enemyAnimation.FlashRed(); // effet visuel
+
+        if (_health <= 0)
+        {
+            Die();
+        }
+    }
+    private void Die()
+    {
+        // Tu peux ajouter des effets visuels, sons, score, etc.
+        Destroy(gameObject);
+    }
 }

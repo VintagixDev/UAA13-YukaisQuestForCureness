@@ -20,9 +20,11 @@ public class EnemyScriptAnimation : MonoBehaviour
 
     private Sprite[] _currentSprites;
 
+    private Coroutine _flashCoroutine;
+
     void Start()
     {
-        _spriteRenderer = GetComponent<SpriteRenderer>(); // Récupère le composant SpriteRenderer
+        _spriteRenderer = GetComponent<SpriteRenderer>(); // Récupère le composant SpriteRenderer de l'objet
         _currentSprites = _downSprites; // Direction par défaut
     }
 
@@ -46,5 +48,25 @@ public class EnemyScriptAnimation : MonoBehaviour
             _currentFrame = (_currentFrame + 1) % _currentSprites.Length;
             _spriteRenderer.sprite = _currentSprites[_currentFrame]; // Mise à jour de l'animation
         }
+    }
+
+    // Changement de couleur lors des dégats
+
+    public void FlashRed(float duration = 1f)
+    {
+        if (_flashCoroutine != null)
+            StopCoroutine(_flashCoroutine);
+
+        _flashCoroutine = StartCoroutine(FlashRedCoroutine(duration));
+    }
+
+    private IEnumerator FlashRedCoroutine(float duration)
+    {
+        Color originalColor = _spriteRenderer.color;
+        _spriteRenderer.color = Color.red;
+
+        yield return new WaitForSeconds(duration);
+
+        _spriteRenderer.color = originalColor;
     }
 }

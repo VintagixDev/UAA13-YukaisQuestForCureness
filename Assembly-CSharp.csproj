@@ -82,6 +82,7 @@
     <Compile Include="Assets\Player\Scripts\PlayerStats.cs" />
     <Compile Include="Assets\Player\Scripts\PlayerMethods.cs" />
     <Compile Include="Assets\Dungeon\Scripts\RoomManager.cs" />
+    <Compile Include="Assets\Enemies\Scripts\EnemyProjetile.cs" />
     <Compile Include="Assets\Dungeon\Scripts\Door.cs" />
     <Compile Include="Assets\PartyManager\PlayerManager.cs" />
     <Compile Include="Assets\Scenes\Main Menu\SettingsScript.cs" />
