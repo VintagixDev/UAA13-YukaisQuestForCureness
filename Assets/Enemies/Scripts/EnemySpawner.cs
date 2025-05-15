@@ -31,7 +31,7 @@ public class EnemySpawner : MonoBehaviour
         // Assigner roomID au Snail uniquement (en fonction de l'objet)
         if (instantiatedEnemy.TryGetComponent(out Snail snail))
         {
-            snail.roomID = _roomID;  // Assigner l'ID de la salle au Snail
+            snail.ChangeRoomId(_roomID);  // Changer le RoomId dans Snail
         }
 
         // Initialiser le rendu et les autres comportements spécifiques

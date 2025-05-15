@@ -3,18 +3,26 @@ using UnityEngine;
 public class GameSupervisor : MonoBehaviour
 {
     [Header("Manager")]
+    [Tooltip("Script qui s'occupe de la génération procédurale")]
     [SerializeField] private RoomManager roomManager;
+    [Tooltip("Script qui s'occupe du déplacement du joueur dans le donjon")]
     [SerializeField] private TeleportationManager teleportationManager;
-
-    [Header("Battle Manager Reference")]
+    [Tooltip("Script qui s'occupe des batailles")]
     [SerializeField] public BattleManager battleManager;
 
     [Header("Stats")]
+    [Tooltip("Script qui contient les statistiques propres à la partie")]
     [SerializeField] private GameStat gameStat;
 
     [Header("Player prefab")]
+    [Tooltip("Objet Joueur")]
     [SerializeField] GameObject playerPrefab;
     private GameObject currentPlayer;
+
+    [Header("HUD prefab")]
+    [Tooltip("Objet HUD")]
+    [SerializeField] GameObject hud;
+    private GameObject currentHud;
 
     private void Start()
     {
@@ -27,7 +35,6 @@ public class GameSupervisor : MonoBehaviour
             Debug.LogWarning("Something Wrong here !");
         }
     }
-
     private bool InitializeComponents()
     {
         if (SetDungeon())
@@ -56,8 +63,6 @@ public class GameSupervisor : MonoBehaviour
             return false;
         }
     }
-
-    // Génère le Donjon en arrière plan : piece->porte
     public bool SetDungeon()
     {
         if (roomManager != null)
@@ -71,8 +76,6 @@ public class GameSupervisor : MonoBehaviour
             return false;
         }
     }
-
-    // Génère le joueur en arrière plan : Stat->camera
     public bool SetPlayer()
     {
         Destroy(currentPlayer);
@@ -87,11 +90,20 @@ public class GameSupervisor : MonoBehaviour
             return false;
         }
     }
-
-    // Génère l'interface en arrière plan
     public bool SetUI()
     {
-        return true;
+        if (hud != null)
+        {
+            Destroy(currentHud); // Supprime l'ancien HUD si présent
+            currentHud = Instantiate(hud);
+            currentHud.name = "HUD";
+            return true;
+        }
+        else
+        {
+            Debug.LogError("HUD prefab not assigned!");
+            return false;
+        }
     }
     public void AdvanceToNextFloor()
     {
@@ -101,9 +113,7 @@ public class GameSupervisor : MonoBehaviour
     public void GenerateNewFloor()
     {
         roomManager.ClearDungeon();
-        //gameStat.CurrentFloor++;
         SetDungeon();
-        //SetPlayer();
     }
     public void Battle()
     {
@@ -117,4 +127,37 @@ public class GameSupervisor : MonoBehaviour
             Debug.LogWarning("BattleManager non assigné !");
         }
     }
+
+    ///
+    /// Ensembles de procédures et fonctions servant à recharger les données [Ne pas toucher en pleine partie sau à des fins de TEST]
+    ///
+
+    // Recharge uniquement l'étage courant (sans changer l'étage)
+    public void ReloadFloor()
+    {
+        Debug.Log("Reloading current floor...");
+        ResetScene();
+    }
+
+    // Redémarre le jeu à zéro
+    public void RestartGame()
+    {
+        Debug.Log("Restarting game...");
+        if (gameStat != null)
+        {
+            gameStat.CurrentFloor = 0;
+        }
+        ResetScene();
+    }
+
+    // Supprime tout puis réinstancie
+    private void ResetScene()
+    {
+        roomManager.ClearDungeon();
+        Destroy(currentPlayer);
+        Destroy(currentHud);
+
+        InitializeComponents();
+    }
+
 }

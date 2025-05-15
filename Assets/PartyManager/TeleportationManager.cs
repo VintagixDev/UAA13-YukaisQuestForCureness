@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class TeleportationManager : MonoBehaviour
@@ -8,57 +7,73 @@ public class TeleportationManager : MonoBehaviour
 
     public GameSupervisor gameSupervisor;
     public GameStat gameStat;
+
+    private const float teleportOffset = 2f;
+
     /// <summary>
     /// Téléporte un joueur à la position d'une porte connectée et met à jour son état de salle actuelle.
     /// </summary>
     /// <param name="player">Le GameObject représentant le joueur à téléporter.</param>
     /// <param name="targetDoor">La porte connectée cible vers laquelle téléporter le joueur.</param>
-    /// <remarks>
-    /// Si la porte connectée est null, un avertissement est affiché dans la console.
-    /// Si le joueur possède un composant <c>PlayerStats</c>, son ID de salle actuelle est mis à jour
-    /// en fonction de l'ID de la porte connectée.
-    /// </remarks>
     public void TeleportPlayer(GameObject player, Door targetDoor, int roomId)
     {
-        if (targetDoor != null)
+        if (targetDoor == null)
         {
-            Vector3 teleportPosition = targetDoor.transform.position;
+            Debug.LogWarning("Warning 309: No connected door is instantiated for this door.");
+            return;
+        }
 
-            if (targetDoor._orientation == "N")
-            {
-                teleportPosition.y -= 2;
-            }
-            else if (targetDoor._orientation == "E")
-            {
-                teleportPosition.x -= 2;
-            }
-            else if (targetDoor._orientation == "S")
-            {
-                teleportPosition.y += 2;
-            }
-            else if (targetDoor._orientation == "W")
-            {
-                teleportPosition.x += 2;
-            }
+        Vector3 teleportPosition = targetDoor.transform.position;
 
-            player.transform.position = teleportPosition;
+        // Décalage selon l'orientation
+        switch (targetDoor.Orientation)
+        {
+            case "N":
+                teleportPosition.y -= teleportOffset;
+                break;
+            case "S":
+                teleportPosition.y += teleportOffset;
+                break;
+            case "E":
+                teleportPosition.x -= teleportOffset;
+                break;
+            case "W":
+                teleportPosition.x += teleportOffset;
+                break;
+            default:
+                Debug.LogWarning($"Unknown orientation: {targetDoor.Orientation}");
+                break;
+        }
 
-            gameStat.CurrentRoom = targetDoor._roomId;
-            gameSupervisor.Battle();
+        player.transform.position = teleportPosition;
 
+        if (gameStat != null)
+        {
+            gameStat.CurrentRoom = targetDoor.RoomID;
         }
         else
         {
-            Debug.LogWarning("Warning 309: No door connected is instantiated for this door");
+            Debug.LogWarning("gameStat reference is missing.");
+        }
+
+        if (gameSupervisor != null)
+        {
+            gameSupervisor.Battle();
+        }
+        else
+        {
+            Debug.LogWarning("gameSupervisor reference is missing.");
         }
     }
 
-    // Recentre le joueur dans une nouvelle salle de spawn à un autre étage
+    /// <summary>
+    /// Recentre le joueur dans une nouvelle salle (spawn au centre de la pièce).
+    /// </summary>
     public void RecenterPlayer(GameObject player)
     {
-        Vector3 teleportPosition = player.transform.position;
-        teleportPosition.x = 0;
-        teleportPosition.y = 0;
-        player.transform.position = teleportPosition;
+        if (player != null)
+        {
+            player.transform.position = Vector3.zero;
+        }
     }
 }

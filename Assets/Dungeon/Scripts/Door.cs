@@ -5,11 +5,11 @@ public class Door : MonoBehaviour
 {
     [Header("Other")]
     [Tooltip("Script de supervision de partie")]
-    [SerializeField] private GameSupervisor _master;
+    [SerializeField] private GameSupervisor MASTER;
     [Tooltip("Script qui gère les déplacement du joueur")]
-    [SerializeField] private TeleportationManager _teleportation;
+    [SerializeField] private TeleportationManager TELEPORTATION;
     [Tooltip("Script qui contient et gère les statistiques du jeu")]
-    [SerializeField] private GameStat _gameStat;
+    [SerializeField] private GameStat GAMESTAT;
 
     [Header("ID")]
     [Tooltip("Identifiant de la porte")]
@@ -63,10 +63,11 @@ public class Door : MonoBehaviour
 
     private void Start()
     {
-        _master = FindObjectOfType<GameSupervisor>();
-        _teleportation = FindObjectOfType<TeleportationManager>();
+        MASTER = FindObjectOfType<GameSupervisor>();
+        TELEPORTATION = FindObjectOfType<TeleportationManager>();
+        GAMESTAT = FindObjectOfType<GameStat>();
 
-        if (_teleportation == null)
+        if (TELEPORTATION == null)
         {
             Debug.LogError("Error 701: TeleportationManager not found in the scene");
         }
@@ -99,7 +100,7 @@ public class Door : MonoBehaviour
             return;
         }
 
-        _teleportation.TeleportPlayer(collision.gameObject, connectedDoor, _roomId);
+        TELEPORTATION.TeleportPlayer(collision.gameObject, connectedDoor, _roomId);
     }
 
     private void UpdateDoorSprite()
@@ -150,7 +151,7 @@ public class Door : MonoBehaviour
         }
     }
 
-    // Optionally, add accessors if other classes need to retrieve these values
+    // accessors
     public int GetDoorId() => _doorId;
     public int GetRoomId() => _roomId;
     public string GetOrientation() => _orientation;

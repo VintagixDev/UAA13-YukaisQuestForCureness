@@ -39,7 +39,7 @@ public class BattleManager : MonoBehaviour
         foreach (GameObject porte in portes)
         {
             Door door = porte.GetComponent<Door>();
-            if (door._roomId == gameStat.CurrentRoom) // Si la porte est dans la pièce actuelle du joueur
+            if (door.RoomID == gameStat.CurrentRoom) // Si la porte est dans la pièce actuelle du joueur
             {
                 door.CloseUnClose(true); // Ferme la porte
             }
@@ -115,7 +115,7 @@ public class BattleManager : MonoBehaviour
         foreach (GameObject porte in portes)
         {
             Door door = porte.GetComponent<Door>();
-            if (door._isLockedByBattle) // Si la porte est verrouillée par la bataille
+            if (door.IsLockedByBattle()) // Si la porte est verrouillée par la bataille
             {
                 door.CloseUnClose(false); // Ouvre la porte
             }

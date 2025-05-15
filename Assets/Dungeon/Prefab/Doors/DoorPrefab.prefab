@@ -171,21 +171,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66989487def34034f9b685e7895c44e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MASTER: {fileID: 0}
-  TELEPORTATION: {fileID: 0}
-  GAMESTAT: {fileID: 0}
+  _master: {fileID: 0}
+  _teleportation: {fileID: 0}
+  _gameStat: {fileID: 0}
   _doorId: 0
   _roomId: 0
   _orientation: 
-  x: 0
-  y: 0
-  Open: {fileID: 21300000, guid: e2f1a4c97f7af9045a5aefeddf99588e, type: 3}
-  Close: {fileID: 21300000, guid: d0c08a6995376df4ab3ef300bb3d1449, type: 3}
-  BossOpen: {fileID: 21300000, guid: ca616cf56aa5716468c400f7ebf2328b, type: 3}
-  BossClose: {fileID: 21300000, guid: 5874a54431b91c44f9b44d949a9d27af, type: 3}
-  spriteRenderer: {fileID: 3224904150000254208}
-  boxCollider: {fileID: 0}
-  _isLockedByBattle: 0
-  _isBossDoor: 0
+  _x: 0
+  _y: 0
+  _open: {fileID: 21300000, guid: e2f1a4c97f7af9045a5aefeddf99588e, type: 3}
+  _close: {fileID: 21300000, guid: d0c08a6995376df4ab3ef300bb3d1449, type: 3}
+  _bossOpen: {fileID: 21300000, guid: ca616cf56aa5716468c400f7ebf2328b, type: 3}
+  _bossClose: {fileID: 21300000, guid: 5874a54431b91c44f9b44d949a9d27af, type: 3}
+  _spriteRenderer: {fileID: 0}
+  _boxCollider: {fileID: 6430973017001333481}
   connectedDoorPosition: {x: 0, y: 0}
   connectedDoor: {fileID: 0}
