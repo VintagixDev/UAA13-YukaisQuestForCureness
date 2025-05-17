@@ -58,7 +58,7 @@ public class EnemyProjetile : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            Debug.Log("Projectile a touché le joueur !");
+            //Debug.Log("Projectile a touché le joueur !");
             // Appelle une méthode sur le joueur si besoin
             // collision.GetComponent<PlayerHealth>()?.TakeDamage(_damage);
             Destroy(gameObject);

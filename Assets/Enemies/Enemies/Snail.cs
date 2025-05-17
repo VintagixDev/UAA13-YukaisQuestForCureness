@@ -2,9 +2,13 @@
 
 public class Snail : MonoBehaviour
 {
+    private BattleManager BATTLE; // script : bataille
+    private EnemyScriptAnimation ANIME; // script : animation 
+
     [Header("Données")]
     [Tooltip("ID de la salle à laquelle appartient l'ennemi")]
     [SerializeField] private int _roomID;
+    public int GetRoomID() { return _roomID; } // Accès
 
     [Tooltip("Santé de l'ennemi")]
     [SerializeField] private int _health;
@@ -40,13 +44,13 @@ public class Snail : MonoBehaviour
     private float _horizontalVelocity { get; set; }
     private float _verticalVelocity { get; set; }
 
-    private EnemyScriptAnimation _enemyAnimation;
+    
 
     void Start()
     {
         if (_player == null)
         {
-            GameObject foundPlayer = GameObject.FindWithTag("Player");
+            GameObject foundPlayer = GameObject.FindWithTag("Player"); // Récupère le player
             if (foundPlayer != null)
             {
                 _player = foundPlayer;
@@ -59,7 +63,16 @@ public class Snail : MonoBehaviour
         }
 
         _playerTransform = _player.transform;
-        _enemyAnimation = GetComponent<EnemyScriptAnimation>(); // Récupère le script d'animation
+        ANIME = GetComponent<EnemyScriptAnimation>(); // Récupère le script d'animation
+
+        GameObject Battle = GameObject.Find("BattleManager"); // Récupère le script de bataille
+        if (Battle != null)
+        {
+            BATTLE = Battle.GetComponent<BattleManager>();
+            BATTLE.AddEnemiesCount();
+
+
+        }
     }
 
     void Update()
@@ -69,9 +82,9 @@ public class Snail : MonoBehaviour
         Move();
 
         // Appeler le gestionnaire d'animations
-        if (_enemyAnimation != null)
+        if (ANIME != null)
         {
-            _enemyAnimation.SetAnimation(_horizontalVelocity, _verticalVelocity);
+            ANIME.SetAnimation(_horizontalVelocity, _verticalVelocity);
         }
 
         // Gérer l'attaque
@@ -136,7 +149,7 @@ public class Snail : MonoBehaviour
     public void ChangeRoomId(int newRoomId)
     {
         _roomID = newRoomId;
-        Debug.Log($"RoomId changé pour {newRoomId}");
+        //Debug.Log($"RoomId changé pour {newRoomId}");
     }
 
     // Accès aux données pour l'ennemi
@@ -154,8 +167,10 @@ public class Snail : MonoBehaviour
     {
         _health -= amount;
 
-        if (_enemyAnimation != null)
-            _enemyAnimation.FlashRed(); // effet visuel
+        if (ANIME != null)
+        {
+            ANIME.FlashRed(); // effet visuel rouge clignotant
+        }
 
         if (_health <= 0)
         {
@@ -164,7 +179,8 @@ public class Snail : MonoBehaviour
     }
     private void Die()
     {
-        // Tu peux ajouter des effets visuels, sons, score, etc.
-        Destroy(gameObject);
+        Destroy(gameObject); // Destruction de l'objet
+        BATTLE._remainingEnemies--;
+        BATTLE.FinishBattleMethod(); // Logique pour terminer la bataille
     }
 }

@@ -2484,7 +2484,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7141519775732789387
 Transform:
   m_ObjectHideFlags: 0
@@ -2740,7 +2740,7 @@ MonoBehaviour:
   rightDoor: {fileID: 5273229804119618558}
   DoorPrefab: {fileID: 5074764154232242637, guid: 4b77c18eea5d2a441a9174fdeb79e0f9, type: 3}
   roomID: 0
-  isBattleFinished: 0
+  isBattleFinished: 1
   enemySpawners: []
 --- !u!1 &8879258255843760345
 GameObject:

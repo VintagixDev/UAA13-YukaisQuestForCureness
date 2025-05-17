@@ -12,6 +12,7 @@ TagManager:
   - Gold
   - Key
   - UI
+  - Enemy
   layers:
   - Default
   - TransparentFX
