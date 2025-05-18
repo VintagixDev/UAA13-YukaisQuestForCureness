@@ -4,12 +4,17 @@ using UnityEngine;
 public class GameStat : MonoBehaviour
 {
     [Header("Actual room of player")]
-    [SerializeField] public int CurrentRoom; //Id de la pièces actuelle du joueur
+    [Tooltip("Pièce actuel (id)")]
+    [SerializeField] public int CurrentRoom; 
 
     [Header("Game progress")]
-    [SerializeField] public int CurrentFloor;
+    [Tooltip("Etage actuel")]
+    [SerializeField] public int CurrentFloor; 
+    [Tooltip("Nb d'ennemis tués")]
     [SerializeField] public int EnemiesKilled;
+    [Tooltip("Nb de coffres ouverts")]
     [SerializeField] public int ChestsOpened;
+    [Tooltip("Niv de difficulté")]
     [SerializeField] public int DifficultyLevel;
 
     //[Header("Actual stats : playable part")]

@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] public List<GameObject> enemies;
+    [Header("")]
+    [Tooltip("List d'ennemis")]
+    public List<GameObject> enemies;
+    [Tooltip("ID de la pieces du spawn")]
     [SerializeField] private int _roomID;
+    [Tooltip("Position en x & y")]
     [SerializeField] private Vector2 _position;
 
     public int RoomID

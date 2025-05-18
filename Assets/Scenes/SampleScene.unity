@@ -283,6 +283,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameStat: {fileID: 1921855428}
+  _remainingEnemies: 0
 --- !u!1 &1443180228
 GameObject:
   m_ObjectHideFlags: 0
@@ -452,6 +453,7 @@ MonoBehaviour:
   - {fileID: 1300583704683959836, guid: 4e7ac5e2cb658624297580bb2505abcb, type: 3}
   - {fileID: 4101437387498584586, guid: 14884fa4c5b3afc4c8827770ef9941ea, type: 3}
   - {fileID: 708959021816400062, guid: d5d33317924097d4196e6f6a78e9f48d, type: 3}
+  - {fileID: 6709312027016907198, guid: 75d3d1d8243d3e34c953b0bdab3bddc8, type: 3}
   SpecialRoomPrefabs:
   - {fileID: 7324905855109424736, guid: 794e3690985d2354a85fd91a29d85590, type: 3}
   maxRoom: 15

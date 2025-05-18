@@ -27,7 +27,7 @@ public class Snail : MonoBehaviour
     [SerializeField] private float _minDistance = 4f;
     [Tooltip("Distance maximale à laquelle l'ennemi commence à se rapprocher du joueur")]
     [SerializeField] private float _maxDistance = 7f;
-    private bool _isMoving = false;
+    //private bool _isMoving = false;
 
     [Header("Attaque")]
     [Tooltip("Préfabriqué du projectile que l'ennemi utilise pour attaquer")]
@@ -103,7 +103,7 @@ public class Snail : MonoBehaviour
             direction = -direction.normalized;
             _horizontalVelocity = direction.x * _moveSpeed;
             _verticalVelocity = direction.y * _moveSpeed;
-            _isMoving = true;
+            //_isMoving = true;
         }
         else if (distance > _maxDistance)
         {
@@ -111,13 +111,13 @@ public class Snail : MonoBehaviour
             direction = direction.normalized;
             _horizontalVelocity = direction.x * _moveSpeed;
             _verticalVelocity = direction.y * _moveSpeed;
-            _isMoving = true;
+            //_isMoving = true;
         }
         else
         {
             _horizontalVelocity = 0f;
             _verticalVelocity = 0f;
-            _isMoving = false;
+            //_isMoving = false;
         }
 
         // Déplacement réel

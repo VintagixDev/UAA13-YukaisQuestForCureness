@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class TeleportationManager : MonoBehaviour
 {
-
-    public GameSupervisor gameSupervisor;
-    public GameStat gameStat;
+    [Header("Composantes")]
+    [Tooltip("Maitre des lieux")]
+    [SerializeField] private GameSupervisor gameSupervisor;
+    [Tooltip("Statistiques générales")]
+    [SerializeField] private GameStat gameStat;
 
     private const float teleportOffset = 2f;
 

@@ -8,7 +8,7 @@ public class GameSupervisor : MonoBehaviour
     [Tooltip("Script qui s'occupe du déplacement du joueur dans le donjon")]
     [SerializeField] private TeleportationManager teleportationManager;
     [Tooltip("Script qui s'occupe des batailles")]
-    [SerializeField] public BattleManager battleManager;
+    [SerializeField] private BattleManager battleManager;
 
     [Header("Stats")]
     [Tooltip("Script qui contient les statistiques propres à la partie")]
@@ -63,7 +63,7 @@ public class GameSupervisor : MonoBehaviour
             return false;
         }
     }
-    public bool SetDungeon()
+    private bool SetDungeon()
     {
         if (roomManager != null)
         {
@@ -76,7 +76,7 @@ public class GameSupervisor : MonoBehaviour
             return false;
         }
     }
-    public bool SetPlayer()
+    private bool SetPlayer()
     {
         Destroy(currentPlayer);
         if (playerPrefab != null)
@@ -90,7 +90,7 @@ public class GameSupervisor : MonoBehaviour
             return false;
         }
     }
-    public bool SetUI()
+    private bool SetUI()
     {
         if (hud != null)
         {
