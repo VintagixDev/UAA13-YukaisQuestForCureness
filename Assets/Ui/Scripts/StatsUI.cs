@@ -6,10 +6,18 @@ using TMPro;
 
 public class StatsUI : MonoBehaviour
 {
+    //[Header("Scripts")]
+    //[SerializeField, Tooltip("Superviseur")]
+    //private GameSupervisor MASTER;
+
+    //[Header("Player")]
+    //[SerializeField, Tooltip("Joueur")]
+    //private GameObject _player;
+
     [Header("Coeurs")]
     const int maxDisplayedHearts = 10; // Nombre de coeurs affichés
     public PlayerStats stats; // Statistiques du joueur
-    public Image heart; // Prefab de l'UI Coeur
+    public GameObject heart; // Prefab de l'UI Coeur
     public GameObject HPDisplay; // GameObject contenant tous les coeurs
     public TMP_Text heartText; // Texte +X
 
@@ -19,7 +27,17 @@ public class StatsUI : MonoBehaviour
     [Header("Clés")]
     public TMP_Text KeysText;
     // Start is called before the first frame update
-  
+
+    /// <summary>
+    /// Ajout de ma part signé -Andras
+    /// </summary>
+    private void Start()
+    {
+        stats = GameObject.Find("Player").GetComponent<PlayerStats>();
+        updateDisplayHearts();
+        updateCollectableUI();
+    }
+
     private void Update()
     {
         if (stats == null)
@@ -31,51 +49,47 @@ public class StatsUI : MonoBehaviour
     }
 
     /// <summary>
-    /// Afficher le nombre de coeurs que le joueur possède.
+    /// Afficher le nombre de cœurs que le joueur possède.
     /// </summary>
     public void updateDisplayHearts()
     {
-       
-        
-        foreach (Transform ts in HPDisplay.transform)
+        // Vider les anciens coeurs
+        foreach (Transform child in HPDisplay.transform)
         {
-            Destroy(ts.gameObject);
+            Destroy(child.gameObject);
         }
-        
 
+        int maxDisplayedHearts = 10;
         float x = -510f;
         float y = 215f;
-        for (int i = 0; i < stats.playerHP; i++)
+
+        // Affiche jusqu'à 10 coeurs
+        int heartsToDisplay = Mathf.Min(stats.playerHP, maxDisplayedHearts);
+
+        for (int i = 0; i < heartsToDisplay; i++)
         {
-            if (i < maxDisplayedHearts)
-            {
-                // Passer a la ligne de coeur suivante
-                if (i == 5)
-                {
-                    y = 165f;
-                    x = -510f;
-                }
-                Image hChild = Instantiate(heart);
-                hChild.transform.SetParent(HPDisplay.transform, false);
-                hChild.GetComponent<RectTransform>().anchoredPosition = new Vector2(x, y);
-                x += 60f;
-            }
+            GameObject hChild = Instantiate(heart);
+            hChild.transform.SetParent(HPDisplay.transform, false);
+            hChild.GetComponent<RectTransform>().anchoredPosition = new Vector2(x, y);
+            x += 60f;
         }
 
-        // Afficher le "+X" si le nombre de coeur du joueur est > a maxDisplayedHearts
+        // Si le joueur a plus de 10 coeurs, affiche +X
         if (stats.playerHP > maxDisplayedHearts)
         {
             heartText.text = "+" + (stats.playerHP - maxDisplayedHearts);
-            GameObject parent = heartText.transform.parent.gameObject;
-            parent.SetActive(true);
+            heartText.transform.parent.gameObject.SetActive(true);
+        }
+        else
+        {
+            heartText.transform.parent.gameObject.SetActive(false);
         }
     }
+
 
     public void updateCollectableUI()
     {
         GoldsText.text = ""+stats.playerGolds;
         KeysText.text = ""+stats.playerKeys;
     }
-
-   
 }

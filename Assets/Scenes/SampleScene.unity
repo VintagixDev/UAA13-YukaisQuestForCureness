@@ -511,7 +511,7 @@ MonoBehaviour:
   teleportationManager: {fileID: 1811761950}
   battleManager: {fileID: 1263744129}
   gameStat: {fileID: 1921855428}
-  playerPrefab: {fileID: 1839927486977741355, guid: 1e1d4a6ea9d57bb46810b97dfcaf319f, type: 3}
+  playerPrefab: {fileID: 8658307078030440138, guid: d8e16cbd3beaecf4990545ca03025e99, type: 3}
   hud: {fileID: 7577835681417582065, guid: 138bd0dc10dcfac4badba111af13c281, type: 3}
 --- !u!4 &2085096512
 Transform:

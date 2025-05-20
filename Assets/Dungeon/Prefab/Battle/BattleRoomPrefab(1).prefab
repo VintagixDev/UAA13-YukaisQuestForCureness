@@ -1802,8 +1802,8 @@ MonoBehaviour:
   roomID: 0
   isBattleFinished: 0
   enemySpawners:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 788832826811800002}
+  - {fileID: 2160272074803285726}
 --- !u!1 &6939332610080984310
 GameObject:
   m_ObjectHideFlags: 0

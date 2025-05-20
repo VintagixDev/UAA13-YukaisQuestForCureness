@@ -68,7 +68,7 @@ public class PlayerShoot : MonoBehaviour
         // lancement du projectile
         GameObject bullet = Instantiate(Bullet, spawnPoint.position, Quaternion.identity);
         bullet.GetComponent<Rigidbody2D>().velocity = shootDirection*bulletSpeed;
-        bullet.GetComponent<BulletShoot>().timeToDeath = bulletRange;
+        bullet.GetComponent<BulletShoot>()._timeToDeath = bulletRange;
     }
 
     // Fonction qui limite le nombre de projectiles lancés

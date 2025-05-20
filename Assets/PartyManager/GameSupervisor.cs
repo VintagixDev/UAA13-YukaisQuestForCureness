@@ -16,12 +16,12 @@ public class GameSupervisor : MonoBehaviour
 
     [Header("Player prefab")]
     [Tooltip("Objet Joueur")]
-    [SerializeField] GameObject playerPrefab;
+    public GameObject playerPrefab; // Sert de template, pas besoin de mettre en private
     private GameObject currentPlayer;
 
     [Header("HUD prefab")]
     [Tooltip("Objet HUD")]
-    [SerializeField] GameObject hud;
+    public GameObject hud; // Sert de template, pas besoin de mettre en private
     private GameObject currentHud;
 
     private void Start()
@@ -97,6 +97,7 @@ public class GameSupervisor : MonoBehaviour
             Destroy(currentHud); // Supprime l'ancien HUD si présent
             currentHud = Instantiate(hud);
             currentHud.name = "HUD";
+
             return true;
         }
         else

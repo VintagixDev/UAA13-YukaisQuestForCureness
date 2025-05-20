@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class Snail : MonoBehaviour
 {
@@ -44,7 +45,13 @@ public class Snail : MonoBehaviour
     private float _horizontalVelocity { get; set; }
     private float _verticalVelocity { get; set; }
 
-    
+    [Header("Loot")]
+    [SerializeField, Tooltip("Or")]
+    private GameObject _goldCoinPrefab;
+    [SerializeField, Tooltip("Cle")] 
+    private GameObject _keyPrefab;
+    [SerializeField, Tooltip("Coffre")] 
+    private GameObject _chestPrefab;
 
     void Start()
     {
@@ -70,8 +77,6 @@ public class Snail : MonoBehaviour
         {
             BATTLE = Battle.GetComponent<BattleManager>();
             BATTLE.AddEnemiesCount();
-
-
         }
     }
 
@@ -90,8 +95,9 @@ public class Snail : MonoBehaviour
         // Gérer l'attaque
         TryAttack();
     }
-
-    // Logique de déplacement (rendre la méthode publique pour implémenter l'interface)
+    /// <summary>
+    /// Logique de déplacement
+    /// </summary>
     public void Move()
     {
         Vector3 direction = _playerTransform.position - transform.position;
@@ -124,7 +130,9 @@ public class Snail : MonoBehaviour
         transform.position += direction * _moveSpeed * Time.deltaTime;
     }
 
-    // Gérer l'attaque
+    /// <summary>
+    /// Logique d'attaque
+    /// </summary>
     private void TryAttack()
     {
         float distance = Vector3.Distance(transform.position, _playerTransform.position);
@@ -145,7 +153,10 @@ public class Snail : MonoBehaviour
         }
     }
 
-    // Changer le RoomId
+    /// <summary>
+    /// Permet de changer la variable _roomID
+    /// </summary>
+    /// <param name="newRoomId"></param>
     public void ChangeRoomId(int newRoomId)
     {
         _roomID = newRoomId;
@@ -179,8 +190,31 @@ public class Snail : MonoBehaviour
     }
     private void Die()
     {
+        RandomizedDrop();
         Destroy(gameObject); // Destruction de l'objet
         BATTLE._remainingEnemies--;
         BATTLE.FinishBattleMethod(); // Logique pour terminer la bataille
+    }
+
+    private void RandomizedDrop()
+    {
+        int randomValue = Random.Range(0, 101); // 0-49 = piece en or, 50-75 = clé, 76-100 = coffre
+        
+
+        // Exemple : 20% de chance de drop
+        if (randomValue <= 49)
+        {
+            Debug.Log("Drop d'une pièce en or");
+            GameObject dropOr = Instantiate(_goldCoinPrefab, _shootPoint.position, Quaternion.identity);
+        } 
+        else if(randomValue >= 50 && randomValue <= 75) {
+            Debug.Log("Drop d'une clé");
+            GameObject dropCle = Instantiate(_keyPrefab, _shootPoint.position, Quaternion.identity);
+        } 
+        else
+        {
+            Debug.Log("Drop d'un coffre");
+            GameObject dropCoffre = Instantiate(_chestPrefab, _shootPoint.position, Quaternion.identity);
+        }
     }
 }

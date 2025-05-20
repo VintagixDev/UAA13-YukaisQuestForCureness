@@ -58,14 +58,11 @@ public class EnemyProjetile : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            //Debug.Log("Projectile a touché le joueur !");
-            // Appelle une méthode sur le joueur si besoin
-            // collision.GetComponent<PlayerHealth>()?.TakeDamage(_damage);
+            collision.GetComponent<PlayerController>().DamagePlayer(1);
             Destroy(gameObject);
-        }
-        else if (collision.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
+        } else if (!collision.CompareTag("EnemyProjectile") && collision.CompareTag("Room") && collision.CompareTag("Door"))
         {
             Destroy(gameObject);
-        }
+        }  
     }
 }

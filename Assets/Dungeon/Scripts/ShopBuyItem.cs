@@ -13,12 +13,12 @@ public class ShopBuyItem : MonoBehaviour
     {
         playerStats = GameObject.FindWithTag("Player").GetComponent<PlayerStats>();
 
-        statsUI = GameObject.FindWithTag("UI").GetComponent<StatsUI>();
+        statsUI = GameObject.Find("HUD").GetComponent<StatsUI>();
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         GameObject gameobj = collision.gameObject;
-        Debug.Log(playerStats.playerGolds);
+        //Debug.Log(playerStats.playerGolds);
         if (gameobj.CompareTag("Player"))
         {
             if (playerStats.playerGolds >= price && !bought)
@@ -29,6 +29,7 @@ public class ShopBuyItem : MonoBehaviour
                 
                 Object.Destroy(this.gameObject, 0);
                 if(statsUI) statsUI.updateDisplayHearts();
+                if (statsUI) statsUI.updateCollectableUI();
             }
         }
     }
