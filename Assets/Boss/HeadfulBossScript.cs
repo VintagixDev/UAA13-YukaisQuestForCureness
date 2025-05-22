@@ -7,14 +7,17 @@ public class HeadfulBossScript : Boss
 {
 
     public GameObject projectile;
+
     public PlayerStats playerStats;
     public GameObject player;
-    
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("FriendlyProjectile"))
+        
+        if (collision.gameObject.CompareTag("FriendlyProjectile"))
         {
+            player = GameObject.FindGameObjectWithTag("Player");
+            playerStats = player.GetComponent<PlayerStats>();
             Destroy(collision.gameObject);
             TakeDamage(playerStats.playerDamage);
         }

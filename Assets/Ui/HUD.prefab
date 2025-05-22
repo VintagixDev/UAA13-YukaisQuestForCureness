@@ -851,7 +851,7 @@ RectTransform:
   m_Father: {fileID: 1943486836767264226}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 5, y: -11.019203}
   m_SizeDelta: {x: -21.888, y: 12.0384}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1012,8 +1012,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d050452f5ed2654f93d8d6c5b3d9d73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MASTER: {fileID: 0}
-  _player: {fileID: 0}
   stats: {fileID: 0}
   heart: {fileID: 6426620774721113653, guid: b568a797fa4866947b1af2b08f343247, type: 3}
   HPDisplay: {fileID: 180171700392494819}
@@ -1238,11 +1236,11 @@ GameObject:
   - component: {fileID: 8284292553627955206}
   m_Layer: 5
   m_Name: Boss UI
-  m_TagString: Untagged
+  m_TagString: bossUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8284292553627955206
 RectTransform:
   m_ObjectHideFlags: 0

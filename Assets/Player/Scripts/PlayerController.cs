@@ -309,10 +309,7 @@ public class PlayerController : MonoBehaviour
                 _statsUI.updateCollectableUI();
                 break;
 
-            //case "EnemyProjectile":
-                //Destroy(obj);
-                //DamagePlayer(1);
-                //break;
+         
         }
     }
 

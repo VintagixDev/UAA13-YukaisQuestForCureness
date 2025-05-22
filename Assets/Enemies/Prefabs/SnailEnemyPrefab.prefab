@@ -241,8 +241,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _roomID: 0
-  _health: 3
-  _moveSpeed: 2
+  _health: 1
+  _moveSpeed: 1
   _player: {fileID: 0}
   _playerTransform: {fileID: 0}
   _minDistance: 4
@@ -250,7 +250,7 @@ MonoBehaviour:
   _projectilePrefab: {fileID: 6374862229697595054, guid: 96d9d3a7abe0a384da1dc2f7b27b1fc3, type: 3}
   _shootPoint: {fileID: 4978946878178855396}
   _attackRange: 6
-  _attackCooldown: 2
+  _attackCooldown: 5
   _goldCoinPrefab: {fileID: 1517570873519947091, guid: 01f7a3a98e7eaba4b95cb11722fd9169, type: 3}
   _keyPrefab: {fileID: 6041309870470360747, guid: 01c3b06b0b5687c479c14455456cdea2, type: 3}
   _chestPrefab: {fileID: 5419790571473145373, guid: 7089f2f1f28aa9d4584a32090de73dd4, type: 3}

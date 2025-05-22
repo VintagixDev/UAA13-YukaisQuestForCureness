@@ -48,3 +48,4 @@ MonoBehaviour:
   - {fileID: 4257998702483350516, guid: 4f4c88b9bbcafa24eb688101aa22159b, type: 3}
   _roomID: 0
   _position: {x: 0, y: 0}
+  bossPrefab: {fileID: 2871083472908688784, guid: ce71faf066d691a4b84313a98b2b7402, type: 3}

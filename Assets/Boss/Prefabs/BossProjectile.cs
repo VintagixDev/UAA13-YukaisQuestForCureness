@@ -22,5 +22,15 @@ public class BossProjectile : MonoBehaviour
         transform.Translate(-dir * Time.deltaTime * 5);
         
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            collision.GetComponent<PlayerController>().DamagePlayer(1);
+            Destroy(gameObject);
+        }
+        
+    }
 }
 

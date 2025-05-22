@@ -13,6 +13,8 @@ TagManager:
   - Key
   - UI
   - Enemy
+  - bossUI
+  - GameSupervisor
   layers:
   - Default
   - TransparentFX

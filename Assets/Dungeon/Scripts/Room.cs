@@ -19,6 +19,8 @@ public class Room : MonoBehaviour
     private static int globalDoorIdCount = 1; // ID global des portes
     [SerializeField] public bool isBattleFinished;
 
+    [SerializeField, Tooltip("Si c'est la salle du boss = true")] public bool isBossRoom; 
+
     [SerializeField] private GameObject[] enemySpawners;
     //public int RoomID; // Identifiant unique de la salle.
     public Vector2Int RoomIndex { get; set; } // Indice de la salle dans une grille (coordonnées).

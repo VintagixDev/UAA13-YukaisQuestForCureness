@@ -25,18 +25,42 @@ public class Boss : MonoBehaviour
     public int cdAttackSpeed;
 
     public Slider healthBar;
-     
+    public GameObject bossUI;
+
+    [Header("Room")]
+    public int _roomID;
+    private BattleManager BATTLE; // script : bataille
+    public GameSupervisor gameSupervisor;
+
+
+
+
     void Start()
     {
+        
         bossCurrentHP = bossMaxHP;
-        healthBar.value = healthBar.maxValue;
-        healthBar.gameObject.SetActive(true);
+        GameObject Battle = GameObject.Find("BattleManager"); // Récupère le script de bataille
+        if (Battle != null)
+        {
+            BATTLE = Battle.GetComponent<BattleManager>();
+            BATTLE.AddEnemiesCount();
+        }
     }
 
     // Update is called once per frame
     private void Update()
     {
+        if(bossUI == null)
+        {
+            gameSupervisor = GameObject.FindGameObjectWithTag("GameSupervisor").GetComponent<GameSupervisor>();
+            bossUI = gameSupervisor.bossUI;
+            bossUI.SetActive(true);
+            healthBar = bossUI.transform.GetChild(0).GetComponent<Slider>();
 
+            healthBar.value = healthBar.maxValue;
+            healthBar.gameObject.SetActive(true);
+        }
+        
         if (Input.GetKeyDown(KeyCode.Space))
         {
             TakeDamage(50);
@@ -44,7 +68,6 @@ public class Boss : MonoBehaviour
 
 
         if (isStunned) return;
-        Movements();
         if (bossIsRange)
         {
             cdAttackSpeed--;
@@ -56,9 +79,11 @@ public class Boss : MonoBehaviour
 
         }
     }
-    public virtual void Movements()
-    {
-
+    private void Die()
+    {        
+        BATTLE._remainingEnemies--;
+        BATTLE.FinishBattleMethod(); // Logique pour terminer la bataille
+        Destroy(gameObject); // Destruction de l'objet
     }
 
     public virtual void EnemyRangeAttack() { }
@@ -70,10 +95,16 @@ public class Boss : MonoBehaviour
         {
             // WIN
             healthBar.value = 0;
-            Destroy(gameObject);
-            healthBar.gameObject.SetActive(false);
+            bossUI.SetActive(false);
+            Die();
         }
         healthBar.value = 100 * bossCurrentHP / bossMaxHP;
+    }
+
+    public void ChangeRoomId(int newRoomId)
+    {
+        _roomID = newRoomId;
+        //Debug.Log($"RoomId changé pour {newRoomId}");
     }
 
 }

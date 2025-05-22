@@ -913,7 +913,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd3858c0e7815c44ca1c99db1a30a899, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHP: 6
+  playerHP: 10
   playerDamage: 5
   playerMoveSpeed: 1
   playerGolds: 0

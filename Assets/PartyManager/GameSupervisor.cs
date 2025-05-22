@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameSupervisor : MonoBehaviour
@@ -23,9 +24,11 @@ public class GameSupervisor : MonoBehaviour
     [Tooltip("Objet HUD")]
     public GameObject hud; // Sert de template, pas besoin de mettre en private
     private GameObject currentHud;
+    public GameObject bossUI;
 
     private void Start()
     {
+        
         if (InitializeComponents())
         {
             Debug.Log("Game Initialized Successfully");
@@ -43,6 +46,7 @@ public class GameSupervisor : MonoBehaviour
             {
                 if (SetUI())
                 {
+                   
                     return true;
                 }
                 else
@@ -97,6 +101,8 @@ public class GameSupervisor : MonoBehaviour
             Destroy(currentHud); // Supprime l'ancien HUD si présent
             currentHud = Instantiate(hud);
             currentHud.name = "HUD";
+            bossUI = GameObject.FindGameObjectWithTag("bossUI");
+            bossUI.SetActive(false);
 
             return true;
         }

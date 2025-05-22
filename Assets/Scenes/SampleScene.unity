@@ -456,8 +456,8 @@ MonoBehaviour:
   - {fileID: 6709312027016907198, guid: 75d3d1d8243d3e34c953b0bdab3bddc8, type: 3}
   SpecialRoomPrefabs:
   - {fileID: 7324905855109424736, guid: 794e3690985d2354a85fd91a29d85590, type: 3}
-  maxRoom: 15
-  minRoom: 10
+  maxRoom: 2
+  minRoom: 2
   nbSpRoom: 2
   roomWidth: 50
   roomHeight: 50
@@ -490,7 +490,7 @@ GameObject:
   - component: {fileID: 2085096511}
   m_Layer: 0
   m_Name: GameSupervisor
-  m_TagString: Untagged
+  m_TagString: GameSupervisor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -513,6 +513,7 @@ MonoBehaviour:
   gameStat: {fileID: 1921855428}
   playerPrefab: {fileID: 8658307078030440138, guid: d8e16cbd3beaecf4990545ca03025e99, type: 3}
   hud: {fileID: 7577835681417582065, guid: 138bd0dc10dcfac4badba111af13c281, type: 3}
+  bossUI: {fileID: 0}
 --- !u!4 &2085096512
 Transform:
   m_ObjectHideFlags: 0

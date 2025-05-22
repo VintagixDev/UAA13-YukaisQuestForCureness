@@ -11,6 +11,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private int _roomID;
     [Tooltip("Position en x & y")]
     [SerializeField] private Vector2 _position;
+    [SerializeField, Tooltip("Prefab du boss")] public GameObject bossPrefab;
 
     public int RoomID
     {
@@ -20,11 +21,30 @@ public class EnemySpawner : MonoBehaviour
 
     public void SpawnRandomEnemy()
     {
+
+        GameObject[] rooms = GameObject.FindGameObjectsWithTag("Room");
+        if (rooms.Length == 0) return;
+
+
+        foreach (GameObject room in rooms)
+        {
+            Room roomScript = room.GetComponent<Room>();
+            if (roomScript.RoomID == _roomID && roomScript.isBossRoom)
+            {
+                GameObject bossSpawner = GameObject.FindGameObjectWithTag("EnemySpawner");
+                GameObject boss = Instantiate(bossPrefab, bossSpawner.transform.position, Quaternion.identity);
+                Boss bossScript = boss.GetComponent<Boss>();
+                bossScript.ChangeRoomId(_roomID);
+                boss.GetComponent<SpriteRenderer>().sortingOrder = 2;
+                return;
+            }
+        }
         if (enemies == null || enemies.Count == 0)
         {
             Debug.LogWarning("Enemy list is empty or null.");
             return;
         }
+        
 
         int nb = Random.Range(0, enemies.Count);
         GameObject enemy = enemies[nb];

@@ -6186,6 +6186,7 @@ MonoBehaviour:
   DoorPrefab: {fileID: 5074764154232242637, guid: 4b77c18eea5d2a441a9174fdeb79e0f9, type: 3}
   roomID: 0
   isBattleFinished: 0
+  isBossRoom: 1
   enemySpawners:
   - {fileID: 3354498667023883281}
 --- !u!156049354 &4969358800850100981
@@ -7218,9 +7219,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7900660553177809076}
   - component: {fileID: 8396687631347418052}
+  - component: {fileID: 4683516472445379395}
   m_Layer: 0
   m_Name: ENEMY SPAWNER
-  m_TagString: Untagged
+  m_TagString: EnemySpawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7292,6 +7294,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4683516472445379395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3354498667023883281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6145a3ffcddc5734b834ce4ff8eb6f7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemies: []
+  _roomID: 0
+  _position: {x: 0, y: 0}
+  bossPrefab: {fileID: 2871083472908688784, guid: ce71faf066d691a4b84313a98b2b7402, type: 3}
 --- !u!1 &3661443491113827698
 GameObject:
   m_ObjectHideFlags: 0
