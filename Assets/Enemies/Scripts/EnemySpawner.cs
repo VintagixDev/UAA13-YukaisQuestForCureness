@@ -4,14 +4,21 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [Header("")]
-    [Tooltip("List d'ennemis")]
-    public List<GameObject> enemies;
-    [Tooltip("ID de la pieces du spawn")]
-    [SerializeField] private int _roomID;
-    [Tooltip("Position en x & y")]
-    [SerializeField] private Vector2 _position;
-    [SerializeField, Tooltip("Prefab du boss")] public GameObject bossPrefab;
+    [Header("Préfabriqués")]
+    [SerializeField, Tooltip("List d'ennemis")]
+    private List<GameObject> enemies;
+    [SerializeField, Tooltip("Prefab du boss")] 
+    private GameObject bossPrefab;
+
+    [Header("Attributs")]
+    [SerializeField, Tooltip("ID de la pieces du spawn")]
+    private int _roomID;
+    [SerializeField, Tooltip("Position en x & y")]
+    private Vector2 _position;
+    [SerializeField, Tooltip("Est un spawner de boss")]
+    private bool _isBossSpawner;
+
+    private BattleManager BATTLE; // script : bataille
 
     public int RoomID
     {
@@ -21,44 +28,66 @@ public class EnemySpawner : MonoBehaviour
 
     public void SpawnRandomEnemy()
     {
-
-        GameObject[] rooms = GameObject.FindGameObjectsWithTag("Room");
-        if (rooms.Length == 0) return;
-
-
-        foreach (GameObject room in rooms)
+        GameObject Battle = GameObject.Find("BattleManager"); // Récupère le script de bataille
+        if (Battle != null)
         {
-            Room roomScript = room.GetComponent<Room>();
-            if (roomScript.RoomID == _roomID && roomScript.isBossRoom)
-            {
-                GameObject bossSpawner = GameObject.FindGameObjectWithTag("EnemySpawner");
-                GameObject boss = Instantiate(bossPrefab, bossSpawner.transform.position, Quaternion.identity);
-                Boss bossScript = boss.GetComponent<Boss>();
-                bossScript.ChangeRoomId(_roomID);
-                boss.GetComponent<SpriteRenderer>().sortingOrder = 2;
-                return;
-            }
-        }
-        if (enemies == null || enemies.Count == 0)
+            BATTLE = Battle.GetComponent<BattleManager>();
+        } else
         {
-            Debug.LogWarning("Enemy list is empty or null.");
+            Debug.LogWarning("No Battle script available");
             return;
         }
-        
 
-        int nb = Random.Range(0, enemies.Count);
-        GameObject enemy = enemies[nb];
-
-        // Instantiate the enemy
-        GameObject instantiatedEnemy = Instantiate(enemy, transform.position, Quaternion.identity);
-
-        // Assigner roomID au Snail uniquement (en fonction de l'objet)
-        if (instantiatedEnemy.TryGetComponent(out Snail snail))
+        if (_isBossSpawner)
         {
-            snail.ChangeRoomId(_roomID);  // Changer le RoomId dans Snail
-        }
+            // Vérification
+            if (bossPrefab == null)
+            {
+                Debug.LogWarning("Boss préfab is null or empty");
+                return;
+            }
 
-        // Initialiser le rendu et les autres comportements spécifiques
-        instantiatedEnemy.GetComponent<SpriteRenderer>().sortingOrder = 2;
+            // Instantiate 
+            GameObject instantiatedBoss = Instantiate(bossPrefab, transform.position, Quaternion.identity);
+
+            // Assigner roomID au Boss uniquement
+            if (instantiatedBoss.TryGetComponent(out Boss boss))
+            {
+                boss.ChangeRoomId(_roomID);  // Changer le RoomId dans le boss
+            }
+
+            // Initialiser le rendu en order in layer 2
+            instantiatedBoss.GetComponent<SpriteRenderer>().sortingOrder = 2;
+
+            // Ajout de 1 à la liste d'ennemis en vie
+            BATTLE.AddEnemiesCount();
+
+        } else
+        {
+            // Vérification
+            if (enemies == null || enemies.Count == 0)
+            {
+                Debug.LogWarning("Enemy list is empty or null.");
+                return;
+            }
+
+            int nb = Random.Range(0, enemies.Count);
+            GameObject enemy = enemies[nb];
+
+            // Instantiate the enemy
+            GameObject instantiatedEnemy = Instantiate(enemy, transform.position, Quaternion.identity);
+
+            // Assigner roomID au Snail uniquement (en fonction de l'objet)
+            if (instantiatedEnemy.TryGetComponent(out Snail snail))
+            {
+                snail.ChangeRoomId(_roomID);  // Changer le RoomId dans Snail
+            }
+
+            // Initialiser le rendu et les autres comportements spécifiques
+            instantiatedEnemy.GetComponent<SpriteRenderer>().sortingOrder = 2;
+
+            // Ajout de 1 à la liste d'ennemis en vie
+            BATTLE.AddEnemiesCount();
+        }
     }
 }

@@ -10,6 +10,19 @@ public class BattleManager : MonoBehaviour
 
     public int _remainingEnemies = 0; // Besoin que ce soit public
 
+    private void Update()
+    {
+        //if (_remainingEnemies < 0)
+        //{
+        //    GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        //    foreach (GameObject enemie in enemies)
+        //    {
+        //        Destroy(enemie);
+        //    }
+        //    _remainingEnemies = 0;
+        //}
+    }
+
     public void AddEnemiesCount()
     {
         _remainingEnemies++;
@@ -45,6 +58,11 @@ public class BattleManager : MonoBehaviour
     {
         if (_remainingEnemies == 0)
         {
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach (GameObject enemie in enemies)
+            {
+                Destroy(enemie);
+            }
             // Ouvre ttes les portes à la fin du combat
             OpenDoorsCurrentRoom();
             // Change les réglages de la pièce

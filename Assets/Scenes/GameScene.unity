@@ -2485,14 +2485,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65aa4187e59c9f34a8976c18ecc10054, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UpSpawn: {fileID: 658653980}
-  DownSpawn: {fileID: 1232775724}
-  LeftSpawn: {fileID: 1707761006}
-  RightSpawn: {fileID: 351910077}
-  Bullet: {fileID: 1450782426395304418, guid: 134d3aaca31ee784b8ded176eacbafbc, type: 3}
-  bulletSpeed: 3
-  bulletRate: 4
-  bulletRange: 3
 --- !u!114 &1909056791
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -76,7 +76,6 @@ public class Snail : MonoBehaviour
         if (Battle != null)
         {
             BATTLE = Battle.GetComponent<BattleManager>();
-            BATTLE.AddEnemiesCount();
         }
     }
 
