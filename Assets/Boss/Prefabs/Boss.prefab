@@ -113,10 +113,12 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   bossUI: {fileID: 0}
   _roomID: 0
+  BATTLE: {fileID: 0}
   gameSupervisor: {fileID: 0}
+  _stone: {fileID: 7702900937753380395, guid: 8f033913610f47248a537b33df532de7, type: 3}
   projectile: {fileID: 1899762008726696376, guid: f8b90c44b4a4e4547865bc9272e9d1ce, type: 3}
-  playerStats: {fileID: 0}
-  player: {fileID: 0}
+  playerStats: {fileID: 3443560174065997534, guid: d8e16cbd3beaecf4990545ca03025e99, type: 3}
+  player: {fileID: 8658307078030440138, guid: d8e16cbd3beaecf4990545ca03025e99, type: 3}
 --- !u!61 &6469743962808945815
 BoxCollider2D:
   m_ObjectHideFlags: 0

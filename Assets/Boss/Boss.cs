@@ -29,17 +29,19 @@ public class Boss : MonoBehaviour
 
     [Header("Room")]
     public int _roomID;
+    [SerializeField]
     private BattleManager BATTLE; // script : bataille
     public GameSupervisor gameSupervisor;
-
-
+    
+    [SerializeField, Tooltip("Pierre de téléportation entre les niveaux")]
+    private GameObject _stone;
 
 
     void Start()
     {
         
         bossCurrentHP = bossMaxHP;
-        GameObject Battle = GameObject.Find("BattleManager"); // Récupère le script de bataille
+        GameObject Battle = GameObject.FindGameObjectWithTag("BattleManager"); // Récupère le script de bataille
         if (Battle != null)
         {
             BATTLE = Battle.GetComponent<BattleManager>();
@@ -49,6 +51,10 @@ public class Boss : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if(BATTLE == null)
+        {
+            BATTLE = GameObject.FindGameObjectWithTag("BattleManager").GetComponent<BattleManager>();
+        }
         if(bossUI == null)
         {
             gameSupervisor = GameObject.FindGameObjectWithTag("GameSupervisor").GetComponent<GameSupervisor>();
@@ -79,10 +85,18 @@ public class Boss : MonoBehaviour
         }
     }
     private void Die()
-    {        
-        BATTLE._remainingEnemies--;
+    {
+        BATTLE.RemoveEnemiesCount();
         BATTLE.FinishBattleMethod(); // Logique pour terminer la bataille
-        Destroy(gameObject); // Destruction de l'objet
+
+        // Spawn du prefab _stone à la position du boss
+        Instantiate(_stone, transform.position, Quaternion.identity);
+       
+        Destroy(this.gameObject.GetComponent<Rigidbody2D>());
+        Destroy(this.gameObject.GetComponent<BoxCollider2D>());
+        Destroy(this.gameObject.GetComponent<SpriteRenderer>());
+           
+        Destroy(gameObject, 0.1f); // Destruction de l'objet
     }
 
     public virtual void EnemyRangeAttack() { }

@@ -5,12 +5,14 @@ using UnityEngine;
 
 public class Chest : MonoBehaviour
 {
-
+    [SerializeField, Tooltip("Script des stats de parties")]
+    private GameStat gameStat;
     public bool isOpen = false;
     public List<GameObject> Items;
     // Start is called before the first frame update
     void OnTriggerEnter2D(Collider2D collision)
     {
+        gameStat = GameObject.FindGameObjectWithTag("GameStat").GetComponent<GameStat>();
         GameObject gameObject = collision.gameObject;
         if (gameObject.name == "Player" && isOpen == false)
         {
@@ -29,8 +31,16 @@ public class Chest : MonoBehaviour
             }
             Destroy(this.gameObject.GetComponent<Rigidbody2D>());
             Destroy(this.gameObject.GetComponent<BoxCollider2D>());
+            gameStat.ChestsOpened++;
 
-
+            // Désactiver car ça fait crash la caméra - J'ai modifié le coffre pour le supp après 5sec
+            //StartCoroutine(DestroyAfterDelay(5f));
         }
+
+        //IEnumerator DestroyAfterDelay(float delay)
+        //{
+        //    yield return new WaitForSeconds(delay);
+        //    Destroy(gameObject);
+        //}
     }
 }

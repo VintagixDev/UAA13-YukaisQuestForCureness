@@ -27,6 +27,10 @@ public class BattleManager : MonoBehaviour
     {
         _remainingEnemies++;
     }
+    public void RemoveEnemiesCount()
+    {
+        _remainingEnemies--;
+    }
 
     /// <summary>
     /// Méthode servant à lancer le combat

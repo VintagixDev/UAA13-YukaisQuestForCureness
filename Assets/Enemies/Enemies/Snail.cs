@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class Snail : MonoBehaviour
 {
     private BattleManager BATTLE; // script : bataille
     private EnemyScriptAnimation ANIME; // script : animation 
+    private GameStat STATS;
 
     [Header("Données")]
     [Tooltip("ID de la salle à laquelle appartient l'ennemi")]
@@ -55,6 +57,7 @@ public class Snail : MonoBehaviour
 
     void Start()
     {
+        STATS = GameObject.FindGameObjectWithTag("GameStat").GetComponent<GameStat>();
         if (_player == null)
         {
             GameObject foundPlayer = GameObject.FindWithTag("Player"); // Récupère le player
@@ -189,6 +192,7 @@ public class Snail : MonoBehaviour
     }
     private void Die()
     {
+        STATS.EnemiesKilled++;
         RandomizedDrop();
         Destroy(gameObject); // Destruction de l'objet
         BATTLE._remainingEnemies--;
