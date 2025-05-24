@@ -7,6 +7,7 @@ public class PlayerProjectileBehaviour : MonoBehaviour
     [Header("Variables")]
     [SerializeField, Tooltip("Durée avant que le projectile soit détruit automatiquement")]
     private float _timeToDeath = 1f;
+    public float TimeToDeath {  get { return _timeToDeath; } set { _timeToDeath = value; } }
 
     void Start()
     {

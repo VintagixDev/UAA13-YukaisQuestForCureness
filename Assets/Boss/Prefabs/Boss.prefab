@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2871083472908688784
+--- !u!1 &3155734899822627405
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,39 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7865340922680597914}
-  - component: {fileID: 8295363996744406388}
-  - component: {fileID: 7141845223241366288}
-  - component: {fileID: 4568782888247871801}
+  - component: {fileID: 6385462812031903530}
+  - component: {fileID: 9041654108517727233}
+  - component: {fileID: 9064132954532963777}
+  - component: {fileID: 6469743962808945815}
   m_Layer: 0
-  m_Name: Boss[HeadfulThreat]
+  m_Name: Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7865340922680597914
+--- !u!4 &6385462812031903530
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2871083472908688784}
+  m_GameObject: {fileID: 3155734899822627405}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3.3973582, y: 3.3973582, z: 6.5229273}
+  m_LocalPosition: {x: -5.25, y: -0.15, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &8295363996744406388
+--- !u!212 &9041654108517727233
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2871083472908688784}
+  m_GameObject: {fileID: 3155734899822627405}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 601e718448f5ac04fafff3d18da65517, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cab5a52589cf3be4a8d36b1b94d6dff1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -86,13 +86,13 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7141845223241366288
+--- !u!114 &9064132954532963777
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2871083472908688784}
+  m_GameObject: {fileID: 3155734899822627405}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a361c90d0f1eb44d82ffa37eb6652c5, type: 3}
@@ -113,17 +113,19 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   bossUI: {fileID: 0}
   _roomID: 0
+  BATTLE: {fileID: 0}
   gameSupervisor: {fileID: 0}
-  projectile: {fileID: 1105879846029355382, guid: 592ad96314b43214a8f15cc3b69dbb9b, type: 3}
-  playerStats: {fileID: 0}
-  player: {fileID: 0}
---- !u!61 &4568782888247871801
+  _stone: {fileID: 7702900937753380395, guid: 8f033913610f47248a537b33df532de7, type: 3}
+  projectile: {fileID: 1899762008726696376, guid: f8b90c44b4a4e4547865bc9272e9d1ce, type: 3}
+  playerStats: {fileID: 3443560174065997534, guid: d8e16cbd3beaecf4990545ca03025e99, type: 3}
+  player: {fileID: 8658307078030440138, guid: d8e16cbd3beaecf4990545ca03025e99, type: 3}
+--- !u!61 &6469743962808945815
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2871083472908688784}
+  m_GameObject: {fileID: 3155734899822627405}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -149,16 +151,16 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.012277305, y: 0.11458817}
+  m_Offset: {x: -0.0031785965, y: -0.058515728}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.92, y: 1.92}
+    oldSize: {x: 3, y: 3}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.0114797, y: 1.2324712}
+  m_Size: {x: 3.045452, y: 2.9264183}
   m_EdgeRadius: 0

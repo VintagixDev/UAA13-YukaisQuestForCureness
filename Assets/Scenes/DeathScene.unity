@@ -157,8 +157,13 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
+<<<<<<< HEAD
   m_AnchoredPosition: {x: 0.0000076294, y: 114}
   m_SizeDelta: {x: 325.4575, y: 70.6257}
+=======
+  m_AnchoredPosition: {x: 51, y: -76}
+  m_SizeDelta: {x: 651.95, y: 242.0303}
+>>>>>>> 99fccaba6a8bf8dafbec54abe46f1671f2a31bed
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &126620682
 MonoBehaviour:
@@ -180,7 +185,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
+<<<<<<< HEAD
   m_text: "Vous \xEAtes mort :("
+=======
+  m_text: "Vous \xEAtes actuellement d\xE9c\xE9d\xE9.\nNos plus sinc\xE8res condol\xE9ances."
+>>>>>>> 99fccaba6a8bf8dafbec54abe46f1671f2a31bed
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -243,7 +252,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: 0.00024414062, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

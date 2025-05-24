@@ -216,16 +216,24 @@ public class PlayerController : MonoBehaviour
 
         GameObject bulletPrefab = null;
 
-        if (direction == Vector2.up) bulletPrefab = _bulletPrefabUp;
-        else if (direction == Vector2.down) bulletPrefab = _bulletPrefabDown;
-        else if (direction == Vector2.left) bulletPrefab = _bulletPrefabLeft;
-        else if (direction == Vector2.right) bulletPrefab = _bulletPrefabRight;
+        if (direction == Vector2.up) // haut
+            bulletPrefab = _bulletPrefabUp;
+        else if (direction == Vector2.down) // bas
+            bulletPrefab = _bulletPrefabDown;
+        else if (direction == Vector2.left) // gauche
+            bulletPrefab = _bulletPrefabLeft;
+        else if (direction == Vector2.right) // droite
+            bulletPrefab = _bulletPrefabRight;
 
-        if (bulletPrefab == null) return; // sécurité
+        if (bulletPrefab == null)
+        {
+            Debug.LogError("bulletPrefab est null");
+            return; // sécurité en cas de mauvaise manip
+        }
 
         GameObject bullet = Instantiate(bulletPrefab, spawnPoint.position, Quaternion.identity);
         bullet.GetComponent<Rigidbody2D>().velocity = direction * _projectileSpeed;
-        bullet.GetComponent<BulletShoot>()._timeToDeath = _projectileLifetime;
+        bullet.GetComponent<PlayerProjectileBehaviour>().TimeToDeath = _projectileLifetime;
         bullet.transform.localScale *= _projectileSize;
     }
 

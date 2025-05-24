@@ -15,6 +15,9 @@ TagManager:
   - Enemy
   - bossUI
   - GameSupervisor
+  - BattleManager
+  - TeleportationManager
+  - GameStat
   layers:
   - Default
   - TransparentFX

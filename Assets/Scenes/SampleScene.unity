@@ -250,7 +250,7 @@ GameObject:
   - component: {fileID: 1263744129}
   m_Layer: 0
   m_Name: BattleManager
-  m_TagString: Untagged
+  m_TagString: BattleManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -330,7 +330,7 @@ GameObject:
   - component: {fileID: 1811761950}
   m_Layer: 0
   m_Name: TeleportationManager
-  m_TagString: Untagged
+  m_TagString: TeleportationManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -376,7 +376,7 @@ GameObject:
   - component: {fileID: 1921855428}
   m_Layer: 0
   m_Name: Stats
-  m_TagString: Untagged
+  m_TagString: GameStat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -456,13 +456,13 @@ MonoBehaviour:
   - {fileID: 6709312027016907198, guid: 75d3d1d8243d3e34c953b0bdab3bddc8, type: 3}
   SpecialRoomPrefabs:
   - {fileID: 7324905855109424736, guid: 794e3690985d2354a85fd91a29d85590, type: 3}
-  maxRoom: 2
-  minRoom: 2
+  maxRoom: 10
+  minRoom: 8
   nbSpRoom: 2
   roomWidth: 50
   roomHeight: 50
-  gridSizeX: 10
-  gridSizeY: 10
+  gridSizeX: 11
+  gridSizeY: 11
 --- !u!4 &1939711357
 Transform:
   m_ObjectHideFlags: 0

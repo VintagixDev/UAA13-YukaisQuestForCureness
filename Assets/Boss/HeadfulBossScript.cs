@@ -28,9 +28,6 @@ public class HeadfulBossScript : Boss
         StartCoroutine(Shoot());
     }
 
-   
-
-
     IEnumerator Shoot()
     {
         while (bossCurrentHP > 0) 
