@@ -14,9 +14,9 @@ public class Chest : MonoBehaviour
     {
         gameStat = GameObject.FindGameObjectWithTag("GameStat").GetComponent<GameStat>();
         GameObject gameObject = collision.gameObject;
-        if (gameObject.name == "Player" && isOpen == false)
+        if (gameObject.name == "Player" && !isOpen)
         {
-
+            Debug.Log("Coffre Ouvert");
             isOpen = true;
             Vector3 pos = transform.position;
             pos.y += 1;
@@ -29,18 +29,10 @@ public class Chest : MonoBehaviour
                 instanciated.name = item.name;
                 
             }
+            gameStat.ChestsOpened++;
             Destroy(this.gameObject.GetComponent<Rigidbody2D>());
             Destroy(this.gameObject.GetComponent<BoxCollider2D>());
-            gameStat.ChestsOpened++;
-
-            // Désactiver car ça fait crash la caméra - J'ai modifié le coffre pour le supp après 5sec
-            //StartCoroutine(DestroyAfterDelay(5f));
-        }
-
-        //IEnumerator DestroyAfterDelay(float delay)
-        //{
-        //    yield return new WaitForSeconds(delay);
-        //    Destroy(gameObject);
-        //}
+            Destroy(this.gameObject, 5f);
+        }   
     }
 }
