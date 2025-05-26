@@ -3,22 +3,30 @@ using UnityEngine;
 
 public class GameStat : MonoBehaviour
 {
+    public static GameStat Instance;
+
     [Header("Actual room of player")]
-    [Tooltip("Pièce actuel (id)")]
-    [SerializeField] public int CurrentRoom; 
+    public int CurrentRoom;
 
     [Header("Game progress")]
-    [Tooltip("Etage actuel")]
-    [SerializeField] public int CurrentFloor; 
-    [Tooltip("Nb d'ennemis tués")]
-    [SerializeField] public int EnemiesKilled;
-    [Tooltip("Nb de coffres ouverts")]
-    [SerializeField] public int ChestsOpened;
-    [Tooltip("Niv de difficulté")]
-    [SerializeField] public int DifficultyLevel;
+    public int CurrentFloor;
+    public int EnemiesKilled;
+    public int ChestsOpened;
+    public int DifficultyLevel;
 
-    //[Header("Actual stats : playable part")]
-    //[SerializeField] 
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+            Debug.Log("GameStat instance créée");
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     public void ResetStatsForNewFloor()
     {

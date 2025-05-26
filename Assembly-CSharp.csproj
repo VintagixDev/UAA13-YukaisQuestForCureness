@@ -70,6 +70,7 @@
     <Compile Include="Assets\Scenes\Main Menu\Buttons.cs" />
     <Compile Include="Assets\Collectibles\Scripts\Chest.cs" />
     <Compile Include="Assets\Boss\Prefabs\BossProjectile.cs" />
+    <Compile Include="Assets\Scenes\DeathStatsDisplay.cs" />
     <Compile Include="Assets\Enemies\Enemies\Orc.cs" />
     <Compile Include="Assets\Player\ancienbordel\PlayerMovements.cs" />
     <Compile Include="Assets\Scenes\ManagerScene.cs" />
