@@ -58,6 +58,7 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.9f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scenes\Scripts\PauseManager.cs" />
     <Compile Include="Assets\Enemies\Scripts\EnemyScriptAnimation.cs" />
     <Compile Include="Assets\Enemies\Enemies\Snail.cs" />
     <Compile Include="Assets\Enemies\Scripts\EnemyProjectileBehaviour.cs" />
@@ -70,10 +71,8 @@
     <Compile Include="Assets\Scenes\Main Menu\Buttons.cs" />
     <Compile Include="Assets\Collectibles\Scripts\Chest.cs" />
     <Compile Include="Assets\Boss\Prefabs\BossProjectile.cs" />
-    <Compile Include="Assets\Scenes\DeathStatsDisplay.cs" />
     <Compile Include="Assets\Enemies\Enemies\Orc.cs" />
     <Compile Include="Assets\Player\ancienbordel\PlayerMovements.cs" />
-    <Compile Include="Assets\Scenes\ManagerScene.cs" />
     <Compile Include="Assets\Enemies\Enemies\Blob.cs" />
     <Compile Include="Assets\Upgrades\Upgrade.cs" />
     <Compile Include="Assets\Ui\Scripts\StatsUI.cs" />
@@ -96,7 +95,9 @@
     <Compile Include="Assets\Dungeon\Scripts\changerdetage.cs" />
     <Compile Include="Assets\Dungeon\Scripts\ShopBuyItem.cs" />
     <Compile Include="Assets\Player\ancienbordel\BulletShoot.cs" />
+    <Compile Include="Assets\Scenes\Scripts\StatsDisplay.cs" />
     <Compile Include="Assets\Boss\Boss.cs" />
+    <Compile Include="Assets\Scenes\Scripts\ManagerScene.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Lib\TextMesh Pro\Shaders\TMPro.cginc" />

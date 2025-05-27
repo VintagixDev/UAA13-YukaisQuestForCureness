@@ -55,7 +55,7 @@ public class TeleportationManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("gameStat reference is missing.");
+            //.LogWarning("gameStat reference is missing.");
         }
 
         if (gameSupervisor != null)
@@ -64,7 +64,7 @@ public class TeleportationManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("gameSupervisor reference is missing.");
+            //Debug.LogWarning("gameSupervisor reference is missing.");
         }
     }
 

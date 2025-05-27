@@ -27,44 +27,53 @@ public class Boss : MonoBehaviour
     public Slider healthBar;
     public GameObject bossUI;
 
-    [Header("Room")]
     public int _roomID;
+
+    [Header("Scripts")]
     [SerializeField]
-    private BattleManager BATTLE; // script : bataille
-    public GameSupervisor gameSupervisor;
-    
+    private BattleManager BATTLE; 
+    [SerializeField] 
+    private GameSupervisor MASTER;
+
+    [Header("Drop")]
     [SerializeField, Tooltip("Pierre de téléportation entre les niveaux")]
     private GameObject _stone;
+    [SerializeField, Tooltip("Tableaux des drops (upgrades)")]
+    private GameObject[] _drops;
 
 
-    void Start()
+    public void Awake()
     {
-        
         bossCurrentHP = bossMaxHP;
-        GameObject Battle = GameObject.FindGameObjectWithTag("BattleManager"); // Récupère le script de bataille
-        if (Battle != null)
-        {
-            BATTLE = Battle.GetComponent<BattleManager>();
-        }
-    }
 
-    // Update is called once per frame
-    private void Update()
-    {
-        if(BATTLE == null)
+        // Récupération des composants
+        MASTER = GameObject.FindGameObjectWithTag("GameSupervisor").GetComponent<GameSupervisor>();
+        BATTLE = GameObject.FindGameObjectWithTag("BattleManager").GetComponent<BattleManager>();
+
+        if (bossUI == null)
         {
-            BATTLE = GameObject.FindGameObjectWithTag("BattleManager").GetComponent<BattleManager>();
-        }
-        if(bossUI == null)
-        {
-            gameSupervisor = GameObject.FindGameObjectWithTag("GameSupervisor").GetComponent<GameSupervisor>();
-            bossUI = gameSupervisor.bossUI;
+            bossUI = MASTER.bossUI;
             bossUI.SetActive(true);
             healthBar = bossUI.transform.GetChild(0).GetComponent<Slider>();
 
             healthBar.value = healthBar.maxValue;
             healthBar.gameObject.SetActive(true);
         }
+
+    }
+
+    // Update is called once per frame
+    private void Update()
+    {
+        //if(bossUI == null)
+        //{
+        //    bossUI = MASTER.bossUI;
+        //    bossUI.SetActive(true);
+        //    healthBar = bossUI.transform.GetChild(0).GetComponent<Slider>();
+
+        //    healthBar.value = healthBar.maxValue;
+        //    healthBar.gameObject.SetActive(true);
+        //}
         
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -87,16 +96,21 @@ public class Boss : MonoBehaviour
     private void Die()
     {
         BATTLE.RemoveEnemiesCount();
-        BATTLE.FinishBattleMethod(); // Logique pour terminer la bataille
+        BATTLE.FinishBattleMethod(); 
 
-        // Spawn du prefab _stone à la position du boss
         Instantiate(_stone, transform.position, Quaternion.identity);
-       
+
+        if (_drops != null && _drops.Length > 0)
+        {
+            int randomIndex = Random.Range(0, _drops.Length);
+            Instantiate(_drops[randomIndex], new Vector3(0, 5, 0), Quaternion.identity);
+        }
+
         Destroy(this.gameObject.GetComponent<Rigidbody2D>());
         Destroy(this.gameObject.GetComponent<BoxCollider2D>());
         Destroy(this.gameObject.GetComponent<SpriteRenderer>());
            
-        Destroy(gameObject, 0.1f); // Destruction de l'objet
+        Destroy(gameObject, 0.1f);
     }
 
     public virtual void EnemyRangeAttack() { }

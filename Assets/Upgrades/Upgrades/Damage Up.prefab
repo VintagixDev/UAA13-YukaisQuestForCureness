@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1172909268735701663}
   - component: {fileID: 2189793014392673899}
   - component: {fileID: 3060369542394419192}
+  - component: {fileID: 5564334044303249188}
   m_Layer: 0
   m_Name: Damage Up
   m_TagString: Untagged
@@ -27,8 +28,8 @@ Transform:
   m_GameObject: {fileID: 9116280131768970892}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.206, y: 0.366, z: -0.12438135}
-  m_LocalScale: {x: 0.75, y: 0.75, z: 7.802}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -48,7 +49,7 @@ MonoBehaviour:
   upgradeID: 0
   upgradeName: Damage Up!
   upgradeDescription: Increase your damage
-  upgradeSprite: {fileID: 21300000, guid: 151c8a7d5dbe20f439081b55c2c56aa8, type: 3}
+  upgradeSprite: {fileID: -1541966703, guid: 8697039bad6de3c4e80493c215c463dd, type: 3}
   upgradeEffectOnce: 1
   upgradeHasBeenUsed: 0
   stats: {fileID: 0}
@@ -94,15 +95,36 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: -1624306119, guid: 29e21165cb3ae334d969d4be634eaa9e, type: 3}
+  m_SortingOrder: 2
+  m_Sprite: {fileID: -1541966703, guid: 8697039bad6de3c4e80493c215c463dd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2, y: 2}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!65 &5564334044303249188
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9116280131768970892}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}

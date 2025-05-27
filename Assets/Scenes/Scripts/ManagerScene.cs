@@ -4,7 +4,7 @@ using System.Threading;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ManagerScene : MonoBehaviour
+public class ManagerScene
 {
     AsyncOperation asyncLoad;
     bool bLoadDone;
@@ -12,7 +12,8 @@ public class ManagerScene : MonoBehaviour
     {
         MainMenu = 0,
         GameScene = 1,
-        DeathScene = 3
+        DeathScene = 2,
+        TutoScene = 3
     }
     public IEnumerator LoadAsyncScene(Scenes scene)
     {

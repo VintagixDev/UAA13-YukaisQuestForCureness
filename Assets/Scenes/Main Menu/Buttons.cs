@@ -28,7 +28,10 @@ public class Buttons : MonoBehaviour
     {
         StartCoroutine(sceneManager.LoadAsyncScene(ManagerScene.Scenes.MainMenu));
     }
-    
 
+    public void OnClickTutoButton()
+    {
+        StartCoroutine(sceneManager.LoadAsyncScene(ManagerScene.Scenes.TutoScene));
+    }
 
 }

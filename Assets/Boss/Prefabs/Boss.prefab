@@ -114,8 +114,12 @@ MonoBehaviour:
   bossUI: {fileID: 0}
   _roomID: 0
   BATTLE: {fileID: 0}
-  gameSupervisor: {fileID: 0}
+  MASTER: {fileID: 0}
   _stone: {fileID: 7702900937753380395, guid: 8f033913610f47248a537b33df532de7, type: 3}
+  _drops:
+  - {fileID: 9116280131768970892, guid: bdb7003eefdd6e54792a797cfb2f8d5b, type: 3}
+  - {fileID: 4492037945341922131, guid: bc3eab6cdf3fa7d42b78f26a7faa2352, type: 3}
+  - {fileID: 3462716218864907921, guid: 946ec917467ed3f4681a54501a6c86b9, type: 3}
   projectile: {fileID: 1899762008726696376, guid: f8b90c44b4a4e4547865bc9272e9d1ce, type: 3}
   playerStats: {fileID: 3443560174065997534, guid: d8e16cbd3beaecf4990545ca03025e99, type: 3}
   player: {fileID: 8658307078030440138, guid: d8e16cbd3beaecf4990545ca03025e99, type: 3}

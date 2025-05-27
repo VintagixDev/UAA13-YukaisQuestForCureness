@@ -2741,6 +2741,7 @@ MonoBehaviour:
   DoorPrefab: {fileID: 5074764154232242637, guid: 4b77c18eea5d2a441a9174fdeb79e0f9, type: 3}
   roomID: 0
   isBattleFinished: 1
+  isBossRoom: 0
   enemySpawners: []
 --- !u!1 &8879258255843760345
 GameObject:
@@ -3007,6 +3008,10 @@ PrefabInstance:
     - target: {fileID: 8396385749407038861, guid: 22a6d3f50e45a5f42acfb7abe6476b23, type: 3}
       propertyPath: m_Name
       value: Shop[Heart]
+      objectReference: {fileID: 0}
+    - target: {fileID: 8396385749407038861, guid: 22a6d3f50e45a5f42acfb7abe6476b23, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

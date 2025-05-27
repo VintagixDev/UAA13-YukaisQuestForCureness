@@ -29,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 4492037945341922131}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.072175406, y: -1.8351985, z: -0.12723255}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -50,7 +50,7 @@ MonoBehaviour:
   upgradeID: 1
   upgradeName: One Up!
   upgradeDescription: Increase your max health
-  upgradeSprite: {fileID: 21300000, guid: fa1d68ad3adc05349932085f6bbe7c7e, type: 3}
+  upgradeSprite: {fileID: 179293660, guid: 8697039bad6de3c4e80493c215c463dd, type: 3}
   upgradeEffectOnce: 1
   upgradeHasBeenUsed: 0
   stats: {fileID: 0}
@@ -96,8 +96,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: fa1d68ad3adc05349932085f6bbe7c7e, type: 3}
+  m_SortingOrder: 2
+  m_Sprite: {fileID: 179293660, guid: 8697039bad6de3c4e80493c215c463dd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -167,16 +167,16 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.06980997, y: 0.030252218}
+  m_Offset: {x: -0.017188787, y: -0.04429418}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.54, y: 2.54}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 2.54, y: 2.54}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.615368, y: 2.0605044}
+  m_Size: {x: 1.0893579, y: 0.96423256}
   m_EdgeRadius: 0
